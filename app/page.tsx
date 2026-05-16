@@ -8,7 +8,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050716]/80 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
           <div>
-            <p className="text-sm font-semibold">Noelle’s Light</p>
+            <p className="text-sm font-semibold">Noelle's Light</p>
             <p className="text-xs text-white/60">You are not alone.</p>
           </div>
 
@@ -32,7 +32,7 @@ export default function Home() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-base leading-7 text-white/70">
-          Noelle’s Light is being built in memory of Noelle Ryan Strain — a
+          Noelle's Light is being built in memory of Noelle Ryan Strain — a
           gentle, judgment-free place to talk, find support groups, connect with
           help nearby, and remind each other there is still light in the dark.
         </p>
@@ -61,10 +61,10 @@ export default function Home() {
             About
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold">What Noelle’s Light is</h2>
+          <h2 className="mt-3 text-3xl font-bold">What Noelle's Light is</h2>
 
           <p className="mt-4 leading-7 text-white/70">
-            Noelle’s Light is a memorial project and future peer-support
+            Noelle's Light is a memorial project and future peer-support
             community. The goal is to create a place where people can speak
             honestly about grief, loneliness, mental health, addiction, family
             struggles, loss, and the things they may be afraid to say out loud.
@@ -89,7 +89,7 @@ export default function Home() {
           <p className="mt-4 leading-7 text-white/70">
             You can share what you are going through without having to use your
             real name. Sometimes the first step is just being able to say,
-            “I’m not okay.”
+            "I'm not okay."
           </p>
 
           <a
@@ -118,10 +118,27 @@ export default function Home() {
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
+          <h2 className="text-2xl font-bold">Support Resources</h2>
+
+          <p className="mt-4 leading-7 text-white/70">
+            Find crisis lines, grief support, mental health resources, addiction
+            and alcohol recovery support, and places to start when you do not
+            know who to talk to.
+          </p>
+
+          <a
+            href="#resources"
+            className="mt-5 block rounded-full bg-pink-200 px-6 py-3 text-center text-sm font-semibold text-slate-950"
+          >
+            View Support Resources
+          </a>
+        </div>
+
+        <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
           <h2 className="text-2xl font-bold">Support groups</h2>
 
           <p className="mt-4 leading-7 text-white/70">
-            Noelle’s Light can grow into a place where people can join support
+            Noelle's Light can grow into a place where people can join support
             groups based on what they are facing, or submit information about
             in-person groups that may help others.
           </p>
@@ -144,7 +161,7 @@ export default function Home() {
       <section className="mx-auto max-w-5xl px-5 py-10">
         <div className="rounded-3xl border border-pink-200/20 bg-pink-200/10 p-6 sm:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-pink-200/80">
-            A note from Noelle’s dad
+            A note from Noelle's dad
           </p>
 
           <h2 className="mt-3 text-3xl font-bold">Why this matters</h2>
@@ -164,9 +181,79 @@ export default function Home() {
           </p>
 
           <p className="mt-4 leading-7 text-white/75">
-            Noelle’s Light is being created in memory of Noelle Ryan Strain,
+            Noelle's Light is being created in memory of Noelle Ryan Strain,
             with the hope that it can become a safe place for people who need
             someone to listen.
+          </p>
+        </div>
+      </section>
+
+      {/* Resources */}
+      <section id="resources" className="mx-auto max-w-5xl px-5 py-10">
+        <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6 sm:p-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-pink-200/80">
+            Support Resources
+          </p>
+
+          <h2 className="mt-3 text-3xl font-bold">Places to start</h2>
+
+          <p className="mt-4 leading-7 text-white/70">
+            If you are overwhelmed, grieving, struggling with mental health, addiction,
+            alcohol, loneliness, or family problems, you do not have to figure it out
+            alone. These are starting points for help.
+          </p>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl bg-white/[0.06] p-4">
+              <h3 className="font-bold">Immediate danger</h3>
+              <p className="mt-2 text-sm leading-6 text-white/65">
+                If someone may be in immediate danger, call 911 or go to the nearest
+                emergency room.
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-white/[0.06] p-4">
+              <h3 className="font-bold">Suicide & crisis support</h3>
+              <p className="mt-2 text-sm leading-6 text-white/65">
+                Call or text 988 to reach the Suicide & Crisis Lifeline.
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-white/[0.06] p-4">
+              <h3 className="font-bold">Crisis Text Line</h3>
+              <p className="mt-2 text-sm leading-6 text-white/65">
+                Text HOME to 741741 to connect with a trained crisis counselor.
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-white/[0.06] p-4">
+              <h3 className="font-bold">Grief and loss</h3>
+              <p className="mt-2 text-sm leading-6 text-white/65">
+                Look for local grief groups, hospice grief programs, church/community
+                support, or online grief communities.
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-white/[0.06] p-4">
+              <h3 className="font-bold">Drug and alcohol struggles</h3>
+              <p className="mt-2 text-sm leading-6 text-white/65">
+                Recovery groups, outpatient programs, counseling, and peer support can
+                help people take the next step.
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-white/[0.06] p-4">
+              <h3 className="font-bold">Mental health support</h3>
+              <p className="mt-2 text-sm leading-6 text-white/65">
+                A primary doctor, therapist, counselor, school counselor, local clinic,
+                or community mental health center can be a place to start.
+              </p>
+            </div>
+          </div>
+
+          <p className="mt-6 text-sm leading-6 text-white/55">
+            Noelle's Light is not monitored 24/7 and does not replace emergency care,
+            therapy, medical care, or professional crisis support.
           </p>
         </div>
       </section>
@@ -231,7 +318,7 @@ export default function Home() {
           </div>
 
           <p className="mt-5 text-sm leading-6 text-white/60">
-            Noelle’s Light is still being built. This page is not monitored 24/7
+            Noelle's Light is still being built. This page is not monitored 24/7
             and should not be used for emergencies.
           </p>
         </div>
