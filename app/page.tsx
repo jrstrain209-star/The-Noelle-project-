@@ -170,6 +170,21 @@ export default function Home() {
             Submit a Group
           </a>
         </div>
+
+        <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
+          <h2 className="text-2xl font-bold">Support the project</h2>
+
+          <p className="mt-4 leading-7 text-white/70">
+            Noelle's Light is built by volunteers and supported by people who believe in creating a safe, judgment-free space for those who are struggling. Your time or contribution matters.
+          </p>
+
+          <a
+            href="#"
+            className="mt-5 block rounded-full bg-pink-200 px-6 py-3 text-center text-sm font-semibold text-slate-950"
+          >
+            Get Involved
+          </a>
+        </div>
       </section>
 
       {/* Dad note */}
