@@ -351,38 +351,76 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Help */}
-      <section id="help" className="mx-auto max-w-5xl px-5 py-10 pb-20">
-        <div className="rounded-3xl border border-red-300/20 bg-red-300/10 p-6 sm:p-8">
-          <h2 className="text-3xl font-bold">Get Help Now</h2>
+    {/* Help */}
+<section id="help" className="mx-auto max-w-5xl px-5 py-10 pb-20">
+  <div className="rounded-3xl border border-red-300/20 bg-red-300/10 p-6 sm:p-8">
+    <p className="text-sm font-semibold uppercase tracking-[0.25em] text-red-200/80">
+      Immediate Support
+    </p>
 
-          <p className="mt-4 leading-7 text-white/75">
-            If you or someone else may be in immediate danger, call 911 or go to
-            the nearest emergency room.
-          </p>
+    <h2 className="mt-3 text-3xl font-bold">Get Help Now</h2>
 
-          <div className="mt-6 space-y-4">
-            <a
-              href="tel:988"
-              className="block rounded-2xl bg-white px-5 py-4 text-center font-bold text-slate-950"
-            >
-              Call or text 988 — Suicide & Crisis Lifeline
-            </a>
+    <p className="mt-4 leading-7 text-white/75">
+      If you or someone else may be in immediate danger, call 911 or go to
+      the nearest emergency room. If you are in crisis, you deserve help
+      right now — even if you do not know what to say yet.
+    </p>
 
-            <a
-              href="sms:988"
-              className="block rounded-2xl bg-white/10 px-5 py-4 text-center font-bold text-white ring-1 ring-white/15"
-            >
-              Text 988
-            </a>
-          </div>
+    <div className="mt-6 grid gap-4 sm:grid-cols-2">
+      <a
+        href="tel:911"
+        className="block rounded-2xl bg-white px-5 py-4 text-center font-bold text-slate-950"
+      >
+        Call 911 for immediate danger
+      </a>
 
-          <p className="mt-5 text-sm leading-6 text-white/60">
-            Noelle's Light is still being built. This page is not monitored 24/7
-            and should not be used for emergencies.
-          </p>
-        </div>
-      </section>
+      <a
+        href="tel:988"
+        className="block rounded-2xl bg-white px-5 py-4 text-center font-bold text-slate-950"
+      >
+        Call 988 — Suicide & Crisis Lifeline
+      </a>
+
+      <a
+        href="sms:988"
+        className="block rounded-2xl bg-white/10 px-5 py-4 text-center font-bold text-white ring-1 ring-white/15"
+      >
+        Text 988
+      </a>
+
+      <a
+        href="sms:741741&body=HOME"
+        className="block rounded-2xl bg-white/10 px-5 py-4 text-center font-bold text-white ring-1 ring-white/15"
+      >
+        Text HOME to 741741
+      </a>
+    </div>
+
+    <div className="mt-6 grid gap-4 sm:grid-cols-2">
+      <div className="rounded-2xl bg-white/[0.06] p-4">
+        <h3 className="font-bold">When you feel alone</h3>
+        <p className="mt-2 text-sm leading-6 text-white/65">
+          You do not have to explain everything perfectly. Start with one
+          sentence: “I need someone to talk to.”
+        </p>
+      </div>
+
+      <div className="rounded-2xl bg-white/[0.06] p-4">
+        <h3 className="font-bold">When someone else is struggling</h3>
+        <p className="mt-2 text-sm leading-6 text-white/65">
+          Stay with them if it is safe, remove immediate dangers if possible,
+          and contact emergency or crisis support.
+        </p>
+      </div>
+    </div>
+
+    <p className="mt-6 text-sm leading-6 text-white/60">
+      Noelle's Light is still being built. This page is not monitored 24/7
+      and should not be used as a replacement for emergency help, therapy,
+      medical care, or professional crisis support.
+    </p>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="border-t border-white/10 px-5 py-8 text-center text-sm text-white/50">
