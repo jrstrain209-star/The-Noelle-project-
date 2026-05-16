@@ -8,7 +8,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050716]/80 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
           <div>
-            <p className="text-sm font-semibold">Noelle's Light</p>
+            <p className="text-sm font-semibold">Noelle&apos;s Light</p>
             <p className="text-xs text-white/60">You are not alone.</p>
           </div>
 
@@ -32,7 +32,7 @@ export default function Home() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-base leading-7 text-white/70">
-          Noelle's Light is being built in memory of Noelle Ryan Strain — a
+          Noelle&apos;s Light is being built in memory of Noelle Ryan Strain — a
           gentle, judgment-free place to talk, find support groups, connect with
           help nearby, and remind each other there is still light in the dark.
         </p>
@@ -61,10 +61,10 @@ export default function Home() {
             About
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold">What Noelle's Light is</h2>
+          <h2 className="mt-3 text-3xl font-bold">What Noelle&apos;s Light is</h2>
 
           <p className="mt-4 leading-7 text-white/70">
-            Noelle's Light is a memorial project and future peer-support
+            Noelle&apos;s Light is a memorial project and future peer-support
             community. The goal is to create a place where people can speak
             honestly about grief, loneliness, mental health, addiction, family
             struggles, loss, and the things they may be afraid to say out loud.
@@ -89,7 +89,7 @@ export default function Home() {
           <p className="mt-4 leading-7 text-white/70">
             You can share what you are going through without having to use your
             real name. Sometimes the first step is just being able to say,
-            "I'm not okay."
+            &quot;I&apos;m not okay.&quot;
           </p>
 
           <a
@@ -138,16 +138,14 @@ export default function Home() {
           <h2 className="text-2xl font-bold">Support groups</h2>
 
           <p className="mt-4 leading-7 text-white/70">
-            Noelle's Light can grow into a place where people can join support
-            groups based on what they are facing, or submit information about
-            in-person groups that may help others.
+            Noelle&apos;s Light can grow into a place where people can join
+            support groups based on what they are facing, or submit information
+            about in-person groups that may help others.
           </p>
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
-          <h2 className="text-2xl font-bold">
-            Help others feel less alone
-          </h2>
+          <h2 className="text-2xl font-bold">Help others feel less alone</h2>
 
           <p className="mt-4 leading-7 text-white/70">
             People who have been through hard things may be able to encourage
@@ -160,7 +158,10 @@ export default function Home() {
           <h2 className="text-2xl font-bold">Submit a Support Group</h2>
 
           <p className="mt-4 leading-7 text-white/70">
-            Know of a grief group, recovery meeting, mental health resource, church/community support group, or in-person meeting that could help someone? Submit it so Noelle's Light can eventually help people find support near them.
+            Know of a grief group, recovery meeting, mental health resource,
+            church/community support group, or in-person meeting that could help
+            someone? Submit it so Noelle&apos;s Light can eventually help people
+            find support near them.
           </p>
 
           <a
@@ -177,11 +178,13 @@ export default function Home() {
           <h2 className="text-2xl font-bold">Support the project</h2>
 
           <p className="mt-4 leading-7 text-white/70">
-            Noelle's Light is built by volunteers and supported by people who believe in creating a safe, judgment-free space for those who are struggling. Your time or contribution matters.
+            Noelle&apos;s Light is built by volunteers and supported by people
+            who believe in creating a safe, judgment-free space for those who
+            are struggling. Your time or contribution matters.
           </p>
 
           <a
-            href="#"
+            href="#support-project"
             className="mt-5 block rounded-full bg-pink-200 px-6 py-3 text-center text-sm font-semibold text-slate-950"
           >
             Get Involved
@@ -193,7 +196,7 @@ export default function Home() {
       <section className="mx-auto max-w-5xl px-5 py-10">
         <div className="rounded-3xl border border-pink-200/20 bg-pink-200/10 p-6 sm:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-pink-200/80">
-            A note from Noelle's dad
+            A note from Noelle&apos;s dad
           </p>
 
           <h2 className="mt-3 text-3xl font-bold">Why this matters</h2>
@@ -213,9 +216,9 @@ export default function Home() {
           </p>
 
           <p className="mt-4 leading-7 text-white/75">
-            Noelle's Light is being created in memory of Noelle Ryan Strain,
-            with the hope that it can become a safe place for people who need
-            someone to listen.
+            Noelle&apos;s Light is being created in memory of Noelle Ryan
+            Strain, with the hope that it can become a safe place for people who
+            need someone to listen.
           </p>
         </div>
       </section>
@@ -230,17 +233,17 @@ export default function Home() {
           <h2 className="mt-3 text-3xl font-bold">Places to start</h2>
 
           <p className="mt-4 leading-7 text-white/70">
-            If you are overwhelmed, grieving, struggling with mental health, addiction,
-            alcohol, loneliness, or family problems, you do not have to figure it out
-            alone. These are starting points for help.
+            If you are overwhelmed, grieving, struggling with mental health,
+            addiction, alcohol, loneliness, or family problems, you do not have
+            to figure it out alone. These are starting points for help.
           </p>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl bg-white/[0.06] p-4">
               <h3 className="font-bold">Immediate danger</h3>
               <p className="mt-2 text-sm leading-6 text-white/65">
-                If someone may be in immediate danger, call 911 or go to the nearest
-                emergency room.
+                If someone may be in immediate danger, call 911 or go to the
+                nearest emergency room.
               </p>
             </div>
 
@@ -261,31 +264,33 @@ export default function Home() {
             <div className="rounded-2xl bg-white/[0.06] p-4">
               <h3 className="font-bold">Grief and loss</h3>
               <p className="mt-2 text-sm leading-6 text-white/65">
-                Look for local grief groups, hospice grief programs, church/community
-                support, or online grief communities.
+                Look for local grief groups, hospice grief programs,
+                church/community support, or online grief communities.
               </p>
             </div>
 
             <div className="rounded-2xl bg-white/[0.06] p-4">
               <h3 className="font-bold">Drug and alcohol struggles</h3>
               <p className="mt-2 text-sm leading-6 text-white/65">
-                Recovery groups, outpatient programs, counseling, and peer support can
-                help people take the next step.
+                Recovery groups, outpatient programs, counseling, and peer
+                support can help people take the next step.
               </p>
             </div>
 
             <div className="rounded-2xl bg-white/[0.06] p-4">
               <h3 className="font-bold">Mental health support</h3>
               <p className="mt-2 text-sm leading-6 text-white/65">
-                A primary doctor, therapist, counselor, school counselor, local clinic,
-                or community mental health center can be a place to start.
+                A primary doctor, therapist, counselor, school counselor, local
+                clinic, or community mental health center can be a place to
+                start.
               </p>
             </div>
           </div>
 
           <p className="mt-6 text-sm leading-6 text-white/55">
-            Noelle's Light is not monitored 24/7 and does not replace emergency care,
-            therapy, medical care, or professional crisis support.
+            Noelle&apos;s Light is not monitored 24/7 and does not replace
+            emergency care, therapy, medical care, or professional crisis
+            support.
           </p>
         </div>
       </section>
@@ -300,7 +305,11 @@ export default function Home() {
           <h2 className="mt-3 text-3xl font-bold">Submit a Support Group</h2>
 
           <p className="mt-4 leading-7 text-white/70">
-            Noelle's Light is collecting support group information so this project can eventually help people find real help in their area. You can submit grief groups, addiction or alcohol recovery meetings, mental health resources, family support groups, church/community groups, or other safe support options.
+            Noelle&apos;s Light is collecting support group information so this
+            project can eventually help people find real help in their area. You
+            can submit grief groups, addiction or alcohol recovery meetings,
+            mental health resources, family support groups, church/community
+            groups, or other safe support options.
           </p>
 
           <a
@@ -313,8 +322,41 @@ export default function Home() {
           </a>
 
           <p className="mt-4 text-sm leading-6 text-white/55">
-            Submissions can be reviewed before anything is listed publicly. Noelle's Light is still being built and is not monitored 24/7.
+            Submissions can be reviewed before anything is listed publicly.
+            Noelle&apos;s Light is still being built and is not monitored 24/7.
           </p>
+        </div>
+      </section>
+
+      {/* Support the Project */}
+      <section id="support-project" className="mx-auto max-w-5xl px-5 py-10">
+        <div className="rounded-3xl border border-pink-200/20 bg-pink-200/10 p-6 sm:p-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-pink-200/80">
+            Support the Project
+          </p>
+
+          <h2 className="mt-3 text-3xl font-bold">Help Noelle&apos;s Light grow</h2>
+
+          <p className="mt-4 leading-7 text-white/75">
+            This project is still new. The next steps are gathering resources,
+            building trust, reviewing submissions, and finding people who want
+            to help create something safe and meaningful.
+          </p>
+
+          <p className="mt-4 leading-7 text-white/75">
+            If you want to help, you can share the site, suggest resources,
+            submit support groups, give feedback, or simply tell someone who is
+            struggling that they are not alone.
+          </p>
+
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeRwrptBHTHtRc0A7PfwCPk0N-LYTbjck-6LatZcVxarOvf5Q/viewform?usp=dialog"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 block rounded-full bg-pink-200 px-6 py-3 text-center text-sm font-semibold text-slate-950 sm:inline-block"
+          >
+            Suggest a Resource
+          </a>
         </div>
       </section>
 
@@ -351,76 +393,76 @@ export default function Home() {
         </div>
       </section>
 
-    {/* Help */}
-<section id="help" className="mx-auto max-w-5xl px-5 py-10 pb-20">
-  <div className="rounded-3xl border border-red-300/20 bg-red-300/10 p-6 sm:p-8">
-    <p className="text-sm font-semibold uppercase tracking-[0.25em] text-red-200/80">
-      Immediate Support
-    </p>
+      {/* Help */}
+      <section id="help" className="mx-auto max-w-5xl px-5 py-10 pb-20">
+        <div className="rounded-3xl border border-red-300/20 bg-red-300/10 p-6 sm:p-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-red-200/80">
+            Immediate Support
+          </p>
 
-    <h2 className="mt-3 text-3xl font-bold">Get Help Now</h2>
+          <h2 className="mt-3 text-3xl font-bold">Get Help Now</h2>
 
-    <p className="mt-4 leading-7 text-white/75">
-      If you or someone else may be in immediate danger, call 911 or go to
-      the nearest emergency room. If you are in crisis, you deserve help
-      right now — even if you do not know what to say yet.
-    </p>
+          <p className="mt-4 leading-7 text-white/75">
+            If you or someone else may be in immediate danger, call 911 or go to
+            the nearest emergency room. If you are in crisis, you deserve help
+            right now — even if you do not know what to say yet.
+          </p>
 
-    <div className="mt-6 grid gap-4 sm:grid-cols-2">
-      <a
-        href="tel:911"
-        className="block rounded-2xl bg-white px-5 py-4 text-center font-bold text-slate-950"
-      >
-        Call 911 for immediate danger
-      </a>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <a
+              href="tel:911"
+              className="block rounded-2xl bg-white px-5 py-4 text-center font-bold text-slate-950"
+            >
+              Call 911 for immediate danger
+            </a>
 
-      <a
-        href="tel:988"
-        className="block rounded-2xl bg-white px-5 py-4 text-center font-bold text-slate-950"
-      >
-        Call 988 — Suicide & Crisis Lifeline
-      </a>
+            <a
+              href="tel:988"
+              className="block rounded-2xl bg-white px-5 py-4 text-center font-bold text-slate-950"
+            >
+              Call 988 — Suicide & Crisis Lifeline
+            </a>
 
-      <a
-        href="sms:988"
-        className="block rounded-2xl bg-white/10 px-5 py-4 text-center font-bold text-white ring-1 ring-white/15"
-      >
-        Text 988
-      </a>
+            <a
+              href="sms:988"
+              className="block rounded-2xl bg-white/10 px-5 py-4 text-center font-bold text-white ring-1 ring-white/15"
+            >
+              Text 988
+            </a>
 
-      <a
-        href="sms:741741&body=HOME"
-        className="block rounded-2xl bg-white/10 px-5 py-4 text-center font-bold text-white ring-1 ring-white/15"
-      >
-        Text HOME to 741741
-      </a>
-    </div>
+            <a
+              href="sms:741741?body=HOME"
+              className="block rounded-2xl bg-white/10 px-5 py-4 text-center font-bold text-white ring-1 ring-white/15"
+            >
+              Text HOME to 741741
+            </a>
+          </div>
 
-    <div className="mt-6 grid gap-4 sm:grid-cols-2">
-      <div className="rounded-2xl bg-white/[0.06] p-4">
-        <h3 className="font-bold">When you feel alone</h3>
-        <p className="mt-2 text-sm leading-6 text-white/65">
-          You do not have to explain everything perfectly. Start with one
-          sentence: “I need someone to talk to.”
-        </p>
-      </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl bg-white/[0.06] p-4">
+              <h3 className="font-bold">When you feel alone</h3>
+              <p className="mt-2 text-sm leading-6 text-white/65">
+                You do not have to explain everything perfectly. Start with one
+                sentence: &quot;I need someone to talk to.&quot;
+              </p>
+            </div>
 
-      <div className="rounded-2xl bg-white/[0.06] p-4">
-        <h3 className="font-bold">When someone else is struggling</h3>
-        <p className="mt-2 text-sm leading-6 text-white/65">
-          Stay with them if it is safe, remove immediate dangers if possible,
-          and contact emergency or crisis support.
-        </p>
-      </div>
-    </div>
+            <div className="rounded-2xl bg-white/[0.06] p-4">
+              <h3 className="font-bold">When someone else is struggling</h3>
+              <p className="mt-2 text-sm leading-6 text-white/65">
+                Stay with them if it is safe, remove immediate dangers if
+                possible, and contact emergency or crisis support.
+              </p>
+            </div>
+          </div>
 
-    <p className="mt-6 text-sm leading-6 text-white/60">
-      Noelle's Light is still being built. This page is not monitored 24/7
-      and should not be used as a replacement for emergency help, therapy,
-      medical care, or professional crisis support.
-    </p>
-  </div>
-</section>
+          <p className="mt-6 text-sm leading-6 text-white/60">
+            Noelle&apos;s Light is still being built. This page is not monitored
+            24/7 and should not be used as a replacement for emergency help,
+            therapy, medical care, or professional crisis support.
+          </p>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="border-t border-white/10 px-5 py-8 text-center text-sm text-white/50">
