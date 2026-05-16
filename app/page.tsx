@@ -155,6 +155,21 @@ export default function Home() {
             the right time can matter more than people realize.
           </p>
         </div>
+
+        <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
+          <h2 className="text-2xl font-bold">Submit a Support Group</h2>
+
+          <p className="mt-4 leading-7 text-white/70">
+            Know of a grief group, recovery meeting, mental health resource, church/community support group, or in-person meeting that could help someone? Submit it so Noelle's Light can eventually help people find support near them.
+          </p>
+
+          <a
+            href="#submit-group"
+            className="mt-5 block rounded-full bg-pink-200 px-6 py-3 text-center text-sm font-semibold text-slate-950"
+          >
+            Submit a Group
+          </a>
+        </div>
       </section>
 
       {/* Dad note */}
@@ -254,6 +269,34 @@ export default function Home() {
           <p className="mt-6 text-sm leading-6 text-white/55">
             Noelle's Light is not monitored 24/7 and does not replace emergency care,
             therapy, medical care, or professional crisis support.
+          </p>
+        </div>
+      </section>
+
+      {/* Submit a Support Group */}
+      <section id="submit-group" className="mx-auto max-w-5xl px-5 py-10">
+        <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6 sm:p-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-pink-200/80">
+            Community Resources
+          </p>
+
+          <h2 className="mt-3 text-3xl font-bold">Submit a Support Group</h2>
+
+          <p className="mt-4 leading-7 text-white/70">
+            Noelle's Light is collecting support group information so this project can eventually help people find real help in their area. You can submit grief groups, addiction or alcohol recovery meetings, mental health resources, family support groups, church/community groups, or other safe support options.
+          </p>
+
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfNvI1Huqg9_hOqRXn9BkhgsRS5ZtMX18hIYKmehAG8QYLGyA/viewform?usp=publish-editor"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 block rounded-full bg-pink-200 px-6 py-3 text-center text-sm font-semibold text-slate-950"
+          >
+            Submit Support Group Info
+          </a>
+
+          <p className="mt-4 text-sm leading-6 text-white/55">
+            Submissions can be reviewed before anything is listed publicly. Noelle's Light is still being built and is not monitored 24/7.
           </p>
         </div>
       </section>
