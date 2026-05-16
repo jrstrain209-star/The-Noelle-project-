@@ -12,14 +12,14 @@ export default function Home() {
         
         {/* Stars */}
         <div className="absolute inset-0">
-          {[...Array(150)].map((_, i) => {
+          {Array.from({ length: 150 }).map((_, i) => {
             const size = Math.random() * 2 + 0.5;
             const opacity = Math.random() * 0.7 + 0.3;
             const duration = Math.random() * 3 + 2;
             const delay = Math.random() * 2;
             return (
               <div
-                key={i}
+                key={`star-${i}`}
                 className="absolute rounded-full bg-white"
                 style={{
                   width: `${size}px`,
@@ -247,7 +247,7 @@ export default function Home() {
             { icon: '💬', title: 'Anonymous Discussions', desc: 'Share and reply to posts completely anonymously' },
             { icon: '📍', title: 'Local Support Groups', desc: 'Find grief groups and recovery meetings near you' },
             { icon: '🏠', title: 'Support Rooms', desc: 'Topic-specific spaces for focused peer support' },
-            { icon: '👥', title: 'Trained Listeners', desc: 'Connect with volunteers who&apos;ve trained in peer support' },
+            { icon: '👥', title: 'Trained Listeners', desc: 'Connect with volunteers who\'ve trained in peer support' },
             { icon: '📚', title: 'Resource Hub', desc: 'Comprehensive mental health and recovery resources' },
             { icon: '💝', title: 'Grief Network', desc: 'Connect with others who understand loss' },
           ].map((idea) => (
