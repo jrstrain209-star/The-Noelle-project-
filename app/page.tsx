@@ -302,7 +302,7 @@ export default function Home() {
           </p>
 
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfNvI1Huqg9_hOqRXn9BkhgsRS5ZtMX18hIYKmehAG8QYLGyA/viewform?usp=publish-editor"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeRwrptBHTHtRc0A7PfwCPk0N-LYTbjck-6LatZcVxarOvf5Q/viewform?usp=dialog"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-6 block rounded-full bg-pink-200 px-6 py-3 text-center text-sm font-semibold text-slate-950"
