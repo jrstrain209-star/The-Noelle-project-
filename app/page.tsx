@@ -1,6 +1,70 @@
 'use client';
 
 export default function Home() {
+  const supportResources = [
+    {
+      category: 'Crisis Support',
+      icon: '🆘',
+      resources: [
+        { name: '988 Suicide & Crisis Lifeline', desc: 'Call or text 988 anytime', link: 'tel:988' },
+        { name: '911 Emergency', desc: 'Immediate danger or life threat', link: 'tel:911' },
+        { name: 'Crisis Text Line', desc: 'Text HOME to 741741', link: 'sms:741741?body=HOME' },
+      ]
+    },
+    {
+      category: 'Mental Health Support',
+      icon: '🧠',
+      resources: [
+        { name: 'NAMI Helpline', desc: '1-800-950-6264 (M-F 10am-10pm EST)', link: 'tel:1-800-950-6264' },
+        { name: 'SAMHSA National Helpline', desc: '1-800-662-4357 (Free & Confidential, 24/7)', link: 'tel:1-800-662-4357' },
+        { name: 'Psychology Today Therapist Finder', desc: 'Find licensed mental health professionals', link: 'https://www.psychologytoday.com' },
+      ]
+    },
+    {
+      category: 'Grief & Loss Support',
+      icon: '💙',
+      resources: [
+        { name: 'The Dinner Party', desc: 'Peer support dinners for grieving young adults', link: 'https://www.thedinnerparty.org' },
+        { name: 'GriefShare', desc: 'Support groups for grief and loss', link: 'https://www.griefshare.org' },
+        { name: 'National Alliance for Grieving Children', desc: 'Resources for grieving families', link: 'https://childrengrieve.org' },
+      ]
+    },
+    {
+      category: 'Recovery Support',
+      icon: '🌱',
+      resources: [
+        { name: 'AA (Alcoholics Anonymous)', desc: 'Meeting finder and support', link: 'https://www.aa.org' },
+        { name: 'NA (Narcotics Anonymous)', desc: 'Addiction recovery support', link: 'https://www.na.org' },
+        { name: 'SMART Recovery', desc: 'Self-empowerment recovery program', link: 'https://www.smartrecovery.org' },
+      ]
+    },
+    {
+      category: 'LGBTQ+ Support',
+      icon: '🌈',
+      resources: [
+        { name: 'The Trevor Project', desc: '1-866-488-7386 (LGBTQ+ crisis support)', link: 'tel:1-866-488-7386' },
+        { name: 'Trans Lifeline', desc: '877-565-8860 (Trans-specific support)', link: 'tel:877-565-8860' },
+        { name: 'PFLAG', desc: 'Support for LGBTQ+ individuals & families', link: 'https://pflag.org' },
+      ]
+    },
+    {
+      category: 'Domestic & Sexual Violence',
+      icon: '🛡️',
+      resources: [
+        { name: 'National Domestic Violence Hotline', desc: '1-800-799-7233 (24/7, Confidential)', link: 'tel:1-800-799-7233' },
+        { name: 'RAINN (Sexual Assault)', desc: '1-800-656-4673 (24/7, Anonymous)', link: 'tel:1-800-656-4673' },
+        { name: 'National Dating Abuse Helpline', desc: '1-866-331-9474 (Teen dating abuse)', link: 'tel:1-866-331-9474' },
+      ]
+    },
+  ];
+
+  const supportGroups = [
+    { title: 'Peer Support Groups', desc: 'Connect with others who truly understand what you\'re going through', icon: '👥' },
+    { title: 'Online Communities', desc: 'Anonymous forums and chat-based support available 24/7', icon: '💻' },
+    { title: 'Support Meetings', desc: 'In-person and virtual meetings for specific struggles', icon: '📍' },
+    { title: 'Therapy & Counseling', desc: 'Professional mental health support for deeper healing', icon: '🤝' },
+  ];
+
   return (
     <main className="min-h-screen bg-slate-950 text-white overflow-hidden">
       {/* Animated Stars/Galaxy Background */}
@@ -99,7 +163,7 @@ export default function Home() {
               Share Your Story
             </a>
             <a
-              href="#resources"
+              href="#support-resources"
               className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full border border-white/30 transition-all duration-300"
             >
               Find Resources
@@ -108,17 +172,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 2: Get Help Now */}
+      {/* SECTION 2: Get Help Now - Expanded */}
       <section id="get-help-now" className="relative max-w-6xl mx-auto px-5 py-16">
         <div className="bg-gradient-to-br from-red-500/10 via-rose-500/5 to-pink-500/10 border border-rose-400/30 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
           <p className="text-rose-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-4">
-            🆘 Immediate Support Available
+            🆘 Crisis Support - Available Now
           </p>
           <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
             If you&apos;re in crisis right now
           </h3>
           <p className="text-white/80 text-base md:text-lg mb-8 max-w-2xl">
-            You deserve help immediately. Please reach out using one of these resources. You are not alone, and your life matters.
+            You deserve help immediately. These resources are staffed 24/7 by trained counselors. You are not alone, and your life matters.
           </p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
@@ -171,7 +235,7 @@ export default function Home() {
           <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
             One in five adults experience mental illness
           </h3>
-          <p className="text-white/80 text-base md:text-lg leading-relaxed mb-6">
+          <p className="text-white/80 text-base md:text-lg leading-relaxed mb-8">
             Grief. Loneliness. Anxiety. Depression. Addiction. Shame. Fear. Whatever you&apos;re facing, countless others understand exactly what you&apos;re going through. This community exists because silence makes pain heavier. Speaking—even anonymously—can help you feel less alone.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -184,7 +248,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 4: Share Your Story */}
+      {/* SECTION 3.5: Support Types Overview */}
+      <section id="support-resources" className="relative max-w-6xl mx-auto px-5 py-16">
+        <h3 className="text-3xl md:text-4xl font-bold mb-4 text-white text-center">Types of Support Available</h3>
+        <p className="text-white/70 text-center mb-10 max-w-2xl mx-auto">Everyone's path to healing is different. Here are the different types of support we can connect you with.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {supportGroups.map((group) => (
+            <div key={group.title} className="bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all duration-300">
+              <div className="text-4xl mb-4">{group.icon}</div>
+              <h4 className="text-white font-bold mb-3 text-lg">{group.title}</h4>
+              <p className="text-white/70 text-sm leading-relaxed">{group.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 4: Comprehensive Resource Categories */}
+      <section className="relative max-w-6xl mx-auto px-5 py-16">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white text-center">Get Help By Category</h2>
+        <p className="text-white/70 text-center mb-12 max-w-2xl mx-auto">Find specific resources for what you&apos;re going through. All numbers are confidential and available 24/7 unless otherwise noted.</p>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {supportResources.map((resourceGroup, idx) => (
+            <div key={idx} className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-3xl p-8 backdrop-blur-sm hover:border-white/20 transition-all duration-300">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-3xl">{resourceGroup.icon}</span>
+                <h4 className="text-xl md:text-2xl font-bold text-white">{resourceGroup.category}</h4>
+              </div>
+              <div className="space-y-4">
+                {resourceGroup.resources.map((resource, ridx) => (
+                  <a
+                    key={ridx}
+                    href={resource.link}
+                    target={resource.link.startsWith('http') ? '_blank' : undefined}
+                    rel={resource.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="block p-4 bg-white/[0.08] hover:bg-white/[0.12] border border-white/10 rounded-xl transition-all duration-300 group"
+                  >
+                    <p className="text-white font-semibold group-hover:text-pink-300 transition-colors">{resource.name}</p>
+                    <p className="text-white/60 text-sm mt-1">{resource.desc}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 5: Share Your Story */}
       <section id="share-your-story" className="relative max-w-6xl mx-auto px-5 py-16">
         <div className="bg-gradient-to-br from-pink-500/10 via-rose-500/5 to-pink-500/10 border border-pink-400/20 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
           <p className="text-pink-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-4">
@@ -213,7 +323,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 5: Noelle's Story */}
+      {/* SECTION 6: Noelle's Story */}
       <section className="relative max-w-6xl mx-auto px-5 py-16">
         <div className="bg-gradient-to-br from-violet-500/5 via-indigo-500/5 to-violet-500/5 border border-violet-400/20 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
           <p className="text-violet-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-4">
@@ -239,7 +349,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 6: Future Ideas */}
+      {/* SECTION 7: Future Ideas */}
       <section className="relative max-w-6xl mx-auto px-5 py-16">
         <h3 className="text-3xl md:text-4xl font-bold mb-10 text-white text-center">What&apos;s Coming</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -260,7 +370,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 7: Footer */}
+      {/* SECTION 8: Footer */}
       <footer className="relative border-t border-white/10 mt-20 py-12 text-center text-white/60 text-sm md:text-base">
         <div className="max-w-6xl mx-auto px-5">
           <p className="text-lg md:text-xl font-semibold text-white mb-2">
@@ -270,6 +380,7 @@ export default function Home() {
           <div className="border-t border-white/10 pt-6 text-white/50 text-xs">
             <p>Noelle&apos;s Light is a peer-support community and memorial project.</p>
             <p className="mt-2">We are not a crisis service. If you are in immediate danger, call 911 or text 988.</p>
+            <p className="mt-3">All phone numbers are confidential and free to call/text.</p>
           </div>
         </div>
       </footer>
