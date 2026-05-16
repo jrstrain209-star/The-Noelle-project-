@@ -45,7 +45,8 @@ export default function Home() {
             Share anonymously
           </a>
           <a
-            href="#about"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfNvI1Huqg9_hOqRXn9BkhgsRS5ZtMX18hIYKmehAG8QYLGyA/viewform?usp=publish-editor"
+          
             className="rounded-full bg-white/10 px-6 py-3 text-center text-sm font-semibold text-white ring-1 ring-white/15"
           >
             Learn about the community
