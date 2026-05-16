@@ -164,7 +164,9 @@ export default function Home() {
           </p>
 
           <a
-            href="#submit-group"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeRwrptBHTHtRc0A7PfwCPk0N-LYTbjck-6LatZcVxarOvf5Q/viewform?usp=dialog"
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-5 block rounded-full bg-pink-200 px-6 py-3 text-center text-sm font-semibold text-slate-950"
           >
             Submit a Group
