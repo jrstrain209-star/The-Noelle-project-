@@ -1,75 +1,23 @@
 'use client';
 
 export default function Home() {
-  const supportResources = [
-    {
-      category: 'Crisis Support',
-      icon: '🆘',
-      resources: [
-        { name: '988 Suicide & Crisis Lifeline', desc: 'Call or text 988 anytime', link: 'tel:988' },
-        { name: '911 Emergency', desc: 'Immediate danger or life threat', link: 'tel:911' },
-        { name: 'Crisis Text Line', desc: 'Text HOME to 741741', link: 'sms:741741?body=HOME' },
-      ]
-    },
-    {
-      category: 'Mental Health Support',
-      icon: '🧠',
-      resources: [
-        { name: 'NAMI Helpline', desc: '1-800-950-6264 (M-F 10am-10pm EST)', link: 'tel:1-800-950-6264' },
-        { name: 'SAMHSA National Helpline', desc: '1-800-662-4357 (Free & Confidential, 24/7)', link: 'tel:1-800-662-4357' },
-        { name: 'Psychology Today Therapist Finder', desc: 'Find licensed mental health professionals', link: 'https://www.psychologytoday.com' },
-      ]
-    },
-    {
-      category: 'Grief & Loss Support',
-      icon: '💙',
-      resources: [
-        { name: 'The Dinner Party', desc: 'Peer support dinners for grieving young adults', link: 'https://www.thedinnerparty.org' },
-        { name: 'GriefShare', desc: 'Support groups for grief and loss', link: 'https://www.griefshare.org' },
-        { name: 'National Alliance for Grieving Children', desc: 'Resources for grieving families', link: 'https://childrengrieve.org' },
-      ]
-    },
-    {
-      category: 'Recovery Support',
-      icon: '🌱',
-      resources: [
-        { name: 'AA (Alcoholics Anonymous)', desc: 'Meeting finder and support', link: 'https://www.aa.org' },
-        { name: 'NA (Narcotics Anonymous)', desc: 'Addiction recovery support', link: 'https://www.na.org' },
-        { name: 'SMART Recovery', desc: 'Self-empowerment recovery program', link: 'https://www.smartrecovery.org' },
-      ]
-    },
-    {
-      category: 'LGBTQ+ Support',
-      icon: '🌈',
-      resources: [
-        { name: 'The Trevor Project', desc: '1-866-488-7386 (LGBTQ+ crisis support)', link: 'tel:1-866-488-7386' },
-        { name: 'Trans Lifeline', desc: '877-565-8860 (Trans-specific support)', link: 'tel:877-565-8860' },
-        { name: 'PFLAG', desc: 'Support for LGBTQ+ individuals & families', link: 'https://pflag.org' },
-      ]
-    },
-    {
-      category: 'Domestic & Sexual Violence',
-      icon: '🛡️',
-      resources: [
-        { name: 'National Domestic Violence Hotline', desc: '1-800-799-7233 (24/7, Confidential)', link: 'tel:1-800-799-7233' },
-        { name: 'RAINN (Sexual Assault)', desc: '1-800-656-4673 (24/7, Anonymous)', link: 'tel:1-800-656-4673' },
-        { name: 'National Dating Abuse Helpline', desc: '1-866-331-9474 (Teen dating abuse)', link: 'tel:1-866-331-9474' },
-      ]
-    },
+  const crisisResources = [
+    { label: '988', desc: 'Suicide & Crisis Lifeline', href: 'tel:988' },
+    { label: '911', desc: 'Emergency Services', href: 'tel:911' },
+    { label: 'Text 741741', desc: 'Crisis Text Line (text HOME)', href: 'sms:741741?body=HOME' },
   ];
 
-  const supportGroups = [
-    { title: 'Peer Support Groups', desc: 'Connect with others who truly understand what you\'re going through', icon: '👥' },
-    { title: 'Online Communities', desc: 'Anonymous forums and chat-based support available 24/7', icon: '💻' },
-    { title: 'Support Meetings', desc: 'In-person and virtual meetings for specific struggles', icon: '📍' },
-    { title: 'Therapy & Counseling', desc: 'Professional mental health support for deeper healing', icon: '🤝' },
+  const resources = [
+    { icon: '🧠', title: 'Mental Health', items: ['NAMI: 1-800-950-6264', 'SAMHSA: 1-800-662-4357', 'Psychology Today Finder'] },
+    { icon: '💙', title: 'Grief Support', items: ['The Dinner Party', 'GriefShare', 'Grief Support Groups'] },
+    { icon: '🌱', title: 'Recovery', items: ['AA Meetings', 'NA Meetings', 'SMART Recovery'] },
+    { icon: '🌈', title: 'LGBTQ+', items: ['Trevor Project: 866-488-7386', 'Trans Lifeline: 877-565-8860', 'PFLAG'] },
   ];
 
   return (
     <main className="min-h-screen bg-slate-950 text-white overflow-hidden">
       {/* Animated Stars/Galaxy Background */}
       <div className="fixed inset-0 -z-10 bg-slate-950">
-        {/* Galaxy gradient layers */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(88,86,214,0.15),transparent_50%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(124,58,237,0.12),transparent_50%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_0%,rgba(168,85,247,0.08),transparent_60%)]"></div>
@@ -99,7 +47,6 @@ export default function Home() {
           })}
         </div>
 
-        {/* CSS for twinkling animation */}
         <style jsx>{`
           @keyframes twinkle {
             0%, 100% { opacity: 0.3; }
@@ -111,7 +58,7 @@ export default function Home() {
       {/* Fixed "Get Help Now" Button */}
       <div className="fixed bottom-6 right-6 z-40 md:bottom-8 md:right-8">
         <a
-          href="#get-help-now"
+          href="#crisis"
           className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-400 to-rose-400 text-slate-950 font-bold rounded-full shadow-2xl hover:shadow-pink-500/50 hover:scale-105 transition-all duration-300 text-sm md:text-base"
         >
           <span className="relative flex h-3 w-3">
@@ -132,255 +79,152 @@ export default function Home() {
             <p className="text-xs md:text-sm text-white/60 mt-1">A safe space to be heard</p>
           </div>
           <a
-            href="#get-help-now"
+            href="#crisis"
             className="hidden sm:block px-6 py-2 bg-pink-400 hover:bg-pink-500 text-slate-950 font-semibold rounded-full transition-colors text-sm"
           >
-            Get Help Now
+            Get Help
           </a>
         </div>
       </header>
 
-      {/* SECTION 1: Hero */}
-      <section className="relative max-w-6xl mx-auto px-5 py-16 md:py-28 text-center">
-        <div className="max-w-3xl mx-auto">
-          <p className="text-pink-300 text-xs md:text-sm font-semibold uppercase tracking-widest mb-6">
-            ✦ A Memorial of Light ✦
-          </p>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-white">
-            You&apos;re carrying something heavy.
-          </h2>
-          <p className="text-xl md:text-2xl text-purple-200 mb-8 font-light">
-            You don&apos;t have to carry it alone.
-          </p>
-          <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto mb-10">
-            Noelle&apos;s Light is a judgment-free sanctuary for those struggling with grief, loneliness, mental health challenges, addiction, and loss. Share your story. Find support. Remember you matter.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="#share-your-story"
-              className="px-8 py-4 bg-gradient-to-r from-pink-400 to-rose-400 text-slate-950 font-bold rounded-full hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300"
-            >
-              Share Your Story
-            </a>
-            <a
-              href="#support-resources"
-              className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full border border-white/30 transition-all duration-300"
-            >
-              Find Resources
-            </a>
-          </div>
+      {/* Hero Section */}
+      <section className="relative max-w-6xl mx-auto px-5 py-16 md:py-24 text-center">
+        <p className="text-pink-300 text-xs md:text-sm font-semibold uppercase tracking-widest mb-4">
+          ✦ A Memorial of Light ✦
+        </p>
+        <h2 className="text-4xl md:text-6xl font-bold leading-tight mb-6 text-white">
+          You don&apos;t have to carry it alone.
+        </h2>
+        <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto mb-10">
+          Noelle&apos;s Light is a judgment-free community for those struggling with grief, loneliness, mental health challenges, addiction, and loss. Share your story. Find support. You matter.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#share"
+            className="px-6 py-3 bg-gradient-to-r from-pink-400 to-rose-400 text-slate-950 font-bold rounded-full hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 text-sm"
+          >
+            Share Your Story
+          </a>
+          <a
+            href="#resources"
+            className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full border border-white/30 transition-all duration-300 text-sm"
+          >
+            Find Resources
+          </a>
         </div>
       </section>
 
-      {/* SECTION 2: Get Help Now - Expanded */}
-      <section id="get-help-now" className="relative max-w-6xl mx-auto px-5 py-16">
-        <div className="bg-gradient-to-br from-red-500/10 via-rose-500/5 to-pink-500/10 border border-rose-400/30 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
-          <p className="text-rose-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-4">
-            🆘 Crisis Support - Available Now
+      {/* Crisis Section */}
+      <section id="crisis" className="relative max-w-6xl mx-auto px-5 py-12">
+        <div className="bg-gradient-to-br from-red-500/10 via-rose-500/5 to-pink-500/10 border border-rose-400/30 rounded-3xl p-8 md:p-10 backdrop-blur-sm">
+          <p className="text-rose-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-3">
+            🆘 In Crisis Right Now?
           </p>
-          <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            If you&apos;re in crisis right now
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
+            Help is available 24/7
           </h3>
-          <p className="text-white/80 text-base md:text-lg mb-8 max-w-2xl">
-            You deserve help immediately. These resources are staffed 24/7 by trained counselors. You are not alone, and your life matters.
+          <p className="text-white/80 text-sm md:text-base mb-6">
+            You deserve support immediately. All services are confidential and free. Call, text, or reach out now.
           </p>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-            {/* 988 */}
-            <a
-              href="tel:988"
-              className="group p-6 bg-white/5 hover:bg-white/10 border border-white/20 rounded-2xl transition-all duration-300 text-center"
-            >
-              <div className="text-3xl md:text-4xl font-black text-pink-400 mb-2">988</div>
-              <p className="text-white font-bold mb-1">Suicide & Crisis Lifeline</p>
-              <p className="text-white/70 text-sm">Call or text 24/7</p>
-              <p className="text-rose-300 text-xs mt-3 font-semibold group-hover:text-rose-200">Tap to call →</p>
-            </a>
-
-            {/* 911 */}
-            <a
-              href="tel:911"
-              className="group p-6 bg-red-500/10 hover:bg-red-500/20 border border-red-400/50 rounded-2xl transition-all duration-300 text-center"
-            >
-              <div className="text-3xl md:text-4xl font-black text-red-400 mb-2">911</div>
-              <p className="text-white font-bold mb-1">Emergency Services</p>
-              <p className="text-white/70 text-sm">Immediate danger</p>
-              <p className="text-red-300 text-xs mt-3 font-semibold group-hover:text-red-200">Tap to call →</p>
-            </a>
-
-            {/* Crisis Text Line */}
-            <a
-              href="sms:741741?body=HOME"
-              className="group p-6 bg-white/5 hover:bg-white/10 border border-white/20 rounded-2xl transition-all duration-300 text-center"
-            >
-              <div className="text-2xl md:text-3xl font-black text-purple-400 mb-2">741741</div>
-              <p className="text-white font-bold mb-1">Crisis Text Line</p>
-              <p className="text-white/70 text-sm">Text &quot;HOME&quot;</p>
-              <p className="text-purple-300 text-xs mt-3 font-semibold group-hover:text-purple-200">Tap to text →</p>
-            </a>
-          </div>
-
-          <p className="text-white/60 text-xs md:text-sm text-center border-t border-white/10 pt-6">
-            Noelle&apos;s Light is not a crisis service and does not replace professional emergency care. These resources are available 24/7.
-          </p>
-        </div>
-      </section>
-
-      {/* SECTION 3: You Are Not Alone */}
-      <section className="relative max-w-6xl mx-auto px-5 py-16">
-        <div className="bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-blue-500/5 border border-purple-400/20 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
-          <p className="text-purple-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-4">
-            ✨ You Are Not Alone
-          </p>
-          <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            One in five adults experience mental illness
-          </h3>
-          <p className="text-white/80 text-base md:text-lg leading-relaxed mb-8">
-            Grief. Loneliness. Anxiety. Depression. Addiction. Shame. Fear. Whatever you&apos;re facing, countless others understand exactly what you&apos;re going through. This community exists because silence makes pain heavier. Speaking—even anonymously—can help you feel less alone.
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {['Grief Support', 'Mental Health', 'Recovery', 'Loneliness', 'Anxiety', 'Depression', 'Loss', 'Healing'].map((item) => (
-              <div key={item} className="text-center p-4 bg-white/5 rounded-xl border border-white/10">
-                <p className="text-white/80 font-medium text-sm">{item}</p>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {crisisResources.map((resource, idx) => (
+              <a
+                key={idx}
+                href={resource.href}
+                className="group p-5 bg-white/5 hover:bg-white/10 border border-white/20 rounded-xl transition-all duration-300 text-center"
+              >
+                <div className="text-2xl md:text-3xl font-black text-pink-400 mb-2">{resource.label}</div>
+                <p className="text-white font-semibold text-sm">{resource.desc}</p>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 3.5: Support Types Overview */}
-      <section id="support-resources" className="relative max-w-6xl mx-auto px-5 py-16">
-        <h3 className="text-3xl md:text-4xl font-bold mb-4 text-white text-center">Types of Support Available</h3>
-        <p className="text-white/70 text-center mb-10 max-w-2xl mx-auto">Everyone's path to healing is different. Here are the different types of support we can connect you with.</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {supportGroups.map((group) => (
-            <div key={group.title} className="bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all duration-300">
-              <div className="text-4xl mb-4">{group.icon}</div>
-              <h4 className="text-white font-bold mb-3 text-lg">{group.title}</h4>
-              <p className="text-white/70 text-sm leading-relaxed">{group.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SECTION 4: Comprehensive Resource Categories */}
-      <section className="relative max-w-6xl mx-auto px-5 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white text-center">Get Help By Category</h2>
-        <p className="text-white/70 text-center mb-12 max-w-2xl mx-auto">Find specific resources for what you&apos;re going through. All numbers are confidential and available 24/7 unless otherwise noted.</p>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {supportResources.map((resourceGroup, idx) => (
-            <div key={idx} className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-3xl p-8 backdrop-blur-sm hover:border-white/20 transition-all duration-300">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-3xl">{resourceGroup.icon}</span>
-                <h4 className="text-xl md:text-2xl font-bold text-white">{resourceGroup.category}</h4>
-              </div>
-              <div className="space-y-4">
-                {resourceGroup.resources.map((resource, ridx) => (
-                  <a
-                    key={ridx}
-                    href={resource.link}
-                    target={resource.link.startsWith('http') ? '_blank' : undefined}
-                    rel={resource.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="block p-4 bg-white/[0.08] hover:bg-white/[0.12] border border-white/10 rounded-xl transition-all duration-300 group"
-                  >
-                    <p className="text-white font-semibold group-hover:text-pink-300 transition-colors">{resource.name}</p>
-                    <p className="text-white/60 text-sm mt-1">{resource.desc}</p>
-                  </a>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SECTION 5: Share Your Story */}
-      <section id="share-your-story" className="relative max-w-6xl mx-auto px-5 py-16">
-        <div className="bg-gradient-to-br from-pink-500/10 via-rose-500/5 to-pink-500/10 border border-pink-400/20 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
-          <p className="text-pink-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-4">
-            💭 Share Anonymously
+      {/* Share Your Story */}
+      <section id="share" className="relative max-w-6xl mx-auto px-5 py-12">
+        <div className="bg-gradient-to-br from-pink-500/10 via-rose-500/5 to-pink-500/10 border border-pink-400/20 rounded-3xl p-8 md:p-10 backdrop-blur-sm">
+          <p className="text-pink-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-3">
+            💭 Share Your Story
           </p>
-          <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            Tell us what you&apos;re going through
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
+            Speak anonymously. Be heard.
           </h3>
-          <p className="text-white/80 text-base md:text-lg leading-relaxed mb-4">
-            Sometimes the first step is just being able to say: &quot;I&apos;m not okay.&quot;
-          </p>
-          <p className="text-white/70 text-base mb-8">
-            Share your story completely anonymously. No names needed. No judgment. Just honest words from a real person. Your story could be exactly what someone else needs to hear to feel less alone. All submissions are reviewed before being shared with the community.
+          <p className="text-white/80 text-sm md:text-base leading-relaxed mb-6">
+            Sometimes the first step is just saying &quot;I&apos;m not okay.&quot; Share what you&apos;re going through completely anonymously. Your story matters and could help someone feel less alone.
           </p>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSfNvI1Huqg9_hOqRXn9BkhgsRS5ZtMX18hIYKmehAG8QYLGyA/viewform?usp=publish-editor"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-8 py-4 bg-gradient-to-r from-pink-400 to-rose-400 text-slate-950 font-bold rounded-full hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 mb-4"
+            className="inline-block px-6 py-3 bg-gradient-to-r from-pink-400 to-rose-400 text-slate-950 font-bold rounded-full hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 text-sm"
           >
-            Open Story Form
+            Open Anonymous Form
           </a>
-          <p className="text-white/60 text-sm">
-            📋 Takes about 5 minutes. All responses are confidential and reviewed by moderators.
+          <p className="text-white/60 text-xs md:text-sm mt-4">
+            Submissions reviewed before sharing. All responses confidential.
           </p>
         </div>
       </section>
 
-      {/* SECTION 6: Noelle's Story */}
-      <section className="relative max-w-6xl mx-auto px-5 py-16">
-        <div className="bg-gradient-to-br from-violet-500/5 via-indigo-500/5 to-violet-500/5 border border-violet-400/20 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
-          <p className="text-violet-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-4">
-            💫 Why This Exists
-          </p>
-          <h3 className="text-3xl md:text-4xl font-bold mb-8 text-white">
-            A message from Noelle&apos;s dad
-          </h3>
-          <div className="space-y-6">
-            <p className="text-white/80 text-base md:text-lg leading-relaxed">
-              I know how loneliness feels. I know how pain can make you feel invisible. People struggle in different ways—through grief, mental illness, loss, addiction, shame, and fear.
-            </p>
-            <p className="text-white/80 text-base md:text-lg leading-relaxed">
-              Sometimes just being able to talk to someone who understands—someone who&apos;s been there—can help a person feel less alone. That small moment of connection can matter more than we realize.
-            </p>
-            <p className="text-white/80 text-base md:text-lg leading-relaxed">
-              Noelle&apos;s Light is built on that belief: that connection saves lives, and that your story—and your pain—deserves to be heard with compassion.
-            </p>
-            <p className="text-pink-300 text-lg md:text-xl font-semibold italic mt-8">
-              You are not alone. Your life matters.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 7: Future Ideas */}
-      <section className="relative max-w-6xl mx-auto px-5 py-16">
-        <h3 className="text-3xl md:text-4xl font-bold mb-10 text-white text-center">What&apos;s Coming</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            { icon: '💬', title: 'Anonymous Discussions', desc: 'Share and reply to posts completely anonymously' },
-            { icon: '📍', title: 'Local Support Groups', desc: 'Find grief groups and recovery meetings near you' },
-            { icon: '🏠', title: 'Support Rooms', desc: 'Topic-specific spaces for focused peer support' },
-            { icon: '👥', title: 'Trained Listeners', desc: 'Connect with volunteers who\'ve trained in peer support' },
-            { icon: '📚', title: 'Resource Hub', desc: 'Comprehensive mental health and recovery resources' },
-            { icon: '💝', title: 'Grief Network', desc: 'Connect with others who understand loss' },
-          ].map((idea) => (
-            <div key={idea.title} className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-6 transition-all duration-300">
-              <div className="text-4xl mb-3">{idea.icon}</div>
-              <h4 className="text-white font-bold mb-2 text-lg">{idea.title}</h4>
-              <p className="text-white/70 text-sm leading-relaxed">{idea.desc}</p>
+      {/* Resources Grid */}
+      <section id="resources" className="relative max-w-6xl mx-auto px-5 py-12">
+        <h3 className="text-2xl md:text-3xl font-bold mb-8 text-white text-center">Get Support By Type</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {resources.map((category, idx) => (
+            <div key={idx} className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-6 transition-all duration-300">
+              <div className="text-3xl mb-3">{category.icon}</div>
+              <h4 className="text-white font-bold mb-3 text-lg">{category.title}</h4>
+              <ul className="space-y-2">
+                {category.items.map((item, i) => (
+                  <li key={i} className="text-white/70 text-sm">{item}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
       </section>
 
-      {/* SECTION 8: Footer */}
-      <footer className="relative border-t border-white/10 mt-20 py-12 text-center text-white/60 text-sm md:text-base">
+      {/* Why This Exists */}
+      <section className="relative max-w-6xl mx-auto px-5 py-12">
+        <div className="bg-gradient-to-br from-violet-500/5 via-indigo-500/5 to-violet-500/5 border border-violet-400/20 rounded-3xl p-8 md:p-10 backdrop-blur-sm">
+          <p className="text-violet-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-3">
+            💫 From Noelle&apos;s Dad
+          </p>
+          <p className="text-white/80 text-base leading-relaxed">
+            I know how loneliness feels. People struggle in different ways—through grief, mental illness, loss, addiction, shame, and fear. Sometimes just being able to talk to someone who understands can help a person feel less alone. That&apos;s what Noelle&apos;s Light is for. You are not alone. Your life matters.
+          </p>
+        </div>
+      </section>
+
+      {/* Submit Support Group */}
+      <section className="relative max-w-6xl mx-auto px-5 py-12">
+        <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-10 backdrop-blur-sm">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">Know a Support Group?</h3>
+          <p className="text-white/80 text-sm md:text-base leading-relaxed mb-6">
+            Help us build a directory of grief groups, recovery meetings, and mental health resources in your area.
+          </p>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeRwrptBHTHtRc0A7PfwCPk0N-LYTbjck-6LatZcVxarOvf5Q/viewform?usp=dialog"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-full transition-colors text-sm"
+          >
+            Submit a Resource
+          </a>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative border-t border-white/10 mt-16 py-8 text-center text-white/60 text-xs md:text-sm">
         <div className="max-w-6xl mx-auto px-5">
-          <p className="text-lg md:text-xl font-semibold text-white mb-2">
+          <p className="text-base md:text-lg font-semibold text-white mb-2">
             Created in memory of Noelle Ryan Strain
           </p>
-          <p className="mb-6">A safe place to be heard. A community of light in the darkness.</p>
-          <div className="border-t border-white/10 pt-6 text-white/50 text-xs">
-            <p>Noelle&apos;s Light is a peer-support community and memorial project.</p>
-            <p className="mt-2">We are not a crisis service. If you are in immediate danger, call 911 or text 988.</p>
-            <p className="mt-3">All phone numbers are confidential and free to call/text.</p>
+          <p className="mb-4">A safe place to be heard. A community of light in the darkness.</p>
+          <div className="border-t border-white/10 pt-4 text-white/50">
+            <p>Noelle&apos;s Light is not a crisis service. If in immediate danger, call 911 or text 988.</p>
           </div>
         </div>
       </footer>
