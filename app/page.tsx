@@ -44,9 +44,9 @@ export default function Home() {
           >
             Share anonymously
           </a>
+
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfNvI1Huqg9_hOqRXn9BkhgsRS5ZtMX18hIYKmehAG8QYLGyA/viewform?usp=publish-editor"
-          
+            href="#about"
             className="rounded-full bg-white/10 px-6 py-3 text-center text-sm font-semibold text-white ring-1 ring-white/15"
           >
             Learn about the community
@@ -60,13 +60,16 @@ export default function Home() {
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-pink-200/80">
             About
           </p>
+
           <h2 className="mt-3 text-3xl font-bold">What Noelle’s Light is</h2>
+
           <p className="mt-4 leading-7 text-white/70">
             Noelle’s Light is a memorial project and future peer-support
             community. The goal is to create a place where people can speak
             honestly about grief, loneliness, mental health, addiction, family
             struggles, loss, and the things they may be afraid to say out loud.
           </p>
+
           <p className="mt-4 leading-7 text-white/70">
             This is not meant to replace emergency help, therapy, or medical
             care. It is meant to help people feel less alone and guide them
@@ -77,17 +80,36 @@ export default function Home() {
 
       {/* Main cards */}
       <section className="mx-auto grid max-w-5xl gap-5 px-5 py-10 sm:grid-cols-2">
-        <div id="share" className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
+        <div
+          id="share"
+          className="rounded-3xl border border-white/10 bg-white/[0.06] p-6"
+        >
           <h2 className="text-2xl font-bold">Share anonymously</h2>
+
           <p className="mt-4 leading-7 text-white/70">
-            People will be able to share what they are going through without
-            having to use their real name. Sometimes the first step is just
-            being able to say, “I’m not okay.”
+            You can share what you are going through without having to use your
+            real name. Sometimes the first step is just being able to say,
+            “I’m not okay.”
+          </p>
+
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfNvI1Huqg9_hOqRXn9BkhgsRS5ZtMX18hIYKmehAG8QYLGyA/viewform?usp=publish-editor"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 block rounded-full bg-pink-200 px-6 py-3 text-center text-sm font-semibold text-slate-950"
+          >
+            Open Anonymous Story Form
+          </a>
+
+          <p className="mt-4 text-sm leading-6 text-white/50">
+            Submissions can be reviewed before anything is shared publicly.
+            This page is not monitored 24/7.
           </p>
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
           <h2 className="text-2xl font-bold">Find support nearby</h2>
+
           <p className="mt-4 leading-7 text-white/70">
             The goal is to help people find local and online resources,
             including grief support, mental health support, addiction recovery,
@@ -97,6 +119,7 @@ export default function Home() {
 
         <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
           <h2 className="text-2xl font-bold">Support groups</h2>
+
           <p className="mt-4 leading-7 text-white/70">
             Noelle’s Light can grow into a place where people can join support
             groups based on what they are facing, or submit information about
@@ -105,7 +128,10 @@ export default function Home() {
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
-          <h2 className="text-2xl font-bold">Help others feel less alone</h2>
+          <h2 className="text-2xl font-bold">
+            Help others feel less alone
+          </h2>
+
           <p className="mt-4 leading-7 text-white/70">
             People who have been through hard things may be able to encourage
             someone else who is still in the middle of it. A kind message at
@@ -120,12 +146,15 @@ export default function Home() {
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-pink-200/80">
             A note from Noelle’s dad
           </p>
+
           <h2 className="mt-3 text-3xl font-bold">Why this matters</h2>
+
           <p className="mt-4 leading-7 text-white/75">
             I know how loneliness feels. I have been struggling with my own
             demons, and I know how hard it can be to find someone to talk to
             when everything feels heavy.
           </p>
+
           <p className="mt-4 leading-7 text-white/75">
             People struggle in different ways — grief, mental health, loss,
             addiction, alcohol, family problems, shame, fear, and things they
@@ -133,6 +162,7 @@ export default function Home() {
             who has been there before can make a person feel a little less
             alone.
           </p>
+
           <p className="mt-4 leading-7 text-white/75">
             Noelle’s Light is being created in memory of Noelle Ryan Strain,
             with the hope that it can become a safe place for people who need
@@ -150,18 +180,23 @@ export default function Home() {
             <div className="rounded-2xl bg-white/[0.06] p-4">
               Anonymous posts and replies
             </div>
+
             <div className="rounded-2xl bg-white/[0.06] p-4">
               Local support group directory
             </div>
+
             <div className="rounded-2xl bg-white/[0.06] p-4">
               Submit an in-person group
             </div>
+
             <div className="rounded-2xl bg-white/[0.06] p-4">
               Topic-based support rooms
             </div>
+
             <div className="rounded-2xl bg-white/[0.06] p-4">
               Mental health and grief resources
             </div>
+
             <div className="rounded-2xl bg-white/[0.06] p-4">
               Volunteer listener program
             </div>
@@ -173,6 +208,7 @@ export default function Home() {
       <section id="help" className="mx-auto max-w-5xl px-5 py-10 pb-20">
         <div className="rounded-3xl border border-red-300/20 bg-red-300/10 p-6 sm:p-8">
           <h2 className="text-3xl font-bold">Get Help Now</h2>
+
           <p className="mt-4 leading-7 text-white/75">
             If you or someone else may be in immediate danger, call 911 or go to
             the nearest emergency room.
@@ -207,4 +243,4 @@ export default function Home() {
       </footer>
     </main>
   );
-            }
+}
