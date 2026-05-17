@@ -7,8 +7,8 @@ export default function SubmitMemory() {
   const [formData, setFormData] = useState({
     name: '',
     relationship: '',
-    memory: '',
-    agreeToPublish: false,
+    message: '',
+    permission_to_post: false,
   });
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string>('');
@@ -49,13 +49,13 @@ export default function SubmitMemory() {
     setLoading(true);
 
     try {
-      if (!formData.memory.trim()) {
+      if (!formData.message.trim()) {
         setError('Please share a memory or letter.');
         setLoading(false);
         return;
       }
 
-      if (!formData.agreeToPublish) {
+      if (!formData.permission_to_post) {
         setError('Please confirm you agree to share this publicly.');
         setLoading(false);
         return;
@@ -78,8 +78,9 @@ export default function SubmitMemory() {
       const result = await submitMemorial({
         name: formData.name || null,
         relationship: formData.relationship || null,
-        memory: formData.memory,
+        message: formData.message,
         photo_url: photoUrl,
+        permission_to_post: formData.permission_to_post,
         approved: false,
       });
 
@@ -93,8 +94,8 @@ export default function SubmitMemory() {
       setFormData({
         name: '',
         relationship: '',
-        memory: '',
-        agreeToPublish: false,
+        message: '',
+        permission_to_post: false,
       });
       setPhoto(null);
       setPhotoPreview('');
@@ -247,20 +248,20 @@ export default function SubmitMemory() {
 
             {/* Memory/Letter Field */}
             <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:border-white/20 transition-all duration-300">
-              <label htmlFor="memory" className="block text-sm font-semibold text-pink-300 mb-2">
+              <label htmlFor="message" className="block text-sm font-semibold text-pink-300 mb-2">
                 Memory or Letter <span className="text-rose-300">*</span>
               </label>
               <textarea
-                id="memory"
-                name="memory"
-                value={formData.memory}
+                id="message"
+                name="message"
+                value={formData.message}
                 onChange={handleInputChange}
                 placeholder="Share your memory, story, or words for Noelle..."
                 rows={6}
                 className="w-full bg-slate-900/50 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400/50 transition-all resize-none"
               />
               <p className="text-white/40 text-xs mt-2">
-                {formData.memory.length} characters
+                {formData.message.length} characters
               </p>
             </div>
 
@@ -305,13 +306,13 @@ export default function SubmitMemory() {
               )}
             </div>
 
-            {/* Agreement Checkbox */}
+            {/* Permission Checkbox */}
             <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:border-white/20 transition-all duration-300">
               <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="checkbox"
-                  name="agreeToPublish"
-                  checked={formData.agreeToPublish}
+                  name="permission_to_post"
+                  checked={formData.permission_to_post}
                   onChange={handleInputChange}
                   className="mt-1 w-5 h-5 rounded border-white/20 bg-slate-900/50 accent-pink-400 cursor-pointer"
                 />
