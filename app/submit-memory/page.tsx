@@ -1,6 +1,111 @@
 'use client';
 
+import { useState } from 'react';
+import { uploadMemorialPhoto, submitMemorial } from '@/lib/supabaseClient';
+
 export default function SubmitMemory() {
+  const [formData, setFormData] = useState({
+    name: '',
+    relationship: '',
+    memory: '',
+    agreeToPublish: false,
+  });
+  const [photo, setPhoto] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string>('');
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value, type } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
+    }));
+  };
+
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setPhoto(file);
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setPhotoPreview(event.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removePhoto = () => {
+    setPhoto(null);
+    setPhotoPreview('');
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      if (!formData.memory.trim()) {
+        setError('Please share a memory or letter.');
+        setLoading(false);
+        return;
+      }
+
+      if (!formData.agreeToPublish) {
+        setError('Please confirm you agree to share this publicly.');
+        setLoading(false);
+        return;
+      }
+
+      let photoUrl: string | null = null;
+
+      // Upload photo if provided
+      if (photo) {
+        const tempId = Date.now().toString();
+        photoUrl = await uploadMemorialPhoto(photo, tempId);
+        if (!photoUrl) {
+          setError('Failed to upload photo. Please try again.');
+          setLoading(false);
+          return;
+        }
+      }
+
+      // Submit memorial
+      const result = await submitMemorial({
+        name: formData.name || null,
+        relationship: formData.relationship || null,
+        memory: formData.memory,
+        photo_url: photoUrl,
+        approved: false,
+      });
+
+      if (!result) {
+        setError('Failed to submit memory. Please try again.');
+        setLoading(false);
+        return;
+      }
+
+      setSubmitted(true);
+      setFormData({
+        name: '',
+        relationship: '',
+        memory: '',
+        agreeToPublish: false,
+      });
+      setPhoto(null);
+      setPhotoPreview('');
+    } catch (err) {
+      console.error('Submit error:', err);
+      setError('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-slate-950 text-white overflow-hidden">
       {/* Animated Stars/Galaxy Background */}
@@ -8,7 +113,7 @@ export default function SubmitMemory() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(88,86,214,0.15),transparent_50%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(124,58,237,0.12),transparent_50%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_0%,rgba(168,85,247,0.08),transparent_60%)]"></div>
-        
+
         {/* Stars */}
         <div className="absolute inset-0">
           {Array.from({ length: 150 }).map((_, i) => {
@@ -63,13 +168,13 @@ export default function SubmitMemory() {
             <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-pink-300 to-purple-300 bg-clip-text text-transparent">
               Noelle&apos;s Light
             </h1>
-            <p className="text-xs md:text-sm text-white/60 mt-1">Share a Memory</p>
+            <p className="text-xs md:text-sm text-white/60 mt-1">Submit a Memory</p>
           </a>
           <a
-            href="/"
+            href="/memorial"
             className="hidden sm:block px-6 py-2 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full transition-colors text-sm border border-white/20"
           >
-            Back Home
+            Back to Memorial
           </a>
         </div>
       </header>
@@ -77,112 +182,183 @@ export default function SubmitMemory() {
       {/* Hero Section */}
       <section className="relative max-w-4xl mx-auto px-5 py-16 md:py-24 text-center">
         <p className="text-pink-300 text-xs md:text-sm font-semibold uppercase tracking-widest mb-4">
-          ✦ Keep Her Light Alive ✦
+          ✦ Share Your Light ✦
         </p>
         <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-white">
-          Share a Memory
+          Submit a Memory
         </h2>
         <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
-          Photos, stories, letters, and memories help keep Noelle&apos;s light alive.
+          Share a photo, letter, or memory of Noelle. Your words will help keep her light alive and
+          provide comfort to those who loved her.
         </p>
       </section>
 
-      {/* What You Can Submit Section */}
-      <section className="relative max-w-4xl mx-auto px-5 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all duration-300">
-            <p className="text-pink-300 text-xs font-bold uppercase tracking-widest mb-3">
-              📸 Photos
+      {/* Main Form Container */}
+      <section className="relative max-w-2xl mx-auto px-5 py-12 pb-24">
+        {submitted ? (
+          <div className="bg-gradient-to-br from-purple-500/10 via-pink-500/5 to-purple-500/10 border border-purple-400/20 rounded-3xl p-8 md:p-12 backdrop-blur-sm text-center">
+            <p className="text-pink-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-4">
+              💫 Thank You
             </p>
-            <h3 className="text-white font-bold mb-2 text-lg">Share Photos</h3>
-            <p className="text-white/70 text-sm">
-              Upload pictures of moments with Noelle, or images that remind you of her light.
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Your Memory Matters</h3>
+            <p className="text-white/80 text-base leading-relaxed mb-8">
+              Thank you for sharing. Your memory will be reviewed before it is posted.
             </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all duration-300">
-            <p className="text-pink-300 text-xs font-bold uppercase tracking-widest mb-3">
-              💌 Letters
-            </p>
-            <h3 className="text-white font-bold mb-2 text-lg">Write Letters</h3>
-            <p className="text-white/70 text-sm">
-              Share words you want to say to or about Noelle. Let your heart speak.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all duration-300">
-            <p className="text-pink-300 text-xs font-bold uppercase tracking-widest mb-3">
-              🌟 Memories
-            </p>
-            <h3 className="text-white font-bold mb-2 text-lg">Share Memories</h3>
-            <p className="text-white/70 text-sm">
-              Tell a story. Share a moment. Describe what Noelle meant to you.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all duration-300">
-            <p className="text-pink-300 text-xs font-bold uppercase tracking-widest mb-3">
-              💬 Messages
-            </p>
-            <h3 className="text-white font-bold mb-2 text-lg">Leave Messages</h3>
-            <p className="text-white/70 text-sm">
-              Send your thoughts, condolences, or anything you&apos;d like the community to know.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Google Form Section */}
-      <section className="relative max-w-4xl mx-auto px-5 py-12">
-        <div className="bg-gradient-to-br from-purple-500/10 via-pink-500/5 to-purple-500/10 border border-purple-400/20 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
-          <div className="text-center mb-8">
-            <p className="text-purple-300 text-xs md:text-sm font-bold uppercase tracking-widest mb-2">
-              💝 Submit Your Tribute
-            </p>
-            <h3 className="text-2xl md:text-3xl font-bold text-white">
-              Fill Out the Form Below
-            </h3>
-          </div>
-
-          {/* Placeholder Google Form iFrame */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-            <iframe
-              src="https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform?embedded=true"
-              width="100%"
-              height="600"
-              frameBorder="0"
-              className="w-full"
-              style={{ minHeight: '600px' }}
+            <a
+              href="/memorial"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-pink-400 to-rose-400 text-slate-950 font-bold rounded-full hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300"
             >
-              Loading…
-            </iframe>
+              Back to Memorial
+            </a>
           </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Name Field */}
+            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:border-white/20 transition-all duration-300">
+              <label htmlFor="name" className="block text-sm font-semibold text-pink-300 mb-2">
+                Your Name <span className="text-white/40">(optional)</span>
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                placeholder="Share your name or remain anonymous"
+                className="w-full bg-slate-900/50 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400/50 transition-all"
+              />
+            </div>
 
-          <p className="text-white/70 text-sm text-center mt-6">
-            The form may take a moment to load. If you experience any issues, you can also email your submission directly.
-          </p>
-        </div>
+            {/* Relationship Field */}
+            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:border-white/20 transition-all duration-300">
+              <label htmlFor="relationship" className="block text-sm font-semibold text-pink-300 mb-2">
+                Your Relationship to Noelle <span className="text-white/40">(optional)</span>
+              </label>
+              <input
+                type="text"
+                id="relationship"
+                name="relationship"
+                value={formData.relationship}
+                onChange={handleInputChange}
+                placeholder="e.g., Friend, Family, Classmate, Coach"
+                className="w-full bg-slate-900/50 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400/50 transition-all"
+              />
+            </div>
+
+            {/* Memory/Letter Field */}
+            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:border-white/20 transition-all duration-300">
+              <label htmlFor="memory" className="block text-sm font-semibold text-pink-300 mb-2">
+                Memory or Letter <span className="text-rose-300">*</span>
+              </label>
+              <textarea
+                id="memory"
+                name="memory"
+                value={formData.memory}
+                onChange={handleInputChange}
+                placeholder="Share your memory, story, or words for Noelle..."
+                rows={6}
+                className="w-full bg-slate-900/50 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400/50 transition-all resize-none"
+              />
+              <p className="text-white/40 text-xs mt-2">
+                {formData.memory.length} characters
+              </p>
+            </div>
+
+            {/* Photo Upload Field */}
+            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:border-white/20 transition-all duration-300">
+              <label htmlFor="photo" className="block text-sm font-semibold text-pink-300 mb-2">
+                Photo <span className="text-white/40">(optional)</span>
+              </label>
+
+              {photoPreview ? (
+                <div className="relative mb-4">
+                  <img
+                    src={photoPreview}
+                    alt="Preview"
+                    className="w-full h-64 object-cover rounded-lg border border-pink-400/30"
+                  />
+                  <button
+                    type="button"
+                    onClick={removePhoto}
+                    className="absolute top-2 right-2 bg-rose-500 hover:bg-rose-600 text-white font-bold py-1 px-3 rounded-lg transition-colors"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ) : (
+                <div className="border-2 border-dashed border-white/20 rounded-lg p-6 text-center hover:border-pink-400/50 transition-colors cursor-pointer">
+                  <input
+                    type="file"
+                    id="photo"
+                    name="photo"
+                    onChange={handlePhotoChange}
+                    accept="image/*"
+                    className="hidden"
+                  />
+                  <label htmlFor="photo" className="cursor-pointer block">
+                    <p className="text-white/60 text-sm">
+                      📸 Click to upload or drag and drop
+                    </p>
+                    <p className="text-white/40 text-xs mt-1">PNG, JPG, GIF up to 10MB</p>
+                  </label>
+                </div>
+              )}
+            </div>
+
+            {/* Agreement Checkbox */}
+            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:border-white/20 transition-all duration-300">
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="agreeToPublish"
+                  checked={formData.agreeToPublish}
+                  onChange={handleInputChange}
+                  className="mt-1 w-5 h-5 rounded border-white/20 bg-slate-900/50 accent-pink-400 cursor-pointer"
+                />
+                <div>
+                  <p className="text-sm text-white font-semibold">
+                    I give permission to post this memory publicly <span className="text-rose-300">*</span>
+                  </p>
+                  <p className="text-xs text-white/60 mt-1">
+                    All submissions will be reviewed before being added to the memorial wall.
+                  </p>
+                </div>
+              </label>
+            </div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="bg-rose-500/10 border border-rose-500/30 rounded-lg p-4">
+                <p className="text-rose-300 text-sm">{error}</p>
+              </div>
+            )}
+
+            {/* Submit Button */}
+            <div className="flex gap-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex-1 px-8 py-4 bg-gradient-to-r from-pink-400 to-rose-400 text-slate-950 font-bold rounded-full hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? 'Submitting...' : 'Submit Memory'}
+              </button>
+              <a
+                href="/memorial"
+                className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full transition-colors border border-white/20"
+              >
+                Cancel
+              </a>
+            </div>
+          </form>
+        )}
       </section>
 
-      {/* Privacy & Review Note */}
-      <section className="relative max-w-2xl mx-auto px-5 py-12">
+      {/* Privacy Note */}
+      <section className="relative max-w-2xl mx-auto px-5 py-8">
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
-          <p className="text-white/70 text-sm leading-relaxed">
-            <span className="block font-semibold text-white mb-2">🔒 All submissions are reviewed before being shared publicly.</span>
-            This helps us ensure that every memory added to Noelle&apos;s memorial is respectful and authentic. We honor every voice.
+          <p className="text-white/70 text-sm">
+            🔒 <span className="block mt-2">Your privacy matters. Please only submit content you are comfortable sharing publicly.</span>
           </p>
-        </div>
-      </section>
-
-      {/* Back to Memorial Link */}
-      <section className="relative max-w-2xl mx-auto px-5 py-12">
-        <div className="text-center">
-          <a
-            href="/memorial"
-            className="inline-block px-8 py-4 bg-gradient-to-r from-purple-400 to-pink-400 text-slate-950 font-bold rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
-          >
-            ← Back to Memorial Wall
-          </a>
         </div>
       </section>
 
