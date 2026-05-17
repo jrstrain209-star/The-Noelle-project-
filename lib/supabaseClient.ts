@@ -1,15 +1,13 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Missing Supabase environment variables. Photo uploads and submissions will not work.');
-}
+export const supabase =
+  supabaseUrl && supabaseAnonKey
+    ? createClient(supabaseUrl, supabaseAnonKey)
+    : null;
 
-export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
-
-// Types for memorial submissions
 export interface MemorialSubmission {
   id: string;
   name: string | null;
@@ -22,94 +20,69 @@ export interface MemorialSubmission {
   updated_at: string;
 }
 
-// Upload photo to Supabase Storage
 export async function uploadMemorialPhoto(
   file: File,
   submissionId: string
 ): Promise<string | null> {
   if (!supabase) {
-    console.error('Supabase not configured');
-    return null;
+    throw new Error("Supabase is not configured. Check Vercel environment variables.");
   }
 
-  try {
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${submissionId}.${fileExt}`;
+  const fileExt = file.name.split(".").pop();
+  const fileName = `${submissionId}.${fileExt}`;
 
-    const { data, error } = await supabase.storage
-      .from('memorial-photos')
-      .upload(fileName, file, {
-        cacheControl: '3600',
-        upsert: true,
-      });
+  const { error } = await supabase.storage
+    .from("memorial-photos")
+    .upload(fileName, file, {
+      cacheControl: "3600",
+      upsert: true,
+    });
 
-    if (error) {
-      console.error('Photo upload error:', error);
-      return null;
-    }
-
-    // Get public URL
-    const { data: publicData } = supabase.storage
-      .from('memorial-photos')
-      .getPublicUrl(fileName);
-
-    return publicData?.publicUrl || null;
-  } catch (error) {
-    console.error('Upload failed:', error);
-    return null;
+  if (error) {
+    throw new Error(`Photo upload failed: ${error.message}`);
   }
+
+  const { data } = supabase.storage
+    .from("memorial-photos")
+    .getPublicUrl(fileName);
+
+  return data.publicUrl;
 }
 
-// Submit memorial to database
 export async function submitMemorial(
-  submission: Omit<MemorialSubmission, 'id' | 'created_at' | 'updated_at'>
-): Promise<MemorialSubmission | null> {
+  submission: Omit<MemorialSubmission, "id" | "created_at" | "updated_at">
+): Promise<MemorialSubmission> {
   if (!supabase) {
-    console.error('Supabase not configured');
-    return null;
+    throw new Error("Supabase is not configured. Check Vercel environment variables.");
   }
 
-  try {
-    const { data, error } = await supabase
-      .from('memorial_submissions')
-      .insert([submission])
-      .select()
-      .single();
+  const { data, error } = await supabase
+    .from("memorial_submissions")
+    .insert([submission])
+    .select()
+    .single();
 
-    if (error) {
-      console.error('Submission error:', error);
-      return null;
-    }
-
-    return data as MemorialSubmission;
-  } catch (error) {
-    console.error('Submit failed:', error);
-    return null;
+  if (error) {
+    throw new Error(`Submission failed: ${error.message}`);
   }
+
+  return data as MemorialSubmission;
 }
 
-// Get approved memorials
 export async function getApprovedMemorials(): Promise<MemorialSubmission[]> {
   if (!supabase) {
-    console.error('Supabase not configured');
     return [];
   }
 
-  try {
-    const { data, error } = await supabase
-      .from('memorial_submissions')
-      .select('*')
-      .eq('approved', true)
-      .order('created_at', { ascending: false });
+  const { data, error } = await supabase
+    .from("memorial_submissions")
+    .select("*")
+    .eq("approved", true)
+    .order("created_at", { ascending: false });
 
-    if (error) {
-      console.error('Fetch error:', error);
-      return [];
-    }
-
-    return data as MemorialSubmission[];
-  } catch (error) {
-    console.error('Fetch failed:', error);
-    return [];
+  if (error) {
+    throw new Error(`Fetch failed: ${error.message}`);
   }
+
+  return data as MemorialSubmission[];
 }

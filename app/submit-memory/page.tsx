@@ -85,10 +85,10 @@ export default function SubmitMemory() {
       });
 
       if (!result) {
-        setError('Failed to submit memory. Please try again.');
-        setLoading(false);
-        return;
-      }
+  setError("Failed to submit memory. Please try again.");
+  setLoading(false);
+  return;
+}
 
       setSubmitted(true);
       setFormData({
@@ -99,10 +99,10 @@ export default function SubmitMemory() {
       });
       setPhoto(null);
       setPhotoPreview('');
-    } catch (err) {
-      console.error('Submit error:', err);
-      setError('An error occurred. Please try again.');
-    } finally {
+   } catch (err) {
+  console.error("Submit error:", err);
+  setError(err instanceof Error ? err.message : "An error occurred. Please try again.");
+} finally {
       setLoading(false);
     }
   };
