@@ -57,8 +57,8 @@ export default function Memorial() {
       {/* Fixed "Get Help Now" Button */}
       <div className="fixed bottom-6 right-6 z-40 md:bottom-8 md:right-8">
         <a
-          href="/#crisis"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-400 to-rose-400 text-slate-950 font-bold rounded-full shadow-2xl hover:shadow-pink-500/50 hover:scale-105 transition-all duration-300 text-sm md:text-base"
+          href="/#help"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-400 to-rose-400 text-slate-950 font-bold rounded-full shadow-2xl hover:shadow-pink-500/50 hover:scale-105 transition-all duration-300"
         >
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-300 opacity-75"></span>
@@ -163,12 +163,12 @@ export default function Memorial() {
             Do you have a photo or letter you&apos;d like to share? Help keep Noelle&apos;s light alive.
           </p>
           <a
-            href="#"
-            className="inline-block px-8 py-4 bg-gradient-to-r from-pink-400 to-rose-400 text-slate-950 font-bold rounded-full hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 mb-6"
+            href="/submit-memory"
+            className="inline-block px-8 py-4 bg-gradient-to-r from-pink-400 to-rose-400 text-slate-950 font-bold rounded-full hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300"
           >
             Submit a Photo or Letter
           </a>
-          <p className="text-white/60 text-xs md:text-sm">
+          <p className="text-white/60 text-xs md:text-sm mt-4">
             Submissions reviewed before being posted publicly.
           </p>
         </div>
