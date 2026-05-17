@@ -4,18 +4,19 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
+  console.warn('Missing Supabase environment variables. Photo uploads and submissions will not work.');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
 
 // Types for memorial submissions
 export interface MemorialSubmission {
   id: string;
   name: string | null;
   relationship: string | null;
-  memory: string;
+  message: string;
   photo_url: string | null;
+  permission_to_post: boolean;
   approved: boolean;
   created_at: string;
   updated_at: string;
@@ -26,6 +27,11 @@ export async function uploadMemorialPhoto(
   file: File,
   submissionId: string
 ): Promise<string | null> {
+  if (!supabase) {
+    console.error('Supabase not configured');
+    return null;
+  }
+
   try {
     const fileExt = file.name.split('.').pop();
     const fileName = `${submissionId}.${fileExt}`;
@@ -58,6 +64,11 @@ export async function uploadMemorialPhoto(
 export async function submitMemorial(
   submission: Omit<MemorialSubmission, 'id' | 'created_at' | 'updated_at'>
 ): Promise<MemorialSubmission | null> {
+  if (!supabase) {
+    console.error('Supabase not configured');
+    return null;
+  }
+
   try {
     const { data, error } = await supabase
       .from('memorial_submissions')
@@ -79,6 +90,11 @@ export async function submitMemorial(
 
 // Get approved memorials
 export async function getApprovedMemorials(): Promise<MemorialSubmission[]> {
+  if (!supabase) {
+    console.error('Supabase not configured');
+    return [];
+  }
+
   try {
     const { data, error } = await supabase
       .from('memorial_submissions')
