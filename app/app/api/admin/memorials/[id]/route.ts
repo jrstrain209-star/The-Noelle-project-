@@ -24,7 +24,7 @@ function getAdminSupabase() {
 
 export async function PATCH(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   if (!isAuthorized(request)) {
     return NextResponse.json(
@@ -33,15 +33,13 @@ export async function PATCH(
     );
   }
 
-  const { id } = await context.params;
-
   try {
     const supabase = getAdminSupabase();
 
     const { data, error } = await supabase
       .from("memorial_submissions")
       .update({ approved: true })
-      .eq("id", id)
+      .eq("id", params.id)
       .select()
       .single();
 
@@ -52,7 +50,9 @@ export async function PATCH(
       );
     }
 
-    return NextResponse.json({ submission: data });
+    return NextResponse.json({
+      submission: data,
+    });
   } catch (error) {
     return NextResponse.json(
       {
@@ -68,7 +68,7 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   if (!isAuthorized(request)) {
     return NextResponse.json(
@@ -77,15 +77,13 @@ export async function DELETE(
     );
   }
 
-  const { id } = await context.params;
-
   try {
     const supabase = getAdminSupabase();
 
     const { error } = await supabase
       .from("memorial_submissions")
       .delete()
-      .eq("id", id);
+      .eq("id", params.id);
 
     if (error) {
       return NextResponse.json(
@@ -94,7 +92,9 @@ export async function DELETE(
       );
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({
+      success: true,
+    });
   } catch (error) {
     return NextResponse.json(
       {
@@ -106,4 +106,3 @@ export async function DELETE(
       { status: 500 }
     );
   }
-}
