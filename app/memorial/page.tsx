@@ -3,7 +3,7 @@
 export default function Memorial() {
   const photoMemories = [
     { title: 'A light remembered', placeholder: '📸' },
-    { title: 'Family moment', placeholder: '💝' },
+    { title: 'Family moment', placeholder: '' },
     { title: 'Photo memory', placeholder: '🌟' },
   ];
 
