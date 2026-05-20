@@ -1,40 +1,170 @@
-'use client';
-
 export default function Home() {
-  const helpResources = [
-    {
-      title: 'Suicide & Crisis Lifeline',
-      description: 'Call or text 988 for immediate support',
-      url: 'https://988lifeline.org/',
-      type: 'crisis'
-    },
-    {
-      title: 'Find Treatment',
-      description: 'Locate mental health and addiction services',
-      url: 'https://www.findtreatment.gov/',
-      type: 'treatment'
-    },
-    {
-      title: 'NAMI Support Groups',
-      description: 'Connect with peer support communities',
-      url: 'https://www.nami.org/support-groups/',
-      type: 'support'
-    }
-  ];
+  return (
+    <main className="min-h-screen bg-[#070816] text-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_#243b6b,_transparent_45%),radial-gradient(circle_at_bottom,_#4b2b5f,_transparent_40%)] opacity-80" />
+      <div className="absolute inset-0 opacity-30 bg-[url('/stars.png')]" />
 
-  const futureIdeas = [
-    'Anonymous posts and replies',
-    'Local support group directory',
-    'Topic-based support rooms',
-    'Volunteer listener program',
-    'Mental health resources hub',
-    'Grief support network'
-  ];
+      <a
+        href="#help"
+        className="fixed bottom-4 right-4 z-50 rounded-full bg-white text-[#070816] px-5 py-3 text-sm font-bold shadow-lg"
+      >
+        Get Help Now
+      </a>
 
-  const emergencyContacts = [
-    { label: 'Call 911', href: 'tel:911', type: 'primary' },
-    { label: 'Call or Text 988', href: 'tel:988', type: 'primary' },
-    { label: 'Text HOME to 741741', href: 'sms:741741?body=HOME', type: 'secondary' }
+      <section className="relative z-10 px-6 py-16 max-w-4xl mx-auto text-center">
+        <p className="text-sm uppercase tracking-[0.3em] text-blue-200">
+          Created in memory of Noelle Ryan Strain
+        </p>
+
+        <h1 className="mt-6 text-4xl md:text-6xl font-bold">
+          Noelle’s Light
+        </h1>
+
+        <p className="mt-6 text-lg text-blue-100 leading-8">
+          A calm, safe place for people who feel alone, overwhelmed, grieving,
+          struggling, or just needing someone who understands.
+        </p>
+
+        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#community"
+            className="rounded-full bg-blue-300 text-[#070816] px-6 py-3 font-semibold"
+          >
+            Find Support
+          </a>
+          <a
+            href="#share"
+            className="rounded-full border border-blue-200 px-6 py-3 font-semibold text-blue-100"
+          >
+            Share Your Story
+          </a>
+        </div>
+      </section>
+
+      <section className="relative z-10 px-6 py-10 max-w-5xl mx-auto grid md:grid-cols-4 gap-4">
+        {[
+          "Share anonymously",
+          "Find someone who understands",
+          "Get connected to local help",
+          "Join or submit support groups",
+        ].map((item) => (
+          <div
+            key={item}
+            className="rounded-2xl bg-white/10 border border-white/10 p-5 backdrop-blur"
+          >
+            <p className="text-blue-100 font-semibold">{item}</p>
+          </div>
+        ))}
+      </section>
+
+      <section id="community" className="relative z-10 px-6 py-14 max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold">You Are Not Alone</h2>
+        <p className="mt-4 text-blue-100 leading-8">
+          Noelle’s Light is for people dealing with grief, loneliness,
+          depression, anxiety, addiction, family problems, loss, trauma,
+          stress, or the quiet battles they do not know how to talk about.
+        </p>
+      </section>
+
+      <section className="relative z-10 px-6 py-14 max-w-5xl mx-auto">
+        <h2 className="text-3xl font-bold text-center">How Noelle’s Light Works</h2>
+
+        <div className="mt-8 grid md:grid-cols-2 gap-5">
+          {[
+            {
+              title: "Talk without judgment",
+              text: "People can share what they are going through and be met with compassion instead of shame.",
+            },
+            {
+              title: "Post anonymously",
+              text: "Not everyone is ready to put their name on their pain. Anonymous posting can help people speak honestly.",
+            },
+            {
+              title: "Find local help",
+              text: "The goal is to help people find real support near them, including crisis resources and community programs.",
+            },
+            {
+              title: "Build real connection",
+              text: "Support groups, peer helpers, and shared stories can remind people that they do not have to carry everything alone.",
+            },
+          ].map((card) => (
+            <div
+              key={card.title}
+              className="rounded-3xl bg-white/10 border border-white/10 p-6 backdrop-blur"
+            >
+              <h3 className="text-xl font-semibold">{card.title}</h3>
+              <p className="mt-3 text-blue-100 leading-7">{card.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="relative z-10 px-6 py-14 max-w-4xl mx-auto rounded-3xl bg-white/10 border border-white/10 backdrop-blur">
+        <h2 className="text-3xl font-bold">A Message From the Founder</h2>
+        <p className="mt-5 text-blue-100 leading-8">
+          Created in memory of Noelle Ryan Strain. I know how loneliness feels,
+          and I know what it’s like to fight demons quietly. Noelle’s Light is
+          being built so people can find someone to talk to, someone who
+          understands, and somewhere to turn before they feel alone.
+        </p>
+      </section>
+
+      <section className="relative z-10 px-6 py-14 max-w-5xl mx-auto">
+        <h2 className="text-3xl font-bold text-center">Future Ideas</h2>
+
+        <div className="mt-8 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {[
+            "Anonymous community posts",
+            "Local support group directory",
+            "Peer helper profiles",
+            "Emergency help resources",
+            "Memorial stories",
+            "Mobile app later",
+          ].map((idea) => (
+            <div
+              key={idea}
+              className="rounded-2xl bg-white/10 border border-white/10 p-5 text-blue-100"
+            >
+              {idea}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="share" className="relative z-10 px-6 py-14 max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold">Share or Submit an Idea</h2>
+        <p className="mt-4 text-blue-100 leading-8">
+          Use the form below to share feedback, suggest a support group, or ask
+          to be part of building Noelle’s Light.
+        </p>
+
+        <div className="mt-8 rounded-3xl overflow-hidden border border-white/10 bg-white">
+          <iframe
+            src="PASTE_YOUR_GOOGLE_FORM_LINK_HERE"
+            width="100%"
+            height="700"
+          >
+            Loading…
+          </iframe>
+        </div>
+      </section>
+
+      <section id="help" className="relative z-10 px-6 py-14 max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl font-bold">Need Help Right Now?</h2>
+        <p className="mt-4 text-blue-100 leading-8">
+          If you are in immediate danger or thinking about hurting yourself,
+          call or text 988 in the United States, or call emergency services.
+        </p>
+        <a
+          href="tel:988"
+          className="mt-6 inline-block rounded-full bg-blue-300 text-[#070816] px-8 py-4 font-bold"
+        >
+          Call 988
+        </a>
+      </section>
+    </main>
+  );
+}    { label: 'Text HOME to 741741', href: 'sms:741741?body=HOME', type: 'secondary' }
   ];
 
   return (
