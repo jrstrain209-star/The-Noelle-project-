@@ -109,18 +109,26 @@ const photoMemories = [
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {photoMemories.map((photo, idx) => (
-            <div key={idx} className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl overflow-hidden hover:border-white/20 transition-all duration-300 group">
-              <div className="aspect-square bg-gradient-to-br from-purple-500/10 via-pink-500/5 to-purple-500/10 flex flex-col items-center justify-center p-6">
-                <div className="text-5xl mb-4">{photo.placeholder}</div>
-                <p className="text-white/60 text-sm text-center">Photo to be added</p>
-              </div>
-              <div className="p-4">
-                <p className="text-white font-semibold text-sm">{photo.title}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  {photoMemories.map((photo) => (
+    <figure
+      key={photo.title}
+      className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-3xl overflow-hidden hover:border-pink-300/40 transition-all duration-300 group shadow-2xl"
+    >
+      <div className="aspect-[4/5] overflow-hidden">
+        <img
+          src={photo.src}
+          alt={photo.title}
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        />
+      </div>
+
+      <figcaption className="p-5">
+        <p className="text-white font-semibold text-sm">{photo.title}</p>
+      </figcaption>
+    </figure>
+  ))}
+</div>
 
         <div className="mt-8 text-center">
           <p className="text-white/60 text-sm">Real photos can be submitted and added to the memorial wall.</p>
