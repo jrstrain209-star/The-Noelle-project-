@@ -6,7 +6,7 @@ const photoMemories = [
   { title: "Joy on the swing", src: "/memory2.jpg" },
   { title: "Sisters by the ocean", src: "/memory3.jpg" },
   { title: "Family in the sunshine", src: "/memory4.jpg" },
-  { title: "Butterfly moment", src: "/memory5.jpg" },
+  { title: "Butterfly moment", src: "/public/images/noelle-butterfly.jpg" },
 ];
 
   const letters = [
