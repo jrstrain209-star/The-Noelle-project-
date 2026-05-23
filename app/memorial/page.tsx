@@ -1,40 +1,119 @@
-'use client';
+"use client";
 
-export default function Memorial() {
-const photoMemories = [
-  { title: "School day memory", src: "/noelle-school.jpg" },
-  { title: "Joy on the swing", src: "/noelle-swing.jpg" },
-  { title: "Sisters by the ocean", src: "/noelle-ocean.jpg" },
-  { title: "Family in the sunshine", src: "/noelle-family.jpg" },
-  { title: "Butterfly moment", src: "/noelle-butterfly.jpg"},
-];
+import { useState } from "react";
 
-  const letters = [
-    { title: 'A letter to Noelle', preview: 'Words of love and remembrance...' },
-    { title: 'A memory I\'ll carry', preview: 'A moment that will stay with me forever...' },
-    { title: 'Something I wish I could say', preview: 'Words left unsaid, now shared...' },
+export default function MemorialPage() {
+  const [candles, setCandles] = useState(27);
+
+  const lovedOnes = [
+    {
+      name: "Noelle Ryan Strain",
+      story:
+        "Her light continues through every act of kindness, every memory shared, and every person who finds comfort here.",
+      image: "/memory1.jpg",
+    },
   ];
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white overflow-hidden">
-      {/* Animated Stars/Galaxy Background */}
-      <div className="fixed inset-0 -z-10 bg-slate-950">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(88,86,214,0.15),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(124,58,237,0.12),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_0%,rgba(168,85,247,0.08),transparent_60%)]"></div>
-        
-        {/* Stars */}
-        <div className="absolute inset-0">
-          {Array.from({ length: 150 }).map((_, i) => {
-            const size = Math.random() * 2 + 0.5;
-            const opacity = Math.random() * 0.7 + 0.3;
-            const duration = Math.random() * 3 + 2;
-            const delay = Math.random() * 2;
-            return (
-              <div
-                key={`star-${i}`}
-                className="absolute rounded-full bg-white"
-                style={{
+    <main className="min-h-screen bg-slate-950 text-white px-5 py-10">
+      <section className="mx-auto max-w-5xl text-center py-12">
+        <p className="text-pink-300 uppercase tracking-widest text-sm font-bold">
+          Memorial Wall
+        </p>
+        <h1 className="mt-4 text-4xl md:text-6xl font-bold">
+          A place to remember the ones we love
+        </h1>
+        <p className="mt-6 text-white/70 max-w-2xl mx-auto">
+          Share a photo, a short story, or light a candle in memory of someone
+          whose love still shines.
+        </p>
+      </section>
+
+      <section className="mx-auto max-w-5xl grid gap-6 md:grid-cols-2">
+        {lovedOnes.map((person) => (
+          <div
+            key={person.name}
+            className="rounded-3xl border border-white/10 bg-white/[0.06] overflow-hidden"
+          >
+            <img
+              src={person.image}
+              alt={person.name}
+              className="h-80 w-full object-cover"
+            />
+            <div className="p-6">
+              <h2 className="text-2xl font-bold">{person.name}</h2>
+              <p className="mt-3 text-white/70 leading-7">{person.story}</p>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <section className="mx-auto max-w-3xl mt-16 rounded-3xl border border-yellow-300/20 bg-yellow-300/10 p-8 text-center">
+        <div className="text-6xl mb-4">🕯️</div>
+        <h2 className="text-3xl font-bold">Light a Candle</h2>
+        <p className="mt-4 text-white/70">
+          Light a candle in memory, prayer, love, or quiet remembrance.
+        </p>
+
+        <button
+          onClick={() => setCandles(candles + 1)}
+          className="mt-6 rounded-full bg-yellow-200 px-8 py-3 font-bold text-slate-950"
+        >
+          Light a Candle
+        </button>
+
+        <p className="mt-6 text-xl font-semibold">
+          {candles} candles have been lit
+        </p>
+      </section>
+
+      <section className="mx-auto max-w-3xl mt-16 rounded-3xl border border-pink-300/20 bg-pink-300/10 p-8">
+        <h2 className="text-3xl font-bold text-center">
+          Submit a Loved One’s Memory
+        </h2>
+        <p className="mt-4 text-center text-white/70">
+          Submissions can include a photo, name, and short story. They will be
+          reviewed before being posted publicly.
+        </p>
+
+        <form className="mt-8 space-y-5">
+          <input
+            className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
+            placeholder="Loved one's name"
+          />
+
+          <textarea
+            className="w-full min-h-32 rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
+            placeholder="Write a short story or memory..."
+          />
+
+          <input
+            type="file"
+            accept="image/*"
+            className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
+          />
+
+          <input
+            className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
+            placeholder="Your name or Anonymous"
+          />
+
+          <button
+            type="button"
+            className="w-full rounded-full bg-pink-300 px-8 py-4 font-bold text-slate-950"
+          >
+            Submit Memory
+          </button>
+        </form>
+
+        <p className="mt-4 text-center text-xs text-white/50">
+          This form is visual for now. Next step is connecting it to Google
+          Forms, Supabase, or email submissions.
+        </p>
+      </section>
+    </main>
+  );
+}                style={{
                   width: `${size}px`,
                   height: `${size}px`,
                   left: `${Math.random() * 100}%`,
