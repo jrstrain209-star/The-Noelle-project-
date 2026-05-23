@@ -131,7 +131,7 @@ const photoMemories = [
 
         <div className="mt-8 text-center">
           <p className="text-white/60 text-sm">
-            Real photos can be submitted and added to the memorial wall.</p>
+          Submit your photos.</p>
         </div>
       </section>
 
