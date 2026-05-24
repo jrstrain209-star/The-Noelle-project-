@@ -22,18 +22,19 @@ export async function uploadMemorialPhoto(file: File) {
 }
 
 export async function submitMemorial(submission: {
-  loved_one_name: string;
-  story: string;
-  submitter_name?: string;
-  photo_url?: string;
+  name?: string | null;
+  relationship?: string | null;
+  message: string;
+  photo_url?: string | null;
+  permission_to_post?: boolean;
 }) {
-  const { error } = await supabase.from("memorial_submissions").insert({
-    loved_one_name: submission.loved_one_name,
-    story: submission.story,
-    submitter_name: submission.submitter_name,
-    photo_url: submission.photo_url,
-    approved: false,
-  });
-
+ const { error } = await supabase.from("memorial_submissions").insert({
+  name: submission.name,
+  relationship: submission.relationship,
+  message: submission.message,
+  photo_url: submission.photo_url,
+  permission_to_post: submission.permission_to_post ?? false,
+  approved: false,
+});
   if (error) throw error;
 }
