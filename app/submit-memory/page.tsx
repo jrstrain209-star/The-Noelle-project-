@@ -75,14 +75,13 @@ export default function SubmitMemory() {
       }
 
       // Submit memorial
-      const result = await submitMemorial({
-        name: formData.name || null,
-        relationship: formData.relationship || null,
-        message: formData.message,
-        photo_url: photoUrl,
-        permission_to_post: formData.permission_to_post,
-        approved: false,
-      });
+     const result = await submitMemorial({
+  name: formData.name || null,
+  relationship: formData.relationship || null,
+  message: formData.message,
+  photo_url: photoUrl,
+  permission_to_post: formData.permission_to_post,
+});
 
       if (!result) {
   setError("Failed to submit memory. Please try again.");
