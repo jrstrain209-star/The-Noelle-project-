@@ -16,13 +16,13 @@ export default function MemorialPage() {
       name: "Memories",
       story:
         "A place where families and friends can remember loved ones together.",
-      image: "/noelle.family.jpg",
+      image: "/noelle-family.jpg",
     },
     {
       name: "Forever Loved",
       story:
         "Every photo and every story keeps their light alive.",
-      image: "/noelle-sisters.jpg",
+      image: "/noelle-ocean.jpg",
     },
   ];
 
