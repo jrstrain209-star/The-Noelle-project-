@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
 
 export default function AdminPage() {
   const [password, setPassword] = useState("");
@@ -9,30 +8,23 @@ export default function AdminPage() {
   const [submissions, setSubmissions] = useState<any[]>([]);
 
   async function loadSubmissions() {
-    const { data } = await supabase
-      .from("memorial_submissions")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (data) setSubmissions(data);
+    const res = await fetch("/api/admin/submissions");
+    const data = await res.json();
+    setSubmissions(Array.isArray(data) ? data : []);
   }
 
   async function approveSubmission(id: string) {
-    await supabase
-      .from("memorial_submissions")
-      .update({ approved: true })
-      .eq("id", id);
+    await fetch("/api/admin/submissions", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, approved: true }),
+    });
 
-   async function loadSubmissions() {
-  const res = await fetch("/api/admin/submissions");
-  const data = await res.json();
-  setSubmissions(data);
-}
+    loadSubmissions();
+  }
 
   useEffect(() => {
-    if (authorized) {
-      loadSubmissions();
-    }
+    if (authorized) loadSubmissions();
   }, [authorized]);
 
   function handleLogin() {
@@ -47,9 +39,7 @@ export default function AdminPage() {
     return (
       <main className="min-h-screen bg-slate-950 text-white flex items-center justify-center p-6">
         <div className="w-full max-w-md bg-white/5 border border-white/10 rounded-3xl p-8">
-          <h1 className="text-3xl font-bold mb-6 text-center">
-            Admin Login
-          </h1>
+          <h1 className="text-3xl font-bold mb-6 text-center">Admin Login</h1>
 
           <input
             type="password"
@@ -74,6 +64,10 @@ export default function AdminPage() {
     <main className="min-h-screen bg-slate-950 text-white p-6">
       <h1 className="text-4xl font-bold mb-8">Memorial Admin Panel</h1>
 
+      {submissions.length === 0 && (
+        <p className="text-white/60">No submissions found yet.</p>
+      )}
+
       <div className="grid gap-6">
         {submissions.map((submission) => (
           <div
@@ -83,7 +77,7 @@ export default function AdminPage() {
             {submission.photo_url && (
               <img
                 src={submission.photo_url}
-                alt={submission.name}
+                alt={submission.name || "Memorial photo"}
                 className="w-full max-h-96 object-cover rounded-2xl mb-4"
               />
             )}
@@ -92,28 +86,20 @@ export default function AdminPage() {
               {submission.name || "Anonymous"}
             </h2>
 
-            <p className="text-white/60 mt-1">
-              {submission.relationship}
-            </p>
+            <p className="text-white/60 mt-1">{submission.relationship}</p>
 
-            <p className="mt-4 text-white/80">
-              {submission.message}
-            </p>
+            <p className="mt-4 text-white/80">{submission.message}</p>
 
-            <div className="mt-6 flex gap-4">
-              {!submission.approved && (
+            <div className="mt-6">
+              {!submission.approved ? (
                 <button
                   onClick={() => approveSubmission(submission.id)}
                   className="rounded-full bg-green-400 text-slate-950 font-bold px-6 py-2"
                 >
                   Approve
                 </button>
-              )}
-
-              {submission.approved && (
-                <span className="text-green-400 font-bold">
-                  Approved
-                </span>
+              ) : (
+                <span className="text-green-400 font-bold">Approved</span>
               )}
             </div>
           </div>
