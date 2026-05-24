@@ -66,7 +66,7 @@ export default function SubmitMemory() {
       // Upload photo if provided
       if (photo) {
         const tempId = Date.now().toString();
-        photoUrl = await uploadMemorialPhoto(photo, tempId);
+        photoUrl = await uploadMemorialPhoto(photo);
         if (!photoUrl) {
           setError('Failed to upload photo. Please try again.');
           setLoading(false);
