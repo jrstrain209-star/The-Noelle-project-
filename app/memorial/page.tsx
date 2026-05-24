@@ -10,19 +10,19 @@ export default function MemorialPage() {
       name: "Noelle Ryan Strain",
       story:
         "Her light continues through every act of kindness, every memory shared, and every person who finds comfort here.",
-      image: "/memory1.jpg",
+      image: "/noelle-swing.jpg",
     },
     {
       name: "Memories",
       story:
         "A place where families and friends can remember loved ones together.",
-      image: "/memory2.jpg",
+      image: "/noelle.family.jpg",
     },
     {
       name: "Forever Loved",
       story:
         "Every photo and every story keeps their light alive.",
-      image: "/memory3.jpg",
+      image: "/noelle-sisters.jpg",
     },
   ];
 
