@@ -1,163 +1,120 @@
 "use client";
 
-import { useState } from "react";
-
-type Submission = {
-  id: string;
-  name: string;
-  relationship: string;
-  message: string;
-  photo_url?: string;
-  created_at: string;
-};
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [authorized, setAuthorized] = useState(false);
-  const [submissions, setSubmissions] = useState<Submission[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [submissions, setSubmissions] = useState<any[]>([]);
 
   async function loadSubmissions() {
-    setLoading(true);
-    setError("");
+    const { data } = await supabase
+      .from("memorial_submissions")
+      .select("*")
+      .order("created_at", { ascending: false });
 
-    try {
-      const response = await fetch("/api/admin/memorials", {
-        headers: {
-          "x-admin-password": password,
-        },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to load submissions");
-      }
-
-      setSubmissions(data.submissions || []);
-      setAuthorized(true);
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Unknown error"
-      );
-    } finally {
-      setLoading(false);
-    }
+    if (data) setSubmissions(data);
   }
 
   async function approveSubmission(id: string) {
-    await fetch(`/api/admin/memorials/${id}`, {
-      method: "PATCH",
-      headers: {
-        "x-admin-password": password,
-      },
-    });
+    await supabase
+      .from("memorial_submissions")
+      .update({ approved: true })
+      .eq("id", id);
 
     loadSubmissions();
   }
 
-  async function deleteSubmission(id: string) {
-    await fetch(`/api/admin/memorials/${id}`, {
-      method: "DELETE",
-      headers: {
-        "x-admin-password": password,
-      },
-    });
+  useEffect(() => {
+    if (authorized) {
+      loadSubmissions();
+    }
+  }, [authorized]);
 
-    loadSubmissions();
+  function handleLogin() {
+    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
+      setAuthorized(true);
+    } else {
+      alert("Wrong password");
+    }
+  }
+
+  if (!authorized) {
+    return (
+      <main className="min-h-screen bg-slate-950 text-white flex items-center justify-center p-6">
+        <div className="w-full max-w-md bg-white/5 border border-white/10 rounded-3xl p-8">
+          <h1 className="text-3xl font-bold mb-6 text-center">
+            Admin Login
+          </h1>
+
+          <input
+            type="password"
+            placeholder="Admin password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3"
+          />
+
+          <button
+            onClick={handleLogin}
+            className="w-full mt-4 rounded-full bg-pink-300 text-slate-950 font-bold py-3"
+          >
+            Login
+          </button>
+        </div>
+      </main>
+    );
   }
 
   return (
-    <main className="min-h-screen bg-black text-white p-6">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6">
-          Noelle’s Light Admin
-        </h1>
+    <main className="min-h-screen bg-slate-950 text-white p-6">
+      <h1 className="text-4xl font-bold mb-8">Memorial Admin Panel</h1>
 
-        {!authorized && (
-          <div className="space-y-4">
-            <input
-              type="password"
-              placeholder="Admin Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 rounded bg-zinc-900 border border-zinc-700"
-            />
-
-            <button
-              onClick={loadSubmissions}
-              className="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded"
-            >
-              Login
-            </button>
-
-            {error && (
-              <p className="text-red-400">{error}</p>
-            )}
-          </div>
-        )}
-
-        {authorized && (
-          <div className="space-y-6">
-            {submissions.length === 0 && (
-              <p>No pending submissions.</p>
+      <div className="grid gap-6">
+        {submissions.map((submission) => (
+          <div
+            key={submission.id}
+            className="rounded-3xl border border-white/10 bg-white/5 p-6"
+          >
+            {submission.photo_url && (
+              <img
+                src={submission.photo_url}
+                alt={submission.name}
+                className="w-full max-h-96 object-cover rounded-2xl mb-4"
+              />
             )}
 
-            {submissions.map((submission) => (
-              <div
-                key={submission.id}
-                className="bg-zinc-900 border border-zinc-800 rounded-xl p-5"
-              >
-                <h2 className="text-2xl font-semibold">
-                  {submission.name}
-                </h2>
+            <h2 className="text-2xl font-bold">
+              {submission.name || "Anonymous"}
+            </h2>
 
-                <p className="text-zinc-400 mb-3">
-                  {submission.relationship}
-                </p>
+            <p className="text-white/60 mt-1">
+              {submission.relationship}
+            </p>
 
-                <p className="whitespace-pre-wrap mb-4">
-                  {submission.message}
-                </p>
+            <p className="mt-4 text-white/80">
+              {submission.message}
+            </p>
 
-                {submission.photo_url && (
-                  <img
-                    src={submission.photo_url}
-                    alt={submission.name}
-                    className="rounded-lg max-h-96 mb-4"
-                  />
-                )}
+            <div className="mt-6 flex gap-4">
+              {!submission.approved && (
+                <button
+                  onClick={() => approveSubmission(submission.id)}
+                  className="rounded-full bg-green-400 text-slate-950 font-bold px-6 py-2"
+                >
+                  Approve
+                </button>
+              )}
 
-                <div className="flex gap-4">
-                  <button
-                    onClick={() =>
-                      approveSubmission(submission.id)
-                    }
-                    className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded"
-                  >
-                    Approve
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      deleteSubmission(submission.id)
-                    }
-                    className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))}
+              {submission.approved && (
+                <span className="text-green-400 font-bold">
+                  Approved
+                </span>
+              )}
+            </div>
           </div>
-        )}
-
-        {loading && (
-          <p className="mt-6 text-zinc-400">
-            Loading...
-          </p>
-        )}
+        ))}
       </div>
     </main>
   );
