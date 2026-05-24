@@ -28,13 +28,10 @@ export async function submitMemorial(submission: {
   photo_url?: string | null;
   permission_to_post?: boolean;
 }) {
- const { error } = await supabase.from("memorial_submissions").insert({
-  name: submission.name,
-  relationship: submission.relationship,
-  message: submission.message,
-  photo_url: submission.photo_url,
-  permission_to_post: submission.permission_to_post ?? false,
-  approved: false,
+const result = await submitMemorial({
+  name: formData.name || null,
+  relationship: formData.relationship || null,
+  message: formData.message,
+  photo_url: photoUrl,
+  permission_to_post: formData.permission_to_post,
 });
-  if (error) throw error;
-}
