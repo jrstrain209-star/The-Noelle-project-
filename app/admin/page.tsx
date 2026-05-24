@@ -23,8 +23,11 @@ export default function AdminPage() {
       .update({ approved: true })
       .eq("id", id);
 
-    loadSubmissions();
-  }
+   async function loadSubmissions() {
+  const res = await fetch("/api/admin/submissions");
+  const data = await res.json();
+  setSubmissions(data);
+}
 
   useEffect(() => {
     if (authorized) {
