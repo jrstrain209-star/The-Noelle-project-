@@ -1,3 +1,4 @@
+import CommunitySection from "@/components/CommunitySection";
 const helpResources = [
   {
     title: "988 Suicide & Crisis Lifeline",
@@ -88,7 +89,7 @@ export default function Home() {
             Sometimes the first step is just being able to say, “I&apos;m not okay.”
           </p>
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfNvI1Huqg9_hOqRXn9BkhgsRS5ZtMX18hIYKmehAG8QYLGyA/viewform?usp=publish-editor"
+            href=<CommunitySection />
             target="_blank"
             rel="noopener noreferrer"
             className="mt-6 inline-block rounded-full bg-pink-200 px-8 py-3 text-sm font-semibold text-slate-950"
