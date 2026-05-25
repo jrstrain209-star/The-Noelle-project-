@@ -95,7 +95,6 @@ export default function Home() {
   Open Story Form
 </a>
 
-<CommunitySection />
             Open Story Form
           </a>
         </div>
