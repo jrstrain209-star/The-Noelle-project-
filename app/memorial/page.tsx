@@ -1,10 +1,49 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import {
+  uploadMemorialPhoto,
+  submitMemorial,
+} from "@/lib/supabaseClient";
 
 export default function MemorialPage() {
   const [candles, setCandles] = useState(27);
+const [name, setName] = useState("");
+const [story, setStory] = useState("");
+const [photo, setPhoto] = useState<File | null>(null);
+const [submitting, setSubmitting] = useState(false);
+const [submitted, setSubmitted] = useState(false);
 
+async function handleSubmit(event: FormEvent) {
+  event.preventDefault();
+
+  try {
+    setSubmitting(true);
+
+    let photoUrl: string | null = null;
+
+    if (photo) {
+      photoUrl = await uploadMemorialPhoto(photo);
+    }
+
+    await submitMemorial({
+      name,
+      message: story,
+      photo_url: photoUrl,
+      permission_to_post: true,
+    });
+
+    setSubmitted(true);
+    setName("");
+    setStory("");
+    setPhoto(null);
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong.");
+  } finally {
+    setSubmitting(false);
+  }
+}
   const lovedOnes = [
     {
       name: "Noelle Ryan Strain",
