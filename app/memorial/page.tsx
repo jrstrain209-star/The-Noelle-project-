@@ -171,23 +171,6 @@ async function handleSubmit(event: FormEvent) {
       Submission received ❤️
     </p>
   )}
-</form>
-
-          <textarea
-            className="w-full min-h-32 rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
-            placeholder="Write a memory or story..."
-          />
-
-          <input
-            type="file"
-            accept="image/*"
-            className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
-          />
-
-          <input
-            className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
-            placeholder="Your name or Anonymous"
-          />
 
           <button
             type="button"
