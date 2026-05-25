@@ -88,12 +88,14 @@ export default function Home() {
           <p className="mt-4 leading-7 text-white/80">
             Sometimes the first step is just being able to say, “I&apos;m not okay.”
           </p>
-          <a
-            href=<CommunitySection />
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-block rounded-full bg-pink-200 px-8 py-3 text-sm font-semibold text-slate-950"
-          >
+         <a
+  href="#community"
+  className="mt-6 inline-block rounded-full bg-pink-200 px-8 py-3 text-sm font-semibold text-slate-900 shadow-lg"
+>
+  Join the Community
+</a>
+
+<CommunitySection />
             Open Story Form
           </a>
         </div>
