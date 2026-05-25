@@ -136,11 +136,42 @@ async function handleSubmit(event: FormEvent) {
           being posted publicly.
         </p>
 
-        <form className="mt-8 space-y-5">
-          <input
-            className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
-            placeholder="Loved one's name"
-          />
+       <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+  <input
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+    className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
+    placeholder="Loved one's name"
+  />
+
+  <textarea
+    value={story}
+    onChange={(e) => setStory(e.target.value)}
+    className="w-full min-h-32 rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
+    placeholder="Write a memory or story..."
+  />
+
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(e) => setPhoto(e.target.files?.[0] || null)}
+    className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
+  />
+
+  <button
+    type="submit"
+    disabled={submitting}
+    className="w-full rounded-full bg-pink-300 px-8 py-4 font-bold text-slate-950"
+  >
+    {submitting ? "Submitting..." : "Submit Memory"}
+  </button>
+
+  {submitted && (
+    <p className="text-center text-green-300">
+      Submission received ❤️
+    </p>
+  )}
+</form>
 
           <textarea
             className="w-full min-h-32 rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white"
