@@ -89,14 +89,12 @@ export default function Home() {
             Sometimes the first step is just being able to say, “I&apos;m not okay.”
           </p>
       <a
+ <a
   href="#community"
   className="mt-6 inline-block rounded-full bg-pink-200 px-8 py-3 text-sm font-semibold text-slate-900 shadow-lg"
 >
   Open Story Form
 </a>
-
-            Open Story Form
-          </a>
         </div>
       </section>
 
