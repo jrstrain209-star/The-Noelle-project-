@@ -172,10 +172,7 @@ async function handleSubmit(event: FormEvent) {
     </p>
   )}
 
-          <button
-            type="button"
-            className="w-full rounded-full bg-pink-300 px-8 py-4 font-bold text-slate-950"
-          >
+         
             Submit Memory
           </button>
         </form>
