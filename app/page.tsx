@@ -93,6 +93,33 @@ export default function Home() {
   href="#community"
   className="mt-6 inline-block rounded-full bg-pink-200 px-8 py-3 text-sm font-semibold text-slate-900 shadow-lg"
 >
+   <section className="rounded-2xl border border-white/10 bg-white/10 p-6 shadow-lg backdrop-blur">
+  <h2 className="text-2xl font-semibold text-white">
+    Share Your Story Anonymously
+  </h2>
+
+  <p className="mt-3 text-white/80">
+    Sometimes it helps just to write it out. You can share what you’re going
+    through without using your name. Your story may help someone else feel less
+    alone.
+  </p>
+
+  <div className="mt-5 rounded-xl bg-black/20 p-4 text-sm text-white/70">
+    <p>
+      You do not have to include your name, phone number, or personal details.
+      This is a safe place to be heard without judgment.
+    </p>
+  </div>
+
+  <a
+    href="YOUR_GOOGLE_FORM_LINK_HERE"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-5 inline-block rounded-full bg-white px-5 py-3 font-medium text-slate-900 shadow hover:bg-white/90"
+  >
+    Submit an Anonymous Story
+  </a>
+</section>
   Open Story Form
 </a>
         </div>
