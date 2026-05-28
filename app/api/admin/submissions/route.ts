@@ -32,7 +32,7 @@ return NextResponse.json({
   stories: stories || [],
   memorials: memorials || [],
 });
-```
+
 
 } catch (err: any) {
 return NextResponse.json(
@@ -48,7 +48,7 @@ export async function PATCH(request: Request) {
 try {
 const body = await request.json();
 
-```
+
 const { id, type, approved } = body;
 
 const table =
@@ -67,7 +67,7 @@ if (error) {
 }
 
 return NextResponse.json({ success: true });
-```
+
 
 } catch (err: any) {
 return NextResponse.json(
