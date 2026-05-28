@@ -22,7 +22,9 @@ if (storiesError || memorialsError) {
   return NextResponse.json(
     {
       error:
-        storiesError?.message || memorialsError?.message || "Database error",
+        storiesError?.message ||
+        memorialsError?.message ||
+        "Database error",
     },
     { status: 500 }
   );
@@ -32,7 +34,6 @@ return NextResponse.json({
   stories: stories || [],
   memorials: memorials || [],
 });
-
 
 } catch (err: any) {
 return NextResponse.json(
@@ -48,11 +49,12 @@ export async function PATCH(request: Request) {
 try {
 const body = await request.json();
 
-
 const { id, type, approved } = body;
 
 const table =
-  type === "story" ? "stories" : "memorial_submissions";
+  type === "story"
+    ? "stories"
+    : "memorial_submissions";
 
 const { error } = await supabase
   .from(table)
@@ -67,7 +69,6 @@ if (error) {
 }
 
 return NextResponse.json({ success: true });
-
 
 } catch (err: any) {
 return NextResponse.json(
