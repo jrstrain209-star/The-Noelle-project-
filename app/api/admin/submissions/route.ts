@@ -13,7 +13,6 @@ const { data: stories, error: storiesError } = await supabase
 .select("*")
 .order("created_at", { ascending: false });
 
-```
 const { data: memorials, error: memorialsError } = await supabase
   .from("memorial_submissions")
   .select("*")
