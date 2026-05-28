@@ -1,1 +1,102 @@
+"use client";
 
+import { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+import Link from "next/link";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+export default function SubmitStoryPage() {
+  const [name, setName] = useState("");
+  const [story, setStory] = useState("");
+  const [anonymous, setAnonymous] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function submitStory(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+
+    const { error } = await supabase.from("stories").insert({
+      name: anonymous ? null : name,
+      story,
+      is_anonymous: anonymous,
+      approved: false,
+    });
+
+    setLoading(false);
+
+    if (error) {
+      alert("Something went wrong. Please try again.");
+      return;
+    }
+
+    setSubmitted(true);
+  }
+
+  if (submitted) {
+    return (
+      <main className="min-h-screen bg-slate-950 text-white p-6 flex items-center justify-center">
+        <div className="max-w-md text-center">
+          <h1 className="text-3xl font-bold mb-4">Thank you for sharing</h1>
+          <p className="text-slate-300 mb-6">
+            Your story was submitted and will be reviewed before being posted.
+          </p>
+          <Link href="/" className="underline">Back home</Link>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className="min-h-screen bg-slate-950 text-white p-6">
+      <div className="max-w-xl mx-auto pt-12">
+        <Link href="/" className="text-slate-300 underline">← Back</Link>
+
+        <h1 className="text-4xl font-bold mt-6 mb-4">Submit Your Story</h1>
+        <p className="text-slate-300 mb-6">
+          Share what you’re going through, what helped you, or what you want others to know.
+        </p>
+
+        <form onSubmit={submitStory} className="space-y-4">
+          {!anonymous && (
+            <input
+              className="w-full p-3 rounded-lg text-black"
+              placeholder="Your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          )}
+
+          <textarea
+            className="w-full p-3 rounded-lg text-black min-h-[220px]"
+            placeholder="Write your story here..."
+            value={story}
+            onChange={(e) => setStory(e.target.value)}
+            required
+          />
+
+          <label className="flex gap-2 items-center">
+            <input
+              type="checkbox"
+              checked={anonymous}
+              onChange={(e) => setAnonymous(e.target.checked)}
+            />
+            Submit anonymously
+          </label>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-white text-slate-950 font-bold py-3 rounded-lg"
+          >
+            {loading ? "Submitting..." : "Submit Story"}
+          </button>
+        </form>
+      </div>
+    </main>
+  );
+}
