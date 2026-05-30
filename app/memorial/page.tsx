@@ -131,4 +131,6 @@ export default function MemorialPage() {
 
       <section className="mx-auto mt-16 max-w-5xl">
         <div className="mb-8 text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-purple
+          <p className="text-sm font-bold uppercase tracking-widest text-purple-200">
+  Memory Wall
+</p>
