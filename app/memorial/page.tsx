@@ -125,7 +125,11 @@ export default function MemorialPage() {
               <h2 className="text-2xl font-bold">{person.name}</h2>
               <p className="mt-3 leading-7 text-white/70">{person.story}</p>
             </div>
-          </div>
+          </div></div>
+      </section>
+    </main>
+  );
+               }
         ))}
       </section>
 
