@@ -1,4 +1,4 @@
-ent";
+"use client";
 
 import { FormEvent, useState } from "react";
 
