@@ -28,7 +28,7 @@ if (!error) {
   setSubmitted(true);
 }
 }
-return (   Share Anonymously
+return (   
 <p className="mt-3 text-white/70">
       Share your thoughts, grief, struggles, victories, or encouragement.
       Posts are reviewed before appearing publicly.
