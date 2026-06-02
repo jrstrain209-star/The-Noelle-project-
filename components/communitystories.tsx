@@ -8,7 +8,7 @@ export default async function CommunityStories() {
 
   const { data: stories } = await supabase
     .from("stories")
-    .select("id, title, content, nickname, created_at")
+    .select("id, story, name, is_anonymous, created_at")
     .eq("approved", true)
     .order("created_at", { ascending: false });
 
@@ -18,33 +18,30 @@ export default async function CommunityStories() {
         <p className="text-sm uppercase tracking-[0.25em] text-purple-300">
           Community Stories
         </p>
+
         <h2 className="mt-3 text-3xl font-bold text-white">
           Shared by people who needed a place to be heard
         </h2>
+
         <p className="mt-4 text-white/70">
-          These stories are shared anonymously or with a chosen name. Every story is reviewed before appearing here.
+          These stories are shared anonymously or with a chosen name. Every
+          story is reviewed before appearing here.
         </p>
       </div>
 
       <div className="space-y-6">
         {stories?.length ? (
-          stories.map((story) => (
+          stories.map((item) => (
             <article
-              key={story.id}
+              key={item.id}
               className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg"
             >
-              {story.title && (
-                <h3 className="mb-3 text-xl font-semibold text-white">
-                  {story.title}
-                </h3>
-              )}
-
               <p className="whitespace-pre-line leading-7 text-white/80">
-                {story.content}
+                {item.story}
               </p>
 
               <p className="mt-5 text-sm text-purple-200">
-                — {story.nickname || "Anonymous"}
+                — {item.is_anonymous ? "Anonymous" : item.name || "Anonymous"}
               </p>
             </article>
           ))
