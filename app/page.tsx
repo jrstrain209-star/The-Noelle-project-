@@ -1,4 +1,4 @@
-import CommunitySection from "@/components/CommunitySection";
+import communitystories from "@/components/communitystories";
 
 const helpResources = [
   {
