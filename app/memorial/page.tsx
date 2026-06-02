@@ -1,4 +1,4 @@
-"use client";
+ent";
 
 import { FormEvent, useState } from "react";
 
@@ -101,5 +101,3 @@ return (Memorial Wall
     </form>
   </section>
 </main>
-
-);}
