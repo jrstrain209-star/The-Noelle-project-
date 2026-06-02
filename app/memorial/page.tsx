@@ -1,7 +1,5 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-
 const lovedOnes = [
   {
     name: "Noelle Ryan Strain",
@@ -11,7 +9,8 @@ const lovedOnes = [
   },
   {
     name: "Memories",
-    story: "A place where families and friends can remember loved ones together.",
+    story:
+      "A place where family, friends, classmates, and loved ones can remember together.",
     image: "/noelle-family.jpg",
   },
   {
@@ -22,29 +21,6 @@ const lovedOnes = [
 ];
 
 export default function MemorialPage() {
-  const [name, setName] = useState("");
-  const [story, setStory] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (!story.trim()) {
-      alert("Please write a memory before submitting.");
-      return;
-    }
-
-    setSubmitting(true);
-
-    setTimeout(() => {
-      setSubmitted(true);
-      setName("");
-      setStory("");
-      setSubmitting(false);
-    }, 1000);
-  }
-
   return (
     <main className="min-h-screen bg-[#050716] px-5 py-12 text-white">
       <section className="mx-auto max-w-5xl text-center">
@@ -60,6 +36,22 @@ export default function MemorialPage() {
           Share memories, stories, photos, and messages for those who will never
           be forgotten.
         </p>
+
+        <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <a
+            href="/submit-memory"
+            className="rounded-full bg-pink-200 px-8 py-3 text-sm font-bold text-slate-950"
+          >
+            Submit a Memory
+          </a>
+
+          <a
+            href="/"
+            className="rounded-full border border-white/15 bg-white/10 px-8 py-3 text-sm font-bold text-white hover:bg-white/15"
+          >
+            Back Home
+          </a>
+        </div>
       </section>
 
       <section className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
@@ -82,44 +74,26 @@ export default function MemorialPage() {
         ))}
       </section>
 
-      <section className="mx-auto mt-16 max-w-3xl rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-        <h2 className="text-center text-3xl font-bold">Share a Memory</h2>
-
-        <p className="mt-3 text-center text-white/70">
-          Leave a message, memory, or letter for someone you love.
+      <section className="mx-auto mt-16 max-w-4xl rounded-3xl border border-pink-200/20 bg-pink-200/5 p-8 text-center">
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-pink-200/80">
+          Keep Her Light Going
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-          <input
-            type="text"
-            placeholder="Your Name (optional)"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-black/30 p-4 text-white"
-          />
+        <h2 className="mt-4 text-3xl font-bold">
+          Add a memory, letter, or photo
+        </h2>
 
-          <textarea
-            rows={6}
-            placeholder="Write your memory here..."
-            value={story}
-            onChange={(e) => setStory(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-black/30 p-4 text-white"
-          />
+        <p className="mx-auto mt-4 max-w-2xl text-white/70">
+          Memories submitted through Noelle&apos;s Light are reviewed before
+          appearing publicly so this space stays safe, respectful, and loving.
+        </p>
 
-          <button
-            type="submit"
-            disabled={submitting}
-            className="w-full rounded-xl bg-pink-500 px-6 py-4 font-bold transition hover:bg-pink-400 disabled:opacity-60"
-          >
-            {submitting ? "Submitting..." : "Share Memory"}
-          </button>
-
-          {submitted && (
-            <p className="text-center text-green-400">
-              Thank you for sharing your memory.
-            </p>
-          )}
-        </form>
+        <a
+          href="/submit-memory"
+          className="mt-8 inline-block rounded-full bg-white px-8 py-3 text-sm font-bold text-slate-950"
+        >
+          Share a Memory
+        </a>
       </section>
     </main>
   );
