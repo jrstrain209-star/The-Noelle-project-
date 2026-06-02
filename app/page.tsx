@@ -17,7 +17,7 @@ const helpResources = [
     url: "https://findtreatment.gov/",
   },
 ];
-
+<CommunityStories />
 const futureIdeas = [
   "Anonymous community posts",
   "Memorial wall",
