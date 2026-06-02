@@ -28,7 +28,10 @@ if (!error) {
   setSubmitted(true);
 }
 }
-return (   
+return (
+  <section id="share" className="mx-auto max-w-6xl px-5 py-16">
+    <div className="rounded-3xl border border-pink-200/20 bg-pink-200/5 p-8 backdrop-blur-sm">
+      <h2 className="text-3xl font-bold">Share Anonymously</h2>   
 <p className="mt-3 text-white/70">
       Share your thoughts, grief, struggles, victories, or encouragement.
       Posts are reviewed before appearing publicly.
