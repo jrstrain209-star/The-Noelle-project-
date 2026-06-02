@@ -75,6 +75,7 @@ export default function Home() {
             className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-slate-950"
           >
             Share Your Story
+            Read Community Stories →
           </a>
 
           <a
