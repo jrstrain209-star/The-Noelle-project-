@@ -167,7 +167,8 @@ export default function Home() {
           ))}
         </div>
       </section>
-
+      
+      <CommunityStories />
       <CommunitySection />
 
       <section className="mx-auto max-w-6xl px-5 py-16">
