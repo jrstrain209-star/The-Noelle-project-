@@ -101,10 +101,10 @@ export default function Home() {
           <h2 className="text-3xl font-bold">
             Share Your Story Anonymously
           </h2>
-
+through
           <p className="mt-4 leading-7 text-white/80">
             Sometimes it helps just to write it out. You can share what
-            you&apos;re going through without using your name. Your story may
+            you&apos;re going  without using your name. Your story may
             help someone else feel less alone.
           </p>
 
