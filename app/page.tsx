@@ -1,4 +1,5 @@
-import communitystories from "@/components/communitystories";
+import CommunityStories from "@/components/communitystories";
+import CommunitySection from "@/components/CommunitySection";
 
 const helpResources = [
   {
@@ -17,7 +18,7 @@ const helpResources = [
     url: "https://findtreatment.gov/",
   },
 ];
-<communitystories />
+
 const futureIdeas = [
   "Anonymous community posts",
   "Memorial wall",
@@ -98,13 +99,11 @@ export default function Home() {
 
       <section id="share" className="mx-auto max-w-6xl px-5 py-16">
         <div className="rounded-3xl border border-pink-200/20 bg-pink-200/5 p-8 backdrop-blur-sm">
-          <h2 className="text-3xl font-bold">
-            Share Your Story Anonymously
-          </h2>
-through
+          <h2 className="text-3xl font-bold">Share Your Story Anonymously</h2>
+
           <p className="mt-4 leading-7 text-white/80">
             Sometimes it helps just to write it out. You can share what
-            you&apos;re going  without using your name. Your story may
+            you&apos;re going through without using your name. Your story may
             help someone else feel less alone.
           </p>
 
@@ -167,7 +166,7 @@ through
           ))}
         </div>
       </section>
-      
+
       <CommunityStories />
       <CommunitySection />
 
@@ -228,4 +227,4 @@ through
       </footer>
     </main>
   );
-      }
+}
