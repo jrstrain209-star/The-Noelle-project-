@@ -6,6 +6,14 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY || ""
 );
 
+const tables = {
+  story: "stories",
+  memorial: "memorial_submissions",
+  community: "community_posts",
+} as const;
+
+type SubmissionType = keyof typeof tables;
+
 export async function GET() {
   const { data: stories, error: storiesError } = await supabase
     .from("stories")
@@ -17,34 +25,66 @@ export async function GET() {
     .select("*")
     .order("created_at", { ascending: false });
 
-  if (storiesError || memorialsError) {
-    return NextResponse.json(
-      {
-        error:
-          storiesError?.message ||
-          memorialsError?.message ||
-          "Database error",
-      },
-      { status: 500 }
-    );
+  const { data: communityPosts, error: communityError } = await supabase
+    .from("community_posts")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  const error = storiesError || memorialsError || communityError;
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
   return NextResponse.json({
     stories: stories || [],
     memorials: memorials || [],
+    communityPosts: communityPosts || [],
   });
 }
 
 export async function PATCH(request: Request) {
   const body = await request.json();
-  const { id, type, approved } = body;
+  const { id, type, approved } = body as {
+    id?: string;
+    type?: SubmissionType;
+    approved?: boolean;
+  };
 
-  const table = type === "story" ? "stories" : "memorial_submissions";
+  if (!id || !type || !(type in tables)) {
+    return NextResponse.json(
+      { error: "Missing or invalid id/type." },
+      { status: 400 }
+    );
+  }
 
   const { error } = await supabase
-    .from(table)
-    .update({ approved })
+    .from(tables[type])
+    .update({ approved: Boolean(approved) })
     .eq("id", id);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ success: true });
+}
+
+export async function DELETE(request: Request) {
+  const body = await request.json();
+  const { id, type } = body as {
+    id?: string;
+    type?: SubmissionType;
+  };
+
+  if (!id || !type || !(type in tables)) {
+    return NextResponse.json(
+      { error: "Missing or invalid id/type." },
+      { status: 400 }
+    );
+  }
+
+  const { error } = await supabase.from(tables[type]).delete().eq("id", id);
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
