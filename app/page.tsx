@@ -36,8 +36,10 @@ const emergencyContacts = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#050716] text-white">
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(120,120,255,0.25),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(255,180,210,0.18),_transparent_30%)]" />
+    <main className="relative min-h-screen overflow-hidden bg-[#02030f] text-white">
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(147,51,234,0.38),_transparent_32%),radial-gradient(circle_at_top_right,_rgba(236,72,153,0.28),_transparent_30%),radial-gradient(circle_at_bottom,_rgba(59,130,246,0.30),_transparent_35%),linear-gradient(180deg,_#02030f_0%,_#07071f_45%,_#02030f_100%)]" />
+      <div className="fixed inset-0 -z-10 opacity-40 bg-[radial-gradient(circle,_rgba(255,255,255,0.75)_1px,_transparent_1px)] [background-size:26px_26px]" />
+      <div className="fixed inset-0 -z-10 opacity-25 bg-[radial-gradient(circle,_rgba(255,255,255,0.9)_1px,_transparent_1px)] [background-size:70px_70px]" />
 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050716]/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
@@ -75,49 +77,17 @@ export default function Home() {
             className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-slate-950"
           >
             Share Your Story
-            
           </a>
-<section className="mx-auto max-w-6xl px-5 py-16">
-  <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-8 backdrop-blur-sm">
-    <p className="mb-2 text-sm font-semibold uppercase tracking-[0.25em] text-pink-200/80">
-      How It Works
-    </p>
 
-    <h2 className="text-3xl font-bold">A simple, safe way to be heard</h2>
+          <a
+            href="#community-stories"
+            className="rounded-full bg-white/10 px-8 py-3 text-sm font-semibold text-white ring-1 ring-white/20"
+          >
+            Read Community Stories →
+          </a>
 
-    <div className="mt-8 grid gap-6 md:grid-cols-3">
-      <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
-        <h3 className="text-xl font-bold">1. Share anonymously</h3>
-        <p className="mt-3 text-sm leading-6 text-white/70">
-          You can write what you’re going through without using your real name.
-        </p>
-      </div>
-
-      <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
-        <h3 className="text-xl font-bold">2. Reviewed first</h3>
-        <p className="mt-3 text-sm leading-6 text-white/70">
-          Stories are reviewed before they appear publicly to help keep this space safe.
-        </p>
-      </div>
-
-      <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
-        <h3 className="text-xl font-bold">3. Help someone feel less alone</h3>
-        <p className="mt-3 text-sm leading-6 text-white/70">
-          Your story may be the reason someone else keeps going.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-<a
-  href="#community-stories"
-  className="rounded-full bg-white/10 px-8 py-3 text-sm font-semibold text-white ring-1 ring-white/20"
->
-  Read Community Stories →
-</a>
-
-<a
-  href="#resources"
+          <a
+            href="#resources"
             className="rounded-full bg-white/10 px-8 py-3 text-sm font-semibold text-white ring-1 ring-white/20"
           >
             Find Help
@@ -128,11 +98,43 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-5 py-16">
         <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-8 backdrop-blur-sm">
           <h2 className="text-3xl font-bold">What is Noelle&apos;s Light?</h2>
-
           <p className="mt-4 leading-7 text-white/80">
             A memorial project and peer-support community for people struggling
             with grief, loneliness, mental health, addiction, trauma, and loss.
           </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-16">
+        <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-8 backdrop-blur-sm">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.25em] text-pink-200/80">
+            How It Works
+          </p>
+
+          <h2 className="text-3xl font-bold">A simple, safe way to be heard</h2>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
+              <h3 className="text-xl font-bold">1. Share anonymously</h3>
+              <p className="mt-3 text-sm leading-6 text-white/70">
+                You can write what you&apos;re going through without using your real name.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
+              <h3 className="text-xl font-bold">2. Reviewed first</h3>
+              <p className="mt-3 text-sm leading-6 text-white/70">
+                Stories are reviewed before they appear publicly to help keep this space safe.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
+              <h3 className="text-xl font-bold">3. Help someone feel less alone</h3>
+              <p className="mt-3 text-sm leading-6 text-white/70">
+                Your story may be the reason someone else keeps going.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -168,9 +170,7 @@ export default function Home() {
             In Loving Memory
           </p>
 
-          <h2 className="mb-4 text-3xl font-bold">
-            Noelle&apos;s Memorial Wall
-          </h2>
+          <h2 className="mb-4 text-3xl font-bold">Noelle&apos;s Memorial Wall</h2>
 
           <p className="mb-6 leading-7 text-white/80">
             A place for photos, letters, memories, and love for Noelle.
@@ -198,9 +198,7 @@ export default function Home() {
               className="rounded-2xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur-sm"
             >
               <h3 className="text-xl font-bold">{resource.title}</h3>
-              <p className="mt-3 text-sm text-white/70">
-                {resource.description}
-              </p>
+              <p className="mt-3 text-sm text-white/70">{resource.description}</p>
             </a>
           ))}
         </div>
@@ -233,8 +231,7 @@ export default function Home() {
           <h2 className="mt-4 text-3xl font-bold">Get Help Right Now</h2>
 
           <p className="mt-4 leading-7 text-white/80">
-            If you or someone else is in immediate danger, call emergency
-            services.
+            If you or someone else is in immediate danger, call emergency services.
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
