@@ -12,8 +12,10 @@ export default async function CommunityStories() {
     .eq("approved", true)
     .order("created_at", { ascending: false });
 
-  return (
-    <section className="mx-auto max-w-4xl px-6 py-16">
+  return (<section
+  id="community-stories"
+  className="mx-auto max-w-4xl px-6 py-16"
+>
       <div className="mb-10 text-center">
         <p className="text-sm uppercase tracking-[0.25em] text-purple-300">
           Community Stories
