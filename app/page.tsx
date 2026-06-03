@@ -77,7 +77,38 @@ export default function Home() {
             Share Your Story
             
           </a>
+<section className="mx-auto max-w-6xl px-5 py-16">
+  <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-8 backdrop-blur-sm">
+    <p className="mb-2 text-sm font-semibold uppercase tracking-[0.25em] text-pink-200/80">
+      How It Works
+    </p>
 
+    <h2 className="text-3xl font-bold">A simple, safe way to be heard</h2>
+
+    <div className="mt-8 grid gap-6 md:grid-cols-3">
+      <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
+        <h3 className="text-xl font-bold">1. Share anonymously</h3>
+        <p className="mt-3 text-sm leading-6 text-white/70">
+          You can write what you’re going through without using your real name.
+        </p>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
+        <h3 className="text-xl font-bold">2. Reviewed first</h3>
+        <p className="mt-3 text-sm leading-6 text-white/70">
+          Stories are reviewed before they appear publicly to help keep this space safe.
+        </p>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-black/20 p-6">
+        <h3 className="text-xl font-bold">3. Help someone feel less alone</h3>
+        <p className="mt-3 text-sm leading-6 text-white/70">
+          Your story may be the reason someone else keeps going.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 <a
   href="#community-stories"
   className="rounded-full bg-white/10 px-8 py-3 text-sm font-semibold text-white ring-1 ring-white/20"
