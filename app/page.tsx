@@ -77,9 +77,16 @@ export default function Home() {
             Share Your Story
             
           </a>
-            Read Community Stories →
-          <a
-            href="#resources"
+
+<a
+  href="#community-stories"
+  className="rounded-full bg-white/10 px-8 py-3 text-sm font-semibold text-white ring-1 ring-white/20"
+>
+  Read Community Stories →
+</a>
+
+<a
+  href="#resources"
             className="rounded-full bg-white/10 px-8 py-3 text-sm font-semibold text-white ring-1 ring-white/20"
           >
             Find Help
