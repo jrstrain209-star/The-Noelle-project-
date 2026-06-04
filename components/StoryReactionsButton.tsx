@@ -32,10 +32,11 @@ export default function StoryReactionButton({
 
   return (
     <button
-      onClick={react}
-      className="mt-5 rounded-full border border-pink-200/20 bg-pink-200/10 px-4 py-2 text-sm font-semibold text-pink-100"
-    >
-      ❤️ {count}
-    </button>
+  onClick={react}
+  disabled={clicked}
+  className="mt-5 rounded-full border border-pink-200/20 bg-pink-200/10 px-4 py-2 text-sm font-semibold text-pink-100 disabled:opacity-70"
+>
+  ❤️ {count}
+</button>
   );
 }
