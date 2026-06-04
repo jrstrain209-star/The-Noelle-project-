@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 import { createClient } from "@supabase/supabase-js";
-
+import StoryReactionButton from "@/components/StoryReactionButton";
 export default async function CommunityStories() {
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
