@@ -258,9 +258,13 @@ export default function Home() {
       </section>
 
       <footer className="border-t border-white/10 px-5 py-12 text-center text-sm text-white/50">
-        <p>Created in memory of Noelle Ryan Strain.</p>
-        <p className="mt-2">A safe place to be heard.</p>
-      </footer>
-    </main>
-  );
-}
+  <p>Created in memory of Noelle Ryan Strain.</p>
+  <p className="mt-2">A safe place to be heard.</p>
+
+  <a
+    href="/suggest"
+    className="mt-4 inline-block text-pink-200 underline"
+  >
+    Suggestions & Comments
+  </a>
+</footer>
