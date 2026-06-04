@@ -268,3 +268,6 @@ export default function Home() {
     Suggestions & Comments
   </a>
 </footer>
+      </main>
+  );
+}
