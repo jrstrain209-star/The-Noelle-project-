@@ -1,7 +1,9 @@
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
 import { createClient } from "@supabase/supabase-js";
 import StoryReactionButton from "@/components/StoryReactionButton";
+
 export default async function CommunityStories() {
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -10,14 +12,15 @@ export default async function CommunityStories() {
 
   const { data: stories } = await supabase
     .from("stories")
-    .select("id, story, name, is_anonymous, created_at")
+    .select("id, story, name, is_anonymous, created_at, story_reactions(id)")
     .eq("approved", true)
     .order("created_at", { ascending: false });
 
-  return (<section
-  id="community-stories"
-  className="mx-auto max-w-4xl px-6 py-16"
->
+  return (
+    <section
+      id="community-stories"
+      className="mx-auto max-w-4xl px-6 py-16"
+    >
       <div className="mb-10 text-center">
         <p className="text-sm uppercase tracking-[0.25em] text-purple-300">
           Community Stories
@@ -47,6 +50,11 @@ export default async function CommunityStories() {
               <p className="mt-5 text-sm text-purple-200">
                 — {item.is_anonymous ? "Anonymous" : item.name || "Anonymous"}
               </p>
+
+              <StoryReactionButton
+                storyId={item.id}
+                initialCount={item.story_reactions?.length || 0}
+              />
             </article>
           ))
         ) : (
