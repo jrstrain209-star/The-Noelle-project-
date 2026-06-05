@@ -46,6 +46,15 @@ export default async function MemorialPage() {
         <h1 className="mt-4 text-4xl font-bold md:text-6xl">
           Noelle&apos;s Light Lives Here
         </h1>
+        <div className="mt-6">
+  <p className="text-2xl font-bold text-pink-200">
+    Noelle Ryan Strain
+  </p>
+
+  <p className="mt-1 text-lg text-white/70">
+    October 28, 2012 – February 13, 2026
+  </p>
+</div>
 
         <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/75">
           This page is for Noelle Ryan Strain — for her photos, her memories,
