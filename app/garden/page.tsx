@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+ import { createClient } from "@supabase/supabase-js";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -24,10 +24,10 @@ export default async function GardenPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#02030f] px-5 py-12 text-white">
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(147,51,234,0.38),_transparent_32%),radial-gradient(circle_at_top_right,_rgba(236,72,153,0.28),_transparent_30%),radial-gradient(circle_at_bottom,_rgba(34,197,94,0.20),_transparent_35%),linear-gradient(180deg,_#02030f_0%,_#07071f_45%,_#03120b_100%)]" />
-      <div className="fixed inset-0 -z-10 opacity-40 bg-[radial-gradient(circle,_rgba(255,255,255,0.75)_1px,_transparent_1px)] [background-size:26px_26px]" />
-      <div className="pointer-events-none fixed bottom-0 left-0 right-0 -z-10 h-72 bg-gradient-to-t from-emerald-950 via-emerald-950/70 to-transparent" />
+    <main className="relative min-h-screen overflow-hidden bg-[#030414] px-5 py-12 text-white">
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(147,51,234,0.35),_transparent_35%),radial-gradient(circle_at_80%_20%,_rgba(236,72,153,0.22),_transparent_28%),linear-gradient(180deg,_#030414_0%,_#07071f_55%,_#050816_100%)]" />
+      <div className="fixed inset-0 -z-10 opacity-70 bg-[radial-gradient(circle,_rgba(255,255,255,0.95)_1px,_transparent_1px)] [background-size:32px_32px]" />
+      <div className="fixed inset-0 -z-10 opacity-30 bg-[radial-gradient(circle,_rgba(255,255,255,0.9)_1px,_transparent_1px)] [background-size:90px_90px]" />
 
       <section className="mx-auto max-w-5xl text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.35em] text-pink-200/80">
@@ -70,9 +70,9 @@ export default async function GardenPage() {
         </div>
       </section>
 
-      <section className="relative mx-auto mt-14 min-h-[620px] max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-black/20 p-6 shadow-2xl backdrop-blur-sm">
-        <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-emerald-900/80 via-emerald-900/35 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-[radial-gradient(ellipse_at_bottom,_rgba(34,197,94,0.45),_transparent_65%)]" />
+      <section className="relative mx-auto mt-14 min-h-[620px] max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/50 p-6 shadow-2xl backdrop-blur-sm">
+        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#101b12] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-[#101b12]" />
 
         {flowers && flowers.length > 0 ? (
           <div className="relative h-[560px]">
