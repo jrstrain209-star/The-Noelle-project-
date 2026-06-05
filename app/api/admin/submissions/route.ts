@@ -31,7 +31,13 @@ export async function GET() {
     .select("*")
     .order("created_at", { ascending: false });
 
-  const error = storiesError || memorialsError || communityError;
+  const { data: gardenFlowers, error: gardenFlowersError } = await supabase
+    .from("garden_flowers")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  const error =
+    storiesError || memorialsError || communityError || gardenFlowersError;
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -41,6 +47,7 @@ export async function GET() {
     stories: stories || [],
     memorials: memorials || [],
     communityPosts: communityPosts || [],
+    gardenFlowers: gardenFlowers || [],
   });
 }
 
