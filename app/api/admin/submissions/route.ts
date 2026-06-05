@@ -10,6 +10,7 @@ const tables = {
   story: "stories",
   memorial: "memorial_submissions",
   community: "community_posts",
+  flower: "garden_flowers",
 } as const;
 
 type SubmissionType = keyof typeof tables;
