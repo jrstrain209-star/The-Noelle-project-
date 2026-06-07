@@ -56,6 +56,7 @@ export default async function CommunityStories() {
                 storyId={item.id}
                 initialCount={item.story_reactions?.length || 0}
               />
+              <StoryCommentForm storyId={item.id} />
             </article>
           ))
         ) : (
