@@ -3,6 +3,7 @@ export const revalidate = 0;
 
 import { createClient } from "@supabase/supabase-js";
 import StoryReactionButton from "@/components/StoryReactionButton";
+import StoryCommentForm from "@/components/StoryCommentForm";
 
 export default async function CommunityStories() {
   const supabase = createClient(
