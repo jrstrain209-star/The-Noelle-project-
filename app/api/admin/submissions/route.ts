@@ -109,10 +109,14 @@ export async function DELETE(request: Request) {
   // Copy the full row to moderation_archive with decision='denied'
   const { error: archiveError } = await supabase
     .from("moderation_archive")
-    .insert({
-      ...submission,
-      decision: "denied",
-    });
+ .insert({
+  source_table: tables[type],
+  source_id: id,
+  submission_type: type,
+  decision: "denied",
+  reason: null,
+  payload: submission,
+});
 
   if (archiveError) {
     return NextResponse.json({ error: archiveError.message }, { status: 500 });
