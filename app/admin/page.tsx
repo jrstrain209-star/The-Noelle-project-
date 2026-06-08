@@ -66,25 +66,24 @@ export default function AdminPage() {
     setLoading(false);
   }
 
-  async function updateApproval(
+  async function approveSubmission(
     id: string,
-    type: "story" | "memorial" | "community" | "flower",
-    approved: boolean
+    type: "story" | "memorial" | "community" | "flower"
   ) {
     await fetch("/api/admin/submissions", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, type, approved }),
+      body: JSON.stringify({ id, type }),
     });
 
     loadSubmissions();
   }
 
-  async function deleteSubmission(
+  async function denySubmission(
     id: string,
     type: "story" | "memorial" | "community" | "flower"
   ) {
-    const confirmed = confirm("Delete this submission?");
+    const confirmed = confirm("Deny this submission?");
     if (!confirmed) return;
 
     await fetch("/api/admin/submissions", {
@@ -133,6 +132,9 @@ export default function AdminPage() {
     );
   }
 
+  const totalPending =
+    stories.length + memorials.length + communityPosts.length + gardenFlowers.length;
+
   return (
     <main className="min-h-screen bg-slate-950 p-6 text-white">
       <div className="mx-auto max-w-6xl">
@@ -141,7 +143,7 @@ export default function AdminPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-pink-200/80">
               Noelle&apos;s Light
             </p>
-            <h1 className="mt-2 text-4xl font-bold">Admin Panel</h1>
+            <h1 className="mt-2 text-4xl font-bold">Pending Review Queue</h1>
           </div>
 
           <button
@@ -152,248 +154,220 @@ export default function AdminPage() {
           </button>
         </div>
 
-        <section className="mb-12">
-          <h2 className="mb-4 text-2xl font-bold">Garden Flowers</h2>
+        {/* Summary Stats */}
+        <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p className="text-sm text-white/60">Stories Pending</p>
+            <p className="mt-1 text-3xl font-bold">{stories.length}</p>
+          </div>
 
-          {gardenFlowers.length === 0 && (
-            <p className="text-white/60">No garden flowers yet.</p>
-          )}
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p className="text-sm text-white/60">Memorials Pending</p>
+            <p className="mt-1 text-3xl font-bold">{memorials.length}</p>
+          </div>
 
-          <div className="grid gap-6">
-            {gardenFlowers.map((flower) => (
-              <div
-                key={flower.id}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6"
-              >
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <p className="text-5xl">
-                      {flowerEmoji[flower.flower_type] || "🌼"}
-                    </p>
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p className="text-sm text-white/60">Posts Pending</p>
+            <p className="mt-1 text-3xl font-bold">{communityPosts.length}</p>
+          </div>
 
-                    <h3 className="mt-3 text-2xl font-bold">
-                      {flower.dedication || "For Noelle"}
-                    </h3>
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p className="text-sm text-white/60">Flowers Pending</p>
+            <p className="mt-1 text-3xl font-bold">{gardenFlowers.length}</p>
+          </div>
+        </div>
 
-                    <p className="mt-1 text-sm text-white/50">
-                      {flower.approved ? "Approved" : "Pending review"}
-                    </p>
+        {totalPending === 0 && (
+          <div className="rounded-3xl border border-green-500/30 bg-green-500/10 p-8 text-center">
+            <p className="text-lg font-semibold text-green-300">
+              ✓ All submissions reviewed! Queue is empty.
+            </p>
+          </div>
+        )}
+
+        {gardenFlowers.length > 0 && (
+          <section className="mb-12">
+            <h2 className="mb-4 text-2xl font-bold">Garden Flowers</h2>
+
+            <div className="grid gap-6">
+              {gardenFlowers.map((flower) => (
+                <div
+                  key={flower.id}
+                  className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                >
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <p className="text-5xl">
+                        {flowerEmoji[flower.flower_type] || "🌼"}
+                      </p>
+
+                      <h3 className="mt-3 text-2xl font-bold">
+                        {flower.dedication || "For Noelle"}
+                      </h3>
+
+                      <p className="mt-1 text-sm text-white/50">
+                        Pending review
+                      </p>
+                    </div>
                   </div>
 
-                  <StatusBadge approved={flower.approved} />
-                </div>
+                  <p className="mt-4 whitespace-pre-wrap text-white/80">
+                    {flower.message}
+                  </p>
 
-                <p className="mt-4 whitespace-pre-wrap text-white/80">
-                  {flower.message}
-                </p>
+                  <p className="mt-4 text-sm text-purple-200">
+                    — {flower.name || "Anonymous"}
+                  </p>
 
-                <p className="mt-4 text-sm text-purple-200">
-                  — {flower.name || "Anonymous"}
-                </p>
-
-                <AdminActions
-                  approved={flower.approved}
-                  onApprove={() => updateApproval(flower.id, "flower", true)}
-                  onUnapprove={() => updateApproval(flower.id, "flower", false)}
-                  onDelete={() => deleteSubmission(flower.id, "flower")}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="mb-4 text-2xl font-bold">Story Submissions</h2>
-
-          {stories.length === 0 && (
-            <p className="text-white/60">No story submissions yet.</p>
-          )}
-
-          <div className="grid gap-6">
-            {stories.map((story) => (
-              <div
-                key={story.id}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6"
-              >
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <h3 className="text-2xl font-bold">
-                      {story.is_anonymous
-                        ? "Anonymous"
-                        : story.name || "Anonymous"}
-                    </h3>
-
-                    <p className="mt-1 text-sm text-white/50">
-                      {story.approved ? "Approved" : "Pending review"}
-                    </p>
-                  </div>
-
-                  <StatusBadge approved={story.approved} />
-                </div>
-
-                <p className="mt-4 whitespace-pre-wrap text-white/80">
-                  {story.story}
-                </p>
-
-                <AdminActions
-                  approved={story.approved}
-                  onApprove={() => updateApproval(story.id, "story", true)}
-                  onUnapprove={() => updateApproval(story.id, "story", false)}
-                  onDelete={() => deleteSubmission(story.id, "story")}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="mb-4 text-2xl font-bold">Memorial Submissions</h2>
-
-          {memorials.length === 0 && (
-            <p className="text-white/60">No memorial submissions yet.</p>
-          )}
-
-          <div className="grid gap-6">
-            {memorials.map((submission) => (
-              <div
-                key={submission.id}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6"
-              >
-                {submission.photo_url && (
-                  <img
-                    src={submission.photo_url}
-                    alt={submission.name || "Memorial photo"}
-                    className="mb-4 max-h-96 w-full rounded-2xl object-cover"
+                  <QueueActions
+                    onApprove={() => approveSubmission(flower.id, "flower")}
+                    onDeny={() => denySubmission(flower.id, "flower")}
                   />
-                )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <h3 className="text-2xl font-bold">
-                      {submission.name || "Anonymous"}
-                    </h3>
+        {stories.length > 0 && (
+          <section className="mb-12">
+            <h2 className="mb-4 text-2xl font-bold">Story Submissions</h2>
 
-                    <p className="mt-1 text-white/60">
-                      {submission.relationship || "No relationship listed"}
-                    </p>
+            <div className="grid gap-6">
+              {stories.map((story) => (
+                <div
+                  key={story.id}
+                  className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                >
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h3 className="text-2xl font-bold">
+                        {story.is_anonymous ? "Anonymous" : story.name || "Anonymous"}
+                      </h3>
+
+                      <p className="mt-1 text-sm text-white/50">
+                        Pending review
+                      </p>
+                    </div>
                   </div>
 
-                  <StatusBadge approved={submission.approved} />
+                  <p className="mt-4 whitespace-pre-wrap text-white/80">
+                    {story.story}
+                  </p>
+
+                  <QueueActions
+                    onApprove={() => approveSubmission(story.id, "story")}
+                    onDeny={() => denySubmission(story.id, "story")}
+                  />
                 </div>
+              ))}
+            </div>
+          </section>
+        )}
 
-                <p className="mt-4 whitespace-pre-wrap text-white/80">
-                  {submission.message}
-                </p>
+        {memorials.length > 0 && (
+          <section className="mb-12">
+            <h2 className="mb-4 text-2xl font-bold">Memorial Submissions</h2>
 
-                <AdminActions
-                  approved={submission.approved}
-                  onApprove={() =>
-                    updateApproval(submission.id, "memorial", true)
-                  }
-                  onUnapprove={() =>
-                    updateApproval(submission.id, "memorial", false)
-                  }
-                  onDelete={() => deleteSubmission(submission.id, "memorial")}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
+            <div className="grid gap-6">
+              {memorials.map((submission) => (
+                <div
+                  key={submission.id}
+                  className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                >
+                  {submission.photo_url && (
+                    <img
+                      src={submission.photo_url}
+                      alt={submission.name || "Memorial photo"}
+                      className="mb-4 max-h-96 w-full rounded-2xl object-cover"
+                    />
+                  )}
 
-        <section>
-          <h2 className="mb-4 text-2xl font-bold">Community Posts</h2>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h3 className="text-2xl font-bold">
+                        {submission.name || "Anonymous"}
+                      </h3>
 
-          {communityPosts.length === 0 && (
-            <p className="text-white/60">No community posts yet.</p>
-          )}
-
-          <div className="grid gap-6">
-            {communityPosts.map((post) => (
-              <div
-                key={post.id}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6"
-              >
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <h3 className="text-2xl font-bold">
-                      {post.display_name || "Anonymous"}
-                    </h3>
-
-                    <p className="mt-1 text-white/60">{post.category}</p>
+                      <p className="mt-1 text-white/60">
+                        {submission.relationship || "No relationship listed"}
+                      </p>
+                    </div>
                   </div>
 
-                  <StatusBadge approved={post.approved} />
+                  <p className="mt-4 whitespace-pre-wrap text-white/80">
+                    {submission.message}
+                  </p>
+
+                  <QueueActions
+                    onApprove={() => approveSubmission(submission.id, "memorial")}
+                    onDeny={() => denySubmission(submission.id, "memorial")}
+                  />
                 </div>
+              ))}
+            </div>
+          </section>
+        )}
 
-                <p className="mt-4 whitespace-pre-wrap text-white/80">
-                  {post.message}
-                </p>
+        {communityPosts.length > 0 && (
+          <section>
+            <h2 className="mb-4 text-2xl font-bold">Community Posts</h2>
 
-                <AdminActions
-                  approved={post.approved}
-                  onApprove={() => updateApproval(post.id, "community", true)}
-                  onUnapprove={() =>
-                    updateApproval(post.id, "community", false)
-                  }
-                  onDelete={() => deleteSubmission(post.id, "community")}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
+            <div className="grid gap-6">
+              {communityPosts.map((post) => (
+                <div
+                  key={post.id}
+                  className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                >
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h3 className="text-2xl font-bold">
+                        {post.display_name || "Anonymous"}
+                      </h3>
+
+                      <p className="mt-1 text-white/60">{post.category}</p>
+                    </div>
+                  </div>
+
+                  <p className="mt-4 whitespace-pre-wrap text-white/80">
+                    {post.message}
+                  </p>
+
+                  <QueueActions
+                    onApprove={() => approveSubmission(post.id, "community")}
+                    onDeny={() => denySubmission(post.id, "community")}
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );
 }
 
-function StatusBadge({ approved }: { approved: boolean }) {
-  return (
-    <span
-      className={
-        approved
-          ? "rounded-full bg-green-400/15 px-4 py-2 text-sm font-bold text-green-300"
-          : "rounded-full bg-yellow-400/15 px-4 py-2 text-sm font-bold text-yellow-200"
-      }
-    >
-      {approved ? "Approved" : "Pending"}
-    </span>
-  );
-}
-
-function AdminActions({
-  approved,
+function QueueActions({
   onApprove,
-  onUnapprove,
-  onDelete,
+  onDeny,
 }: {
-  approved: boolean;
   onApprove: () => void;
-  onUnapprove: () => void;
-  onDelete: () => void;
+  onDeny: () => void;
 }) {
   return (
     <div className="mt-6 flex flex-wrap gap-3">
-      {!approved ? (
-        <button
-          onClick={onApprove}
-          className="rounded-full bg-green-400 px-6 py-2 font-bold text-slate-950"
-        >
-          Approve
-        </button>
-      ) : (
-        <button
-          onClick={onUnapprove}
-          className="rounded-full bg-yellow-300 px-6 py-2 font-bold text-slate-950"
-        >
-          Unapprove
-        </button>
-      )}
+      <button
+        onClick={onApprove}
+        className="rounded-full bg-green-400 px-6 py-2 font-bold text-slate-950"
+      >
+        Approve
+      </button>
 
       <button
-        onClick={onDelete}
+        onClick={onDeny}
         className="rounded-full bg-rose-500 px-6 py-2 font-bold text-white"
       >
-        Delete
+        Deny
       </button>
     </div>
   );
