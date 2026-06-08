@@ -19,21 +19,25 @@ export async function GET() {
   const { data: stories, error: storiesError } = await supabase
     .from("stories")
     .select("*")
+    .eq("moderation_status", "pending")
     .order("created_at", { ascending: false });
 
   const { data: memorials, error: memorialsError } = await supabase
     .from("memorial_submissions")
     .select("*")
+    .eq("moderation_status", "pending")
     .order("created_at", { ascending: false });
 
   const { data: communityPosts, error: communityError } = await supabase
     .from("community_posts")
     .select("*")
+    .eq("moderation_status", "pending")
     .order("created_at", { ascending: false });
 
   const { data: gardenFlowers, error: gardenFlowersError } = await supabase
     .from("garden_flowers")
     .select("*")
+    .eq("moderation_status", "pending")
     .order("created_at", { ascending: false });
 
   const error =
@@ -53,10 +57,9 @@ export async function GET() {
 
 export async function PATCH(request: Request) {
   const body = await request.json();
-  const { id, type, approved } = body as {
+  const { id, type } = body as {
     id?: string;
     type?: SubmissionType;
-    approved?: boolean;
   };
 
   if (!id || !type || !(type in tables)) {
@@ -68,7 +71,7 @@ export async function PATCH(request: Request) {
 
   const { error } = await supabase
     .from(tables[type])
-    .update({ approved: Boolean(approved) })
+    .update({ approved: true, moderation_status: "approved" })
     .eq("id", id);
 
   if (error) {
@@ -92,10 +95,37 @@ export async function DELETE(request: Request) {
     );
   }
 
-  const { error } = await supabase.from(tables[type]).delete().eq("id", id);
+  // First, fetch the full row to archive it
+  const { data: submission, error: fetchError } = await supabase
+    .from(tables[type])
+    .select("*")
+    .eq("id", id)
+    .single();
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  if (fetchError) {
+    return NextResponse.json({ error: fetchError.message }, { status: 500 });
+  }
+
+  // Copy the full row to moderation_archive with decision='denied'
+  const { error: archiveError } = await supabase
+    .from("moderation_archive")
+    .insert({
+      ...submission,
+      decision: "denied",
+    });
+
+  if (archiveError) {
+    return NextResponse.json({ error: archiveError.message }, { status: 500 });
+  }
+
+  // Update the original row instead of deleting it
+  const { error: updateError } = await supabase
+    .from(tables[type])
+    .update({ approved: false, moderation_status: "denied" })
+    .eq("id", id);
+
+  if (updateError) {
+    return NextResponse.json({ error: updateError.message }, { status: 500 });
   }
 
   return NextResponse.json({ success: true });
