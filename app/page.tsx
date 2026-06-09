@@ -18,7 +18,7 @@ const helpResources = [
     url: "https://findtreatment.gov/",
   },
 ];
-<a href="/garden">Visit Noelle’s Garden</a>
+
 
 const futureIdeas = [
   "Anonymous community posts",
@@ -57,6 +57,13 @@ export default function Home() {
           </a>
         </div>
       </header>
+
+      <a
+  href="/garden"
+  className="inline-block rounded-full bg-purple-500 px-6 py-3 text-white font-semibold"
+>
+  Visit Noelle’s Garden
+</a>
 
       <section className="mx-auto max-w-6xl px-5 py-20 text-center sm:py-28">
         <p className="mb-6 text-xs font-semibold uppercase tracking-[0.35em] text-pink-200/80">
