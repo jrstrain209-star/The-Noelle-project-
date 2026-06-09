@@ -38,8 +38,9 @@ export default function NoelleGardenScene() {
           </p>
           <h1 className="text-4xl font-bold md:text-6xl">Noelle’s Garden</h1>
           <p className="mt-4 text-slate-200">
-            A peaceful night garden of lanterns, memory mushrooms, flowers, and
-            fireflies of hope.
+            This garden is still growing.
+The paths are unfinished, the lanterns are still being lit, and new memories bloom each day. Thank you for walking beside us as we create a place of remembrance, hope, and healing.
+— In memory of Noelle Ryan Strain 💜
           </p>
         </div>
       </section>
