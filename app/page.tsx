@@ -18,6 +18,7 @@ const helpResources = [
     url: "https://findtreatment.gov/",
   },
 ];
+<a href="/garden">Visit Noelle’s Garden</a>
 
 const futureIdeas = [
   "Anonymous community posts",
