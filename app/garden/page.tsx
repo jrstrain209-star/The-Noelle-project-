@@ -1,5 +1,10 @@
 export default function GardenPage() {
   return (
+    import NoelleGardenScene from "@/components/NoelleGardenScene";
+
+export default function GardenPage() {
+  return <NoelleGardenScene />;
+}
     <main className="min-h-screen bg-black text-white">
       <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#090b2f] via-[#101533] to-[#07160f]">
 
