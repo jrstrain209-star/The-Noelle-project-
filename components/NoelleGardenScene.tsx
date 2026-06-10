@@ -9,7 +9,74 @@ export default function NoelleGardenScene() {
     <main className="min-h-screen bg-black text-white">
       <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#070820] via-[#11183d] to-[#07160f]">
         <div className="absolute right-10 top-10 h-28 w-28 rounded-full bg-yellow-100 shadow-[0_0_90px_35px_rgba(254,240,138,0.35)]" />
+<section className="bg-[#050816] px-6 py-20 text-white">
+  <div className="mx-auto max-w-5xl">
+    <p className="mb-3 text-center text-sm uppercase tracking-widest text-yellow-200">
+      Future Features
+    </p>
 
+    <h2 className="mb-6 text-center text-3xl font-bold md:text-5xl">
+      The Growing Seasons of Noelle’s Garden
+    </h2>
+
+    <p className="mx-auto mb-12 max-w-3xl text-center text-slate-300">
+      Noelle’s Garden is still growing. Each season will add new paths,
+      memories, lights, and places of reflection. Thank you for your patience
+      as this memorial garden continues to bloom one light at a time.
+    </p>
+
+    <div className="grid gap-6 md:grid-cols-2">
+      <SeasonCard
+        title="Season One: Planting the Path"
+        text="The first version of the garden begins with moonlight, fireflies, lanterns, mushrooms, flowers, and a quiet place to remember."
+      />
+
+      <SeasonCard
+        title="Season Two: Memory Mushroom Grove"
+        text="Visitors will be able to add memories, photos, stories, and messages. Each memory will help the mushroom grove grow."
+      />
+
+      <SeasonCard
+        title="Season Three: Fireflies of Hope"
+        text="Fireflies will carry meaning through color — for someone remembered, someone needing light, someone healing, or someone finding hope."
+      />
+
+      <SeasonCard
+        title="Season Four: The Lantern Tree"
+        text="Visitors will be able to light lanterns for loved ones, mental health awareness, peace, recovery, gratitude, and remembrance."
+      />
+
+      <SeasonCard
+        title="Season Five: Reflection Pond"
+        text="A quiet space for visitors to pause, breathe, reflect, and remember — with lantern light and fireflies reflected on the water."
+      />
+
+      <SeasonCard
+        title="Season Six: Community Garden"
+        text="The garden will grow through visitor suggestions, shared memories, support messages, and ideas from the people who walk through it."
+      />
+    </div>
+
+    <div className="mt-14 rounded-3xl border border-yellow-200/30 bg-yellow-200/10 p-8 text-center shadow-[0_0_50px_rgba(250,204,21,0.18)]">
+      <h3 className="mb-3 text-2xl font-bold text-yellow-100">
+        Help the Garden Grow
+      </h3>
+
+      <p className="mx-auto mb-6 max-w-2xl text-slate-200">
+        This garden is being built with love, patience, and community. If you
+        have an idea, a feature request, or something you’d like to see added,
+        please share it with us.
+      </p>
+
+      <a
+        href="/suggestions"
+        className="inline-block rounded-full bg-yellow-300 px-8 py-4 text-lg font-bold text-slate-950 shadow-[0_0_35px_rgba(250,204,21,0.55)] transition hover:scale-105 hover:bg-yellow-200"
+      >
+        Share a Garden Suggestion
+      </a>
+    </div>
+  </div>
+</section>
         <div className="absolute inset-0 opacity-70 bg-[radial-gradient(circle_at_20%_20%,white_1px,transparent_2px),radial-gradient(circle_at_70%_25%,white_1px,transparent_2px),radial-gradient(circle_at_45%_10%,white_1px,transparent_2px),radial-gradient(circle_at_85%_35%,white_1px,transparent_2px)]" />
 
         <div className="absolute bottom-0 left-[-10%] h-72 w-[120%] rounded-t-[50%] bg-[#052e1b]" />
