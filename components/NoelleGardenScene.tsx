@@ -3,7 +3,7 @@ import GardenPath from "./GardenPath";
 import LanternTree from "./LanternTree";
 import MemoryMushroom from "./MemoryMushroom";
 import ReflectionPond from "./ReflectionPond";
-
+import FlowerBed from "./FlowerBed";
 export default function NoelleGardenScene() {
   return (
     <main className="min-h-screen bg-black text-white">
@@ -19,7 +19,10 @@ export default function NoelleGardenScene() {
         <GardenPath />
         <LanternTree />
         <ReflectionPond />
-
+<FlowerBed left="6%" bottom="55px" size="large" />
+<FlowerBed left="76%" bottom="60px" size="large" />
+<FlowerBed left="12%" bottom="185px" size="small" />
+<FlowerBed left="68%" bottom="200px" size="small" />
         <MemoryMushroom left="18%" bottom="140px" size="large" />
         <MemoryMushroom left="18%" bottom="140px" size="large" color="purple" />
 <MemoryMushroom left="72%" bottom="150px" size="medium" color="red" />
