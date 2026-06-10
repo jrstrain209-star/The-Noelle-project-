@@ -41,9 +41,8 @@ export default function NoelleGardenScene() {
             </h1>
 
             <p className="mx-auto mb-6 max-w-xl text-slate-200">
-              This garden is still growing. Please walk gently. Thank you for
-              helping it bloom one light, one memory, and one act of hope at a
-              time.
+              Please walk gently. Thank you for helping this place bloom one
+              light, one memory, and one act of hope at a time.
             </p>
 
             <button
@@ -89,23 +88,78 @@ export default function NoelleGardenScene() {
         <Firefly left="63%" top="37%" color="blue" delay="2.2s" />
         <Firefly left="80%" top="53%" color="green" delay="3s" />
         <Firefly left="52%" top="28%" color="white" delay="4s" />
+      </section>
 
-        <div className="absolute left-1/2 top-20 w-[90%] max-w-2xl -translate-x-1/2 rounded-3xl border border-white/10 bg-black/45 p-6 text-center shadow-2xl backdrop-blur">
-          <p className="mb-3 text-sm uppercase tracking-widest text-yellow-200">
-            Noelle’s Memorial Garden
+      <section className="bg-[#050816] px-6 py-20 text-white">
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-3 text-center text-sm uppercase tracking-widest text-yellow-200">
+            Future Features
           </p>
-          <h1 className="text-4xl font-bold md:text-6xl">Noelle’s Garden</h1>
-          <p className="mt-4 text-slate-200">
-            A peaceful night garden of lanterns, memory mushrooms, flowers, and
-            fireflies of hope. This garden is still growing. Thank you for your
-            patience as new paths, memories, and places of reflection continue
-            to bloom.
-          </p>
-        </div>
 
-        <div className="absolute bottom-10 left-1/2 w-[90%] max-w-xl -translate-x-1/2 rounded-2xl border border-white/10 bg-black/35 p-4 text-center text-sm text-slate-200 backdrop-blur">
-          <p className="font-semibold text-yellow-100">
-          
+          <h2 className="mb-6 text-center text-3xl font-bold md:text-5xl">
+            The Growing Seasons of Noelle’s Garden
+          </h2>
+
+          <p className="mx-auto mb-12 max-w-3xl text-center text-slate-300">
+            Noelle’s Garden is still growing. Each season will add new paths,
+            memories, lights, and places of reflection. Thank you for your
+            patience as this memorial garden continues to bloom one light at a
+            time.
+          </p>
+
+          <div className="mb-12 grid gap-4 md:grid-cols-3">
+            <MeaningCard
+              title="Fireflies"
+              text="Fireflies represent people — someone remembered, someone needing light, someone healing, hope, or a quiet prayer."
+            />
+            <MeaningCard
+              title="Mushrooms"
+              text="Mushrooms preserve stories — family memories, favorite moments, encouragement, laughter, lessons, and anonymous memories."
+            />
+            <MeaningCard
+              title="Lanterns"
+              text="Lanterns carry intentions — remembrance, mental health awareness, peace, recovery, reflection, gratitude, and celebration of life."
+            />
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <SeasonCard
+              title="Season One: Planting the Path"
+              text="The first version of the garden begins with moonlight, fireflies, lanterns, mushrooms, flowers, and a quiet place to remember."
+            />
+            <SeasonCard
+              title="Season Two: Memory Mushroom Grove"
+              text="Visitors will be able to add memories, photos, stories, and messages. Each memory will help the mushroom grove grow."
+            />
+            <SeasonCard
+              title="Season Three: Fireflies of Hope"
+              text="Fireflies will carry meaning through color — for someone remembered, someone needing light, someone healing, or someone finding hope."
+            />
+            <SeasonCard
+              title="Season Four: The Lantern Tree"
+              text="Visitors will be able to light lanterns for loved ones, mental health awareness, peace, recovery, gratitude, and remembrance."
+            />
+            <SeasonCard
+              title="Season Five: Reflection Pond"
+              text="A quiet space for visitors to pause, breathe, reflect, and remember — with lantern light and fireflies reflected on the water."
+            />
+            <SeasonCard
+              title="Season Six: Community Garden"
+              text="The garden will grow through visitor suggestions, shared memories, support messages, and ideas from the people who walk through it."
+            />
+          </div>
+
+          <div className="mt-14 rounded-3xl border border-yellow-200/30 bg-yellow-200/10 p-8 text-center shadow-[0_0_50px_rgba(250,204,21,0.18)]">
+            <h3 className="mb-3 text-2xl font-bold text-yellow-100">
+              Help the Garden Grow
+            </h3>
+
+            <p className="mx-auto mb-6 max-w-2xl text-slate-200">
+              This garden is being built with love, patience, and community. If
+              you have an idea, a feature request, or something you’d like to see
+              added, please share it with us.
+            </p>
+
             <a
               href="/suggestions"
               className="inline-block rounded-full bg-yellow-300 px-8 py-4 text-lg font-bold text-slate-950 shadow-[0_0_35px_rgba(250,204,21,0.55)] transition hover:scale-105 hover:bg-yellow-200"
