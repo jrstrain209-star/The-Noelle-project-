@@ -25,9 +25,11 @@ export default function NoelleGardenScene() {
         <MemoryMushroom left="44%" bottom="95px" size="small" />
         <MemoryMushroom left="58%" bottom="110px" size="small" />
 
-        <Firefly left="14%" top="34%" />
-        <Firefly left="31%" top="49%" />
-        <Firefly left="63%" top="37%" />
+        <Firefly left="14%" top="34%" color="gold" delay="0s" />
+<Firefly left="31%" top="49%" color="violet" delay="1.4s" />
+<Firefly left="63%" top="37%" color="blue" delay="2.2s" />
+<Firefly left="80%" top="53%" color="green" delay="3s" />
+<Firefly left="52%" top="28%" color="white" delay="4s" />
         <Firefly left="80%" top="53%" />
 
         <div className="absolute left-1/2 top-20 w-[90%] max-w-2xl -translate-x-1/2 rounded-3xl border border-white/10 bg-black/45 p-6 text-center shadow-2xl backdrop-blur">
