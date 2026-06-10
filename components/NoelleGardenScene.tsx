@@ -178,4 +178,39 @@ export default function NoelleGardenScene() {
               Help the Garden Grow
             </h3>
 
-            <p
+            <p className="mx-auto mb-6 max-w-2xl text-slate-200">
+              This garden is being built with love, patience, and community. If
+              you have an idea, a feature request, or something you’d like to see
+              added, please share it with us.
+            </p>
+
+            <a
+              href="/suggestions"
+              className="inline-block rounded-full bg-yellow-300 px-8 py-4 text-lg font-bold text-slate-950 shadow-[0_0_35px_rgba(250,204,21,0.55)] transition hover:scale-105 hover:bg-yellow-200"
+            >
+              Share a Garden Suggestion
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function MeaningCard({ title, text }: { title: string; text: string }) {
+  return (
+    <div className="rounded-3xl border border-yellow-200/20 bg-yellow-200/10 p-5 text-center">
+      <h3 className="mb-2 text-lg font-bold text-yellow-100">{title}</h3>
+      <p className="text-sm text-slate-300">{text}</p>
+    </div>
+  );
+}
+
+function SeasonCard({ title, text }: { title: string; text: string }) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl backdrop-blur">
+      <h3 className="mb-3 text-xl font-bold text-purple-200">{title}</h3>
+      <p className="text-slate-300">{text}</p>
+    </div>
+  );
+}
