@@ -21,10 +21,12 @@ export default function NoelleGardenScene() {
         <ReflectionPond />
 
         <MemoryMushroom left="18%" bottom="140px" size="large" />
-        <MemoryMushroom left="72%" bottom="150px" size="medium" />
-        <MemoryMushroom left="44%" bottom="95px" size="small" />
-        <MemoryMushroom left="58%" bottom="110px" size="small" />
-
+        <MemoryMushroom left="18%" bottom="140px" size="large" color="purple" />
+<MemoryMushroom left="72%" bottom="150px" size="medium" color="red" />
+<MemoryMushroom left="44%" bottom="95px" size="small" color="gold" />
+<MemoryMushroom left="58%" bottom="110px" size="small" color="blue" />
+<MemoryMushroom left="28%" bottom="90px" size="small" color="pink" />
+<MemoryMushroom left="82%" bottom="95px" size="small" color="white" />
         <Firefly left="14%" top="34%" color="gold" delay="0s" />
         <Firefly left="31%" top="49%" color="violet" delay="1.4s" />
         <Firefly left="63%" top="37%" color="blue" delay="2.2s" />
