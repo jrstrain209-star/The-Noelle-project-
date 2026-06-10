@@ -26,11 +26,10 @@ export default function NoelleGardenScene() {
         <MemoryMushroom left="58%" bottom="110px" size="small" />
 
         <Firefly left="14%" top="34%" color="gold" delay="0s" />
-<Firefly left="31%" top="49%" color="violet" delay="1.4s" />
-<Firefly left="63%" top="37%" color="blue" delay="2.2s" />
-<Firefly left="80%" top="53%" color="green" delay="3s" />
-<Firefly left="52%" top="28%" color="white" delay="4s" />
-        <Firefly left="80%" top="53%" />
+        <Firefly left="31%" top="49%" color="violet" delay="1.4s" />
+        <Firefly left="63%" top="37%" color="blue" delay="2.2s" />
+        <Firefly left="80%" top="53%" color="green" delay="3s" />
+        <Firefly left="52%" top="28%" color="white" delay="4s" />
 
         <div className="absolute left-1/2 top-20 w-[90%] max-w-2xl -translate-x-1/2 rounded-3xl border border-white/10 bg-black/45 p-6 text-center shadow-2xl backdrop-blur">
           <p className="mb-3 text-sm uppercase tracking-widest text-yellow-200">
@@ -44,14 +43,17 @@ export default function NoelleGardenScene() {
             to bloom.
           </p>
         </div>
+
+        <div className="absolute bottom-10 left-1/2 w-[90%] max-w-xl -translate-x-1/2 rounded-2xl border border-white/10 bg-black/35 p-4 text-center text-sm text-slate-200 backdrop-blur">
+          <p className="font-semibold text-yellow-100">
+            This garden is still growing.
+          </p>
+          <p>
+            Fireflies, mushrooms, and lanterns carry different colors and
+            meanings. Please be patient as new paths continue to bloom.
+          </p>
+        </div>
       </section>
-      <div className="absolute bottom-10 left-1/2 w-[90%] max-w-xl -translate-x-1/2 rounded-2xl border border-white/10 bg-black/35 p-4 text-center text-sm text-slate-200 backdrop-blur">
-  <p className="font-semibold text-yellow-100">This garden is still growing.</p>
-  <p>
-    Fireflies, mushrooms, and lanterns carry different colors and meanings.
-    Please be patient as new paths continue to bloom.
-  </p>
-</div>
 
       <section className="bg-[#050816] px-6 py-20 text-white">
         <div className="mx-auto max-w-5xl">
@@ -69,6 +71,21 @@ export default function NoelleGardenScene() {
             patience as this memorial garden continues to bloom one light at a
             time.
           </p>
+
+          <div className="mb-12 grid gap-4 md:grid-cols-3">
+            <MeaningCard
+              title="✨ Fireflies"
+              text="Fireflies represent people — someone remembered, someone needing light, someone healing, hope, or a quiet prayer."
+            />
+            <MeaningCard
+              title="🍄 Mushrooms"
+              text="Mushrooms preserve stories — family memories, favorite moments, encouragement, laughter, lessons, and anonymous memories."
+            />
+            <MeaningCard
+              title="🏮 Lanterns"
+              text="Lanterns carry intentions — remembrance, mental health awareness, peace, recovery, reflection, gratitude, and celebration of life."
+            />
+          </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             <SeasonCard
@@ -123,6 +140,15 @@ export default function NoelleGardenScene() {
         </div>
       </section>
     </main>
+  );
+}
+
+function MeaningCard({ title, text }: { title: string; text: string }) {
+  return (
+    <div className="rounded-3xl border border-yellow-200/20 bg-yellow-200/10 p-5 text-center">
+      <h3 className="mb-2 text-lg font-bold text-yellow-100">{title}</h3>
+      <p className="text-sm text-slate-300">{text}</p>
+    </div>
   );
 }
 
