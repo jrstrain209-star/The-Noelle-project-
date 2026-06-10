@@ -45,6 +45,13 @@ export default function NoelleGardenScene() {
           </p>
         </div>
       </section>
+      <div className="absolute bottom-10 left-1/2 w-[90%] max-w-xl -translate-x-1/2 rounded-2xl border border-white/10 bg-black/35 p-4 text-center text-sm text-slate-200 backdrop-blur">
+  <p className="font-semibold text-yellow-100">This garden is still growing.</p>
+  <p>
+    Fireflies, mushrooms, and lanterns carry different colors and meanings.
+    Please be patient as new paths continue to bloom.
+  </p>
+</div>
 
       <section className="bg-[#050816] px-6 py-20 text-white">
         <div className="mx-auto max-w-5xl">
