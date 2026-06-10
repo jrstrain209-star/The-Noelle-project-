@@ -1,13 +1,65 @@
+"use client";
+
+import { useState } from "react";
 import Firefly from "./Firefly";
+import FlowerBed from "./FlowerBed";
 import GardenPath from "./GardenPath";
 import LanternTree from "./LanternTree";
 import MemoryMushroom from "./MemoryMushroom";
 import ReflectionPond from "./ReflectionPond";
-import FlowerBed from "./FlowerBed";
+
 export default function NoelleGardenScene() {
+  const [entered, setEntered] = useState(false);
+
+  function beginWalk() {
+    setEntered(true);
+
+    setTimeout(() => {
+      document
+        .getElementById("garden-main")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 300);
+  }
+
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#070820] via-[#11183d] to-[#07160f]">
+      {!entered && (
+        <section className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#050616] via-[#11183d] to-[#07160f] px-6">
+          <div className="absolute right-10 top-10 h-28 w-28 rounded-full bg-yellow-100 shadow-[0_0_90px_35px_rgba(254,240,138,0.35)]" />
+
+          <Firefly left="18%" top="30%" color="gold" delay="0s" />
+          <Firefly left="72%" top="36%" color="violet" delay="1.5s" />
+          <Firefly left="50%" top="20%" color="white" delay="2.5s" />
+
+          <div className="max-w-2xl rounded-3xl border border-yellow-200/20 bg-black/50 p-8 text-center shadow-[0_0_70px_rgba(250,204,21,0.15)] backdrop-blur">
+            <p className="mb-3 text-sm uppercase tracking-widest text-yellow-200">
+              Welcome to
+            </p>
+
+            <h1 className="mb-5 text-4xl font-bold md:text-6xl">
+              Noelle’s Garden
+            </h1>
+
+            <p className="mx-auto mb-6 max-w-xl text-slate-200">
+              This garden is still growing. Please walk gently. Thank you for
+              helping it bloom one light, one memory, and one act of hope at a
+              time.
+            </p>
+
+            <button
+              onClick={beginWalk}
+              className="rounded-full bg-yellow-300 px-8 py-4 text-lg font-bold text-slate-950 shadow-[0_0_35px_rgba(250,204,21,0.55)] transition hover:scale-105 hover:bg-yellow-200"
+            >
+              Begin Your Walk
+            </button>
+          </div>
+        </section>
+      )}
+
+      <section
+        id="garden-main"
+        className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#070820] via-[#11183d] to-[#07160f]"
+      >
         <div className="absolute right-10 top-10 h-28 w-28 rounded-full bg-yellow-100 shadow-[0_0_90px_35px_rgba(254,240,138,0.35)]" />
 
         <div className="absolute inset-0 opacity-70 bg-[radial-gradient(circle_at_20%_20%,white_1px,transparent_2px),radial-gradient(circle_at_70%_25%,white_1px,transparent_2px),radial-gradient(circle_at_45%_10%,white_1px,transparent_2px),radial-gradient(circle_at_85%_35%,white_1px,transparent_2px)]" />
@@ -19,17 +71,19 @@ export default function NoelleGardenScene() {
         <GardenPath />
         <LanternTree />
         <ReflectionPond />
-<FlowerBed left="6%" bottom="55px" size="large" />
-<FlowerBed left="76%" bottom="60px" size="large" />
-<FlowerBed left="12%" bottom="185px" size="small" />
-<FlowerBed left="68%" bottom="200px" size="small" />
-        <MemoryMushroom left="18%" bottom="140px" size="large" />
+
         <MemoryMushroom left="18%" bottom="140px" size="large" color="purple" />
-<MemoryMushroom left="72%" bottom="150px" size="medium" color="red" />
-<MemoryMushroom left="44%" bottom="95px" size="small" color="gold" />
-<MemoryMushroom left="58%" bottom="110px" size="small" color="blue" />
-<MemoryMushroom left="28%" bottom="90px" size="small" color="pink" />
-<MemoryMushroom left="82%" bottom="95px" size="small" color="white" />
+        <MemoryMushroom left="72%" bottom="150px" size="medium" color="red" />
+        <MemoryMushroom left="44%" bottom="95px" size="small" color="gold" />
+        <MemoryMushroom left="58%" bottom="110px" size="small" color="blue" />
+        <MemoryMushroom left="28%" bottom="90px" size="small" color="pink" />
+        <MemoryMushroom left="82%" bottom="95px" size="small" color="white" />
+
+        <FlowerBed left="6%" bottom="55px" size="large" />
+        <FlowerBed left="76%" bottom="60px" size="large" />
+        <FlowerBed left="12%" bottom="185px" size="small" />
+        <FlowerBed left="68%" bottom="200px" size="small" />
+
         <Firefly left="14%" top="34%" color="gold" delay="0s" />
         <Firefly left="31%" top="49%" color="violet" delay="1.4s" />
         <Firefly left="63%" top="37%" color="blue" delay="2.2s" />
@@ -97,27 +151,22 @@ export default function NoelleGardenScene() {
               title="Season One: Planting the Path"
               text="The first version of the garden begins with moonlight, fireflies, lanterns, mushrooms, flowers, and a quiet place to remember."
             />
-
             <SeasonCard
               title="Season Two: Memory Mushroom Grove"
               text="Visitors will be able to add memories, photos, stories, and messages. Each memory will help the mushroom grove grow."
             />
-
             <SeasonCard
               title="Season Three: Fireflies of Hope"
               text="Fireflies will carry meaning through color — for someone remembered, someone needing light, someone healing, or someone finding hope."
             />
-
             <SeasonCard
               title="Season Four: The Lantern Tree"
               text="Visitors will be able to light lanterns for loved ones, mental health awareness, peace, recovery, gratitude, and remembrance."
             />
-
             <SeasonCard
               title="Season Five: Reflection Pond"
               text="A quiet space for visitors to pause, breathe, reflect, and remember — with lantern light and fireflies reflected on the water."
             />
-
             <SeasonCard
               title="Season Six: Community Garden"
               text="The garden will grow through visitor suggestions, shared memories, support messages, and ideas from the people who walk through it."
@@ -129,39 +178,4 @@ export default function NoelleGardenScene() {
               Help the Garden Grow
             </h3>
 
-            <p className="mx-auto mb-6 max-w-2xl text-slate-200">
-              This garden is being built with love, patience, and community. If
-              you have an idea, a feature request, or something you’d like to see
-              added, please share it with us.
-            </p>
-
-            <a
-              href="/suggestions"
-              className="inline-block rounded-full bg-yellow-300 px-8 py-4 text-lg font-bold text-slate-950 shadow-[0_0_35px_rgba(250,204,21,0.55)] transition hover:scale-105 hover:bg-yellow-200"
-            >
-              Share a Garden Suggestion
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-}
-
-function MeaningCard({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="rounded-3xl border border-yellow-200/20 bg-yellow-200/10 p-5 text-center">
-      <h3 className="mb-2 text-lg font-bold text-yellow-100">{title}</h3>
-      <p className="text-sm text-slate-300">{text}</p>
-    </div>
-  );
-}
-
-function SeasonCard({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl backdrop-blur">
-      <h3 className="mb-3 text-xl font-bold text-purple-200">{title}</h3>
-      <p className="text-slate-300">{text}</p>
-    </div>
-  );
-}
+            <p
