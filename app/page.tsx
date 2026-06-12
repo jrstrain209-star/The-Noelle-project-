@@ -102,7 +102,16 @@ export default function Home() {
           </a>
         </div>
       </section>
-
+.from("submissions")
+.insert([
+  {
+      name: null,
+          email: null,
+              category: "anonymous_story",
+                  message: story,
+                      anonymous: true,
+                        },
+                        ])
       <section className="mx-auto max-w-6xl px-5 py-16">
         <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-8 backdrop-blur-sm">
           <h2 className="text-3xl font-bold">What is Noelle&apos;s Light?</h2>
