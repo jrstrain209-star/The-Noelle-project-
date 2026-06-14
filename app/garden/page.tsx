@@ -34,6 +34,13 @@ const gardenStops = [
     icon: "✨",
   },
 ];
+const gardenThemes = [
+  "from-emerald-300/15 to-yellow-100/10",
+  "from-blue-300/15 to-slate-100/10",
+  "from-purple-300/15 to-amber-100/10",
+  "from-yellow-200/20 to-orange-100/10",
+  "from-cyan-200/15 to-indigo-200/10",
+];
 
 export default function NoellesGardenPage() {
   const gardenRef = useRef<HTMLDivElement | null>(null);
@@ -124,20 +131,32 @@ export default function NoellesGardenPage() {
         <div className="relative z-10 mx-auto max-w-4xl space-y-28">
           {gardenStops.map((stop, index) => (
             <article
-              key={stop.title}
-              className={`rounded-[2rem] border border-white/10 bg-white/10 p-8 shadow-2xl backdrop-blur-md ${
-                index % 2 === 0 ? "mr-auto" : "ml-auto"
-              } max-w-xl`}
-            >
-              <div className="mb-5 text-5xl">{stop.icon}</div>
-              <p className="mb-3 tracking-[0.35em] text-sm font-bold text-yellow-100/80">
-                {stop.title.toUpperCase()}
-              </p>
-              <h2 className="text-3xl font-black">{stop.eyebrow}</h2>
-              <p className="mt-4 text-lg leading-8 text-white/70">
-                {stop.text}
-              </p>
-            </article>
+  key={stop.title}
+  className={`relative max-w-xl rounded-[2rem] border border-white/10 bg-gradient-to-br ${
+    gardenThemes[index]
+  } p-8 shadow-2xl backdrop-blur-md ${
+    index % 2 === 0 ? "mr-auto" : "ml-auto"
+  }`}
+>
+  <div className="absolute -top-4 left-8 h-8 w-8 rounded-full bg-stone-200/40 shadow-[0_0_20px_rgba(255,255,255,.25)]" />
+  <div className="absolute -bottom-5 right-10 h-10 w-10 rounded-full bg-stone-300/30 shadow-[0_0_20px_rgba(255,255,255,.2)]" />
+
+  <div className="mb-5 text-5xl">{stop.icon}</div>
+
+  <p className="mb-3 tracking-[0.35em] text-sm font-bold text-yellow-100/80">
+    {stop.title.toUpperCase()}
+  </p>
+
+  <h2 className="text-3xl font-black">{stop.eyebrow}</h2>
+
+  <p className="mt-4 text-lg leading-8 text-white/70">
+    {stop.text}
+  </p>
+
+  <button className="mt-6 rounded-full bg-white/90 px-6 py-3 font-bold text-slate-950 shadow-lg">
+    Enter This Space
+  </button>
+</article>
           ))}
 
           <div className="mx-auto max-w-2xl rounded-[2rem] border border-yellow-100/20 bg-yellow-100/10 p-8 text-center shadow-2xl backdrop-blur">
