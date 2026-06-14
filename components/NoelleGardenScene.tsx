@@ -1,192 +1,211 @@
 "use client";
 
-import { useState } from "react";
-import Firefly from "./Firefly";
-import FlowerBed from "./FlowerBed";
-import GardenPath from "./GardenPath";
-import LanternTree from "./LanternTree";
-import MemoryMushroom from "./MemoryMushroom";
-import ReflectionPond from "./ReflectionPond";
+const areas = [
+  {
+    id: "tree",
+    label: "Memory Tree",
+    title: "A quiet place to remember.",
+    text: "Lanterns hang from the branches like memories held gently in the night. This is the heart of the garden.",
+    side: "md:mr-auto",
+  },
+  {
+    id: "pond",
+    label: "Reflection Pond",
+    title: "It is okay to sit here awhile.",
+    text: "Moonlight rests on the water. Floating lanterns drift slowly. This space is for grief, breath, and reflection.",
+    side: "md:ml-auto",
+  },
+  {
+    id: "meadow",
+    label: "Flower Meadow",
+    title: "A place where hope can grow.",
+    text: "Flowers can represent love, survival, remembrance, encouragement, and the people still fighting.",
+    side: "md:mr-auto",
+  },
+  {
+    id: "lanterns",
+    label: "Lantern Walk",
+    title: "There is still light ahead.",
+    text: "A gentle path of messages for those we lost, those still hurting, and those trying to make it one more day.",
+    side: "md:ml-auto",
+  },
+];
 
 export default function NoelleGardenScene() {
-  const [entered, setEntered] = useState(false);
-
-  function beginWalk() {
-    setEntered(true);
-
-    setTimeout(() => {
-      document
-        .getElementById("garden-main")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 300);
-  }
-
   return (
-    <main className="min-h-screen bg-black text-white">
-      {!entered && (
-        <section className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#050616] via-[#11183d] to-[#07160f] px-6">
-          <div className="absolute right-10 top-10 h-28 w-28 rounded-full bg-yellow-100 shadow-[0_0_90px_35px_rgba(254,240,138,0.35)]" />
+    <main className="min-h-screen overflow-hidden bg-[#07110d] text-white">
+      <section className="relative min-h-screen bg-[radial-gradient(circle_at_top,_rgba(250,204,21,0.18),_transparent_30%),radial-gradient(circle_at_25%_30%,_rgba(147,197,253,0.16),_transparent_35%),linear-gradient(180deg,_#070817_0%,_#0b1831_45%,_#08180f_100%)] px-5 py-8">
+        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle,_rgba(255,255,255,0.75)_1px,_transparent_1px)] [background-size:44px_44px]" />
+        <div className="absolute right-8 top-8 h-28 w-28 rounded-full bg-yellow-100 shadow-[0_0_90px_35px_rgba(254,240,138,0.35)]" />
 
-          <Firefly left="18%" top="30%" color="gold" delay="0s" />
-          <Firefly left="72%" top="36%" color="violet" delay="1.5s" />
-          <Firefly left="50%" top="20%" color="white" delay="2.5s" />
+        <Firefly className="left-[12%] top-[16%]" />
+        <Firefly className="left-[78%] top-[22%]" />
+        <Firefly className="left-[32%] top-[48%]" />
+        <Firefly className="left-[84%] top-[62%]" />
+        <Firefly className="left-[18%] top-[78%]" />
 
-          <div className="max-w-2xl rounded-3xl border border-yellow-200/20 bg-black/50 p-8 text-center shadow-[0_0_70px_rgba(250,204,21,0.15)] backdrop-blur">
-            <p className="mb-3 text-sm uppercase tracking-widest text-yellow-200">
-              Welcome to
+        <Mushroom className="left-[8%] top-[34%]" />
+        <Mushroom className="right-[10%] top-[44%] scale-75" />
+        <Mushroom className="left-[14%] top-[70%] scale-90" />
+        <Mushroom className="right-[18%] top-[82%]" />
+
+        <div className="relative z-10 mx-auto max-w-6xl">
+          <nav className="mb-10 flex items-center justify-between rounded-full border border-white/10 bg-black/25 px-5 py-3 backdrop-blur-md">
+            <a href="/" className="text-sm text-white/70 hover:text-white">
+              ← Home
+            </a>
+            <a
+              href="#help"
+              className="rounded-full bg-yellow-200 px-4 py-2 text-sm font-bold text-slate-950"
+            >
+              Get Help Now
+            </a>
+          </nav>
+
+          <section className="mx-auto max-w-3xl py-16 text-center md:py-24">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.35em] text-yellow-100/80">
+              Noelle&apos;s Garden
             </p>
 
-            <h1 className="mb-5 text-4xl font-bold md:text-6xl">
-              Noelle’s Garden
+            <h1 className="text-5xl font-bold leading-tight md:text-7xl">
+              Take the path you need today.
             </h1>
 
-            <p className="mx-auto mb-6 max-w-xl text-slate-200">
-              Please walk gently. Thank you for helping this place bloom one
-              light, one memory, and one act of hope at a time.
-            </p>
-
-            <button
-              onClick={beginWalk}
-              className="rounded-full bg-yellow-300 px-8 py-4 text-lg font-bold text-slate-950 shadow-[0_0_35px_rgba(250,204,21,0.55)] transition hover:scale-105 hover:bg-yellow-200"
-            >
-              Begin Your Walk
-            </button>
-          </div>
-        </section>
-      )}
-
-      <section
-        id="garden-main"
-        className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#070820] via-[#11183d] to-[#07160f]"
-      >
-        <div className="absolute right-10 top-10 h-28 w-28 rounded-full bg-yellow-100 shadow-[0_0_90px_35px_rgba(254,240,138,0.35)]" />
-
-        <div className="absolute inset-0 opacity-70 bg-[radial-gradient(circle_at_20%_20%,white_1px,transparent_2px),radial-gradient(circle_at_70%_25%,white_1px,transparent_2px),radial-gradient(circle_at_45%_10%,white_1px,transparent_2px),radial-gradient(circle_at_85%_35%,white_1px,transparent_2px)]" />
-
-        <div className="absolute bottom-0 left-[-10%] h-72 w-[120%] rounded-t-[50%] bg-[#052e1b]" />
-        <div className="absolute bottom-0 left-[-15%] h-52 w-[130%] rounded-t-[50%] bg-[#064326]" />
-        <div className="absolute bottom-0 left-[-20%] h-32 w-[140%] rounded-t-[50%] bg-[#086337]" />
-
-        <GardenPath />
-        <LanternTree />
-        <ReflectionPond />
-
-        <MemoryMushroom left="18%" bottom="140px" size="large" color="purple" />
-        <MemoryMushroom left="72%" bottom="150px" size="medium" color="red" />
-        <MemoryMushroom left="44%" bottom="95px" size="small" color="gold" />
-        <MemoryMushroom left="58%" bottom="110px" size="small" color="blue" />
-        <MemoryMushroom left="28%" bottom="90px" size="small" color="pink" />
-        <MemoryMushroom left="82%" bottom="95px" size="small" color="white" />
-
-        <FlowerBed left="6%" bottom="55px" size="large" />
-        <FlowerBed left="76%" bottom="60px" size="large" />
-        <FlowerBed left="12%" bottom="185px" size="small" />
-        <FlowerBed left="68%" bottom="200px" size="small" />
-
-        <Firefly left="14%" top="34%" color="gold" delay="0s" />
-        <Firefly left="31%" top="49%" color="violet" delay="1.4s" />
-        <Firefly left="63%" top="37%" color="blue" delay="2.2s" />
-        <Firefly left="80%" top="53%" color="green" delay="3s" />
-        <Firefly left="52%" top="28%" color="white" delay="4s" />
-      </section>
-
-      <section className="bg-[#050816] px-6 py-20 text-white">
-        <div className="mx-auto max-w-5xl">
-          <p className="mb-3 text-center text-sm uppercase tracking-widest text-yellow-200">
-            Future Features
-          </p>
-
-          <h2 className="mb-6 text-center text-3xl font-bold md:text-5xl">
-            The Growing Seasons of Noelle’s Garden
-          </h2>
-
-          <p className="mx-auto mb-12 max-w-3xl text-center text-slate-300">
-            Noelle’s Garden is still growing. Each season will add new paths,
-            memories, lights, and places of reflection. Thank you for your
-            patience as this memorial garden continues to bloom one light at a
-            time.
-          </p>
-
-          <div className="mb-12 grid gap-4 md:grid-cols-3">
-            <MeaningCard
-              title="Fireflies"
-              text="Fireflies represent people — someone remembered, someone needing light, someone healing, hope, or a quiet prayer."
-            />
-            <MeaningCard
-              title="Mushrooms"
-              text="Mushrooms preserve stories — family memories, favorite moments, encouragement, laughter, lessons, and anonymous memories."
-            />
-            <MeaningCard
-              title="Lanterns"
-              text="Lanterns carry intentions — remembrance, mental health awareness, peace, recovery, reflection, gratitude, and celebration of life."
-            />
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            <SeasonCard
-              title="Season One: Planting the Path"
-              text="The first version of the garden begins with moonlight, fireflies, lanterns, mushrooms, flowers, and a quiet place to remember."
-            />
-            <SeasonCard
-              title="Season Two: Memory Mushroom Grove"
-              text="Visitors will be able to add memories, photos, stories, and messages. Each memory will help the mushroom grove grow."
-            />
-            <SeasonCard
-              title="Season Three: Fireflies of Hope"
-              text="Fireflies will carry meaning through color — for someone remembered, someone needing light, someone healing, or someone finding hope."
-            />
-            <SeasonCard
-              title="Season Four: The Lantern Tree"
-              text="Visitors will be able to light lanterns for loved ones, mental health awareness, peace, recovery, gratitude, and remembrance."
-            />
-            <SeasonCard
-              title="Season Five: Reflection Pond"
-              text="A quiet space for visitors to pause, breathe, reflect, and remember — with lantern light and fireflies reflected on the water."
-            />
-            <SeasonCard
-              title="Season Six: Community Garden"
-              text="The garden will grow through visitor suggestions, shared memories, support messages, and ideas from the people who walk through it."
-            />
-          </div>
-
-          <div className="mt-14 rounded-3xl border border-yellow-200/30 bg-yellow-200/10 p-8 text-center shadow-[0_0_50px_rgba(250,204,21,0.18)]">
-            <h3 className="mb-3 text-2xl font-bold text-yellow-100">
-              Help the Garden Grow
-            </h3>
-
-            <p className="mx-auto mb-6 max-w-2xl text-slate-200">
-              This garden is being built with love, patience, and community. If
-              you have an idea, a feature request, or something you’d like to see
-              added, please share it with us.
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/75">
+              A storybook-real memorial garden with watercolor softness — a
+              peaceful place for memory, reflection, hope, and light.
             </p>
 
             <a
-              href="/suggestions"
-              className="inline-block rounded-full bg-yellow-300 px-8 py-4 text-lg font-bold text-slate-950 shadow-[0_0_35px_rgba(250,204,21,0.55)] transition hover:scale-105 hover:bg-yellow-200"
+              href="#tree"
+              className="mt-8 inline-block rounded-full bg-white px-8 py-3 font-bold text-slate-950"
             >
-              Share a Garden Suggestion
+              Begin Your Walk
+            </a>
+          </section>
+
+          <section className="relative mx-auto max-w-5xl pb-20">
+            <div className="absolute left-1/2 top-0 hidden h-full w-8 -translate-x-1/2 rounded-full bg-gradient-to-b from-amber-100/50 via-stone-200/30 to-amber-100/40 md:block" />
+
+            {areas.map((area) => (
+              <div key={area.id} id={area.id} className="relative py-12 md:py-20">
+                <div
+                  className={`max-w-xl rounded-[2rem] border border-white/15 bg-white/10 p-7 shadow-2xl backdrop-blur-md ${area.side}`}
+                >
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-yellow-100/80">
+                    {area.label}
+                  </p>
+                  <h2 className="text-3xl font-bold md:text-4xl">{area.title}</h2>
+                  <p className="mt-4 leading-7 text-white/75">{area.text}</p>
+
+                  <div className="mt-6 h-44 overflow-hidden rounded-3xl border border-white/10 bg-black/20">
+                    <Illustration type={area.id} />
+                  </div>
+                </div>
+
+                <div className="mx-auto mt-8 hidden h-5 w-5 rounded-full bg-yellow-200 shadow-[0_0_30px_12px_rgba(253,224,71,0.35)] md:block" />
+              </div>
+            ))}
+          </section>
+        </div>
+      </section>
+
+      <section id="help" className="bg-[#050816] px-5 py-16">
+        <div className="mx-auto max-w-4xl rounded-[2rem] border border-red-200/20 bg-red-200/10 p-8 text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-red-100/80">
+            Immediate Support
+          </p>
+          <h2 className="mt-4 text-3xl font-bold">Get Help Right Now</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-white/75">
+            If you or someone else is in immediate danger, call emergency
+            services. For crisis support in the U.S., call or text 988.
+          </p>
+
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <a href="tel:988" className="rounded-full bg-white px-7 py-3 font-bold text-slate-950">
+              Call 988
+            </a>
+            <a href="sms:988" className="rounded-full bg-white/10 px-7 py-3 font-bold text-white ring-1 ring-white/20">
+              Text 988
             </a>
           </div>
         </div>
       </section>
+
+      <style>{`
+        @keyframes floatFirefly {
+          0% { transform: translate3d(0, 0, 0); opacity: .45; }
+          50% { opacity: 1; }
+          100% { transform: translate3d(18px, -24px, 0); opacity: .7; }
+        }
+      `}</style>
     </main>
   );
 }
 
-function MeaningCard({ title, text }: { title: string; text: string }) {
+function Firefly({ className }: { className: string }) {
   return (
-    <div className="rounded-3xl border border-yellow-200/20 bg-yellow-200/10 p-5 text-center">
-      <h3 className="mb-2 text-lg font-bold text-yellow-100">{title}</h3>
-      <p className="text-sm text-slate-300">{text}</p>
-    </div>
+    <span
+      className={`absolute h-2 w-2 rounded-full bg-yellow-200 shadow-[0_0_18px_8px_rgba(253,224,71,0.45)] ${className}`}
+      style={{ animation: "floatFirefly 6s ease-in-out infinite alternate" }}
+    />
   );
 }
 
-function SeasonCard({ title, text }: { title: string; text: string }) {
+function Mushroom({ className }: { className: string }) {
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl backdrop-blur">
-      <h3 className="mb-3 text-xl font-bold text-purple-200">{title}</h3>
-      <p className="text-slate-300">{text}</p>
+    <span className={`absolute ${className}`} aria-hidden="true">
+      <span className="block h-5 w-8 rounded-t-full bg-red-300 shadow-[0_0_18px_rgba(252,165,165,0.25)]" />
+      <span className="mx-auto block h-6 w-3 rounded-b-full bg-stone-200" />
+    </span>
+  );
+}
+
+function Illustration({ type }: { type: string }) {
+  if (type === "tree") {
+    return (
+      <div className="relative h-full bg-gradient-to-b from-indigo-950 to-emerald-950">
+        <div className="absolute bottom-0 left-1/2 h-24 w-8 -translate-x-1/2 rounded-t-full bg-amber-950" />
+        <div className="absolute bottom-16 left-1/2 h-28 w-44 -translate-x-1/2 rounded-full bg-emerald-800" />
+        <div className="absolute bottom-20 left-[38%] h-3 w-3 rounded-full bg-yellow-200 shadow-[0_0_20px_8px_rgba(253,224,71,0.35)]" />
+        <div className="absolute bottom-24 left-[58%] h-3 w-3 rounded-full bg-yellow-200 shadow-[0_0_20px_8px_rgba(253,224,71,0.35)]" />
+      </div>
+    );
+  }
+
+  if (type === "pond") {
+    return (
+      <div className="relative h-full bg-gradient-to-b from-slate-950 to-emerald-950">
+        <div className="absolute bottom-8 left-1/2 h-24 w-72 -translate-x-1/2 rounded-[50%] bg-sky-300/35 shadow-[0_0_50px_rgba(125,211,252,0.25)]" />
+        <div className="absolute bottom-16 left-[42%] h-2 w-12 rounded-full bg-yellow-100" />
+      </div>
+    );
+  }
+
+  if (type === "meadow") {
+    return (
+      <div className="relative h-full bg-gradient-to-b from-indigo-950 to-emerald-900">
+        {Array.from({ length: 18 }).map((_, i) => (
+          <span
+            key={i}
+            className="absolute bottom-8 h-7 w-2 rounded-full bg-pink-200"
+            style={{ left: `${8 + i * 5}%` }}
+          />
+        ))}
+        <div className="absolute bottom-0 h-10 w-full bg-emerald-800" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative h-full bg-gradient-to-b from-indigo-950 to-slate-950">
+      {Array.from({ length: 7 }).map((_, i) => (
+        <span
+          key={i}
+          className="absolute bottom-10 h-16 w-5 rounded-t-full bg-yellow-100/80 shadow-[0_0_24px_rgba(254,240,138,0.45)]"
+          style={{ left: `${12 + i * 12}%` }}
+        />
+      ))}
     </div>
   );
 }
