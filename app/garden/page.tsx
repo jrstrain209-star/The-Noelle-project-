@@ -1,157 +1,128 @@
 "use client";
 
+import { useState } from "react";
+
 const scenes = [
   {
-    id: "memory-tree",
+    id: "gate",
+    title: "Noëlle's Garden",
+    text: "Walk gently. Take what you need. Leave what you can.",
+    image: "/garden-art/garden-gate.png",
+  },
+  {
+    id: "tree",
     title: "Memory Tree",
-    subtitle: "A quiet place to remember.",
-    text: "Lanterns hang from the branches like memories held gently in the night.",
+    text: "A quiet place to remember. Lanterns hang like memories held gently in the night.",
     image: "/garden-art/memory-tree.png",
   },
   {
-    id: "reflection-pond",
+    id: "pond",
     title: "Reflection Pond",
-    subtitle: "It is okay to sit here awhile.",
-    text: "Moonlight rests on the water. This space is for grief, breath, and reflection.",
+    text: "It is okay to sit here awhile. Let the water hold what feels too heavy.",
     image: "/garden-art/reflection-pond.png",
   },
   {
-    id: "mushroom-hollow",
+    id: "mushrooms",
     title: "Mushroom Hollow",
-    subtitle: "Small lights in dark places.",
-    text: "Tiny glowing reminders for the people trying to make it one more day.",
+    text: "Small lights in dark places. Even here, something gentle can grow.",
     image: "/garden-art/mushroom-hollow.png",
   },
   {
-    id: "lantern-grove",
-    title: "Lantern Grove",
-    subtitle: "For those who need immediate light.",
-    text: "Support should be easy to find when the night feels too heavy.",
-    image: "/garden-art/lantern-grove.png",
+    id: "field",
+    title: "Firefly Field",
+    text: "You are not walking alone. Every light is someone who kept going.",
+    image: "/garden-art/firefly-field.png",
   },
   {
-    id: "firefly-field",
-    title: "Firefly Field",
-    subtitle: "You are not walking alone.",
-    text: "Every small light is a reminder that someone else has stood in the dark too.",
-    image: "/garden-art/firefly-field.png",
+    id: "lantern",
+    title: "Noëlle's Lantern",
+    text: "May the love that remains help guide someone else home.",
+    image: "/garden-art/noelles-lantern.png",
   },
 ];
 
 export default function GardenPage() {
+  const [index, setIndex] = useState(0);
+  const scene = scenes[index];
+
+  const nextScene = () => {
+    setIndex((current) => Math.min(current + 1, scenes.length - 1));
+  };
+
+  const previousScene = () => {
+    setIndex((current) => Math.max(current - 1, 0));
+  };
+
   return (
-    <main className="bg-[#050814] text-white">
+    <main className="relative h-screen overflow-hidden bg-black text-white">
+      <div
+        className="absolute inset-0 bg-cover bg-center transition-all duration-700"
+        style={{ backgroundImage: `url('${scene.image}')` }}
+      />
+
+      <div className="absolute inset-0 bg-black/20" />
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/85 to-transparent" />
+
       <a
-        href="#help"
-        className="fixed right-4 top-4 z-50 rounded-full bg-yellow-200 px-5 py-3 text-sm font-black text-slate-950 shadow-[0_0_40px_rgba(253,224,71,.7)]"
+        href="/"
+        className="absolute left-4 top-4 z-20 rounded-full bg-black/35 px-5 py-3 text-sm font-bold text-white backdrop-blur-md"
       >
-        🕯 Get Help Now
+        ← Home
       </a>
 
-      <section
-        className="relative flex min-h-screen items-center justify-center bg-cover bg-center px-6 text-center"
-        style={{ backgroundImage: "url('/garden-art/garden-gate.png')" }}
-      >
-        <div className="absolute inset-0 bg-black/45" />
+      <div className="absolute bottom-10 left-1/2 z-20 w-[90%] max-w-xl -translate-x-1/2 text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.35em] text-yellow-100/80">
+          {scene.id === "gate" ? "Enter the memorial garden" : "Noëlle's Garden"}
+        </p>
 
-        <div className="relative z-10 max-w-3xl">
-          <p className="mb-5 tracking-[0.45em] text-yellow-100">
-            NOËLLE&apos;S GARDEN
-          </p>
+        <h1 className="mt-3 text-4xl font-black md:text-6xl">{scene.title}</h1>
 
-          <h1 className="text-5xl font-black leading-tight md:text-7xl">
-            Take the path
-            <br />
-            you need today.
-          </h1>
+        <p className="mx-auto mt-4 max-w-lg text-lg leading-8 text-white/85">
+          {scene.text}
+        </p>
 
-          <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-white/80">
-            A moonlit memorial garden for memory, reflection, hope, and small
-            lights in dark places.
-          </p>
+        <div className="mt-8 flex items-center justify-center gap-3">
+          {index > 0 && (
+            <button
+              onClick={previousScene}
+              className="rounded-full bg-white/15 px-6 py-3 font-bold backdrop-blur-md"
+            >
+              Back
+            </button>
+          )}
 
-          <a
-            href="#memory-tree"
-            className="mt-10 inline-block rounded-full bg-yellow-200 px-9 py-4 font-black text-slate-950 shadow-[0_0_45px_rgba(253,224,71,.7)]"
-          >
-            🏮 Begin Your Walk
-          </a>
+          {index < scenes.length - 1 ? (
+            <button
+              onClick={nextScene}
+              className="rounded-full bg-yellow-200 px-8 py-4 font-black text-slate-950 shadow-[0_0_45px_rgba(253,224,71,.65)]"
+            >
+              {index === 0 ? "Open the Gate" : "Continue the Walk"}
+            </button>
+          ) : (
+            <button
+              onClick={() => setIndex(0)}
+              className="rounded-full bg-yellow-200 px-8 py-4 font-black text-slate-950 shadow-[0_0_45px_rgba(253,224,71,.65)]"
+            >
+              Return to the Gate
+            </button>
+          )}
         </div>
-      </section>
-<div className="mx-auto mt-8 max-w-md rotate-[-2deg] rounded-2xl border-2 border-yellow-100/30 bg-[#5a351c]/85 px-6 py-4 shadow-2xl backdrop-blur-md">
-  <p className="text-sm font-black uppercase tracking-[0.25em] text-yellow-100">
-    Garden Under Construction
-  </p>
-  <p className="mt-2 text-sm leading-6 text-white/75">
-    This garden is still being planted. Some paths, memories, and lights are
-    still growing.
-  </p>
-</div>
-      {scenes.map((scene, index) => (
-        <section
-          key={scene.id}
-          id={scene.id}
-          className="relative flex min-h-screen items-end bg-cover bg-center px-6 py-20"
-          style={{ backgroundImage: `url('${scene.image}')` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/20" />
+      </div>
 
-          <div
-            className={`relative z-10 max-w-xl rounded-3xl border border-white/15 bg-black/35 p-7 shadow-2xl backdrop-blur-md ${
-              index % 2 === 0 ? "mr-auto" : "ml-auto"
+      <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+        {scenes.map((item, sceneIndex) => (
+          <button
+            key={item.id}
+            onClick={() => setIndex(sceneIndex)}
+            aria-label={item.title}
+            className={`h-2 rounded-full transition-all ${
+              sceneIndex === index
+                ? "w-8 bg-yellow-200"
+                : "w-2 bg-white/40"
             }`}
-          >
-            <p className="text-xs font-bold uppercase tracking-[0.35em] text-yellow-100/80">
-              {scene.title}
-            </p>
-
-            <h2 className="mt-4 text-4xl font-black">{scene.subtitle}</h2>
-
-            <p className="mt-5 text-lg leading-8 text-white/80">
-              {scene.text}
-            </p>
-          </div>
-        </section>
-      ))}
-
-      <section
-        id="help"
-        className="relative flex min-h-screen items-center justify-center bg-cover bg-center px-6 text-center"
-        style={{ backgroundImage: "url('/garden-art/noelles-lantern.png')" }}
-      >
-        <div className="absolute inset-0 bg-black/55" />
-
-        <div className="relative z-10 max-w-2xl rounded-3xl border border-yellow-100/20 bg-black/40 p-8 shadow-[0_0_80px_rgba(253,224,71,.25)] backdrop-blur-md">
-          <p className="text-xs font-bold uppercase tracking-[0.35em] text-yellow-100/80">
-            Immediate Support
-          </p>
-
-          <h2 className="mt-4 text-4xl font-black">
-            There is still light ahead.
-          </h2>
-
-          <p className="mt-5 text-lg leading-8 text-white/80">
-            If you or someone else is in immediate danger, call emergency
-            services. For crisis support in the U.S., call or text 988.
-          </p>
-
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <a
-              href="tel:988"
-              className="rounded-full bg-yellow-200 px-8 py-4 font-black text-slate-950"
-            >
-              Call 988
-            </a>
-
-            <a
-              href="sms:988"
-              className="rounded-full bg-white/10 px-8 py-4 font-black text-white ring-1 ring-white/20"
-            >
-              Text 988
-            </a>
-          </div>
-        </div>
-      </section>
+          />
+        ))}
+      </div>
     </main>
   );
 }
