@@ -56,7 +56,9 @@ export default function GardenPage() {
   return (
     <main className="relative h-screen overflow-hidden bg-black text-white">
       <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-700"
+        className={`absolute inset-0 bg-center bg-no-repeat transition-all duration-700 ${
+  scene.id === "gate" ? "bg-contain" : "bg-cover"
+}`}
         style={{ backgroundImage: `url('${scene.image}')` }}
       />
 
