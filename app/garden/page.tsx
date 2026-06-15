@@ -114,7 +114,7 @@ export default function NoellesGardenPage() {
 
         <div className="relative z-10 mx-auto max-w-6xl space-y-40">
           {/* MEMORY TREE */}
-          <scene className="block min-h-[75vh] pt-24">
+          <section className="block min-h-[75vh] pt-24">
             <div className="relative mx-auto max-w-4xl">
               <div className="mx-auto h-72 w-72 rounded-full bg-emerald-300/20 blur-3xl" />
 
@@ -145,10 +145,10 @@ export default function NoellesGardenPage() {
                 </p>
               </div>
             </div>
-          </scene>
+          </section>
 
           {/* REFLECTION POND */}
-          <scene className="block min-h-[70vh]">
+          <section className="block min-h-[70vh]">
             <div className="relative mx-auto max-w-5xl">
               <div className="mx-auto h-64 max-w-2xl rounded-[50%] bg-blue-300/30 shadow-[inset_0_0_60px_rgba(255,255,255,.25),0_0_90px_rgba(120,190,255,.25)]" />
               <div className="mx-auto mt-[-8rem] h-32 max-w-xl rounded-[50%] border border-white/20 bg-blue-950/40" />
@@ -173,10 +173,10 @@ export default function NoellesGardenPage() {
                 ))}
               </div>
             </div>
-          </scene>
+          </section>
 
           {/* MUSHROOM HOLLOW */}
-          <scene className="block min-h-[70vh]">
+          <section className="block min-h-[70vh]">
             <div className="relative mx-auto max-w-5xl">
               <div className="absolute inset-x-0 top-24 h-64 rounded-[50%] bg-purple-400/10 blur-3xl" />
 
@@ -208,10 +208,10 @@ export default function NoellesGardenPage() {
                 </p>
               </div>
             </div>
-          </scene>
+          </section>
 
           {/* LANTERN GROVE */}
-          <scene className="block min-h-[75vh]">
+          <section className="block min-h-[75vh]">
             <div className="relative mx-auto max-w-5xl text-center">
               <div className="absolute inset-x-0 top-0 h-96 bg-yellow-200/10 blur-3xl" />
 
@@ -246,10 +246,10 @@ export default function NoellesGardenPage() {
                 </h2>
               </div>
             </div>
-          </scene>
+          </section>
 
           {/* FIREFLY FIELD */}
-          <scene className="block min-h-[75vh]">
+          <section className="block min-h-[75vh]">
             <div className="relative mx-auto max-w-5xl text-center">
               <div className="absolute inset-0 rounded-[50%] bg-cyan-300/10 blur-3xl" />
 
@@ -276,10 +276,10 @@ export default function NoellesGardenPage() {
                 </h2>
               </div>
             </div>
-          </scene>
+          </section>
 
           {/* NOELLE'S LANTERN */}
-          <scene className="block min-h-screen pb-20 pt-16">
+          <section className="block min-h-screen pb-20 pt-16">
             <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
               <div className="absolute top-20 h-96 w-96 rounded-full bg-yellow-200/20 blur-3xl" />
 
@@ -307,7 +307,7 @@ export default function NoellesGardenPage() {
                 Return to the Garden Gate
               </button>
             </div>
-          </scene>
+          </section>
         </div>
       </section>
 
