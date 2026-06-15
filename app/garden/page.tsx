@@ -5,7 +5,7 @@ import { useState } from "react";
 const scenes = [
   {
     id: "gate",
-    title: "Noëlle's Garden",
+    title: "Noelle's Garden",
     text: "Walk gently. Take what you need. Leave what you can.",
     image: "/garden-art/garden-gate.png",
   },
@@ -35,7 +35,7 @@ const scenes = [
   },
   {
     id: "lantern",
-    title: "Noëlle's Lantern",
+    title: "Noelle's Lantern",
     text: "May the love that remains help guide someone else home.",
     image: "/garden-art/noelles-lantern.png",
   },
