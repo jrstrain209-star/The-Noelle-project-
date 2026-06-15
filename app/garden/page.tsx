@@ -78,7 +78,15 @@ export default function GardenPage() {
           </a>
         </div>
       </section>
-
+<div className="mx-auto mt-8 max-w-md rotate-[-2deg] rounded-2xl border-2 border-yellow-100/30 bg-[#5a351c]/85 px-6 py-4 shadow-2xl backdrop-blur-md">
+  <p className="text-sm font-black uppercase tracking-[0.25em] text-yellow-100">
+    Garden Under Construction
+  </p>
+  <p className="mt-2 text-sm leading-6 text-white/75">
+    This garden is still being planted. Some paths, memories, and lights are
+    still growing.
+  </p>
+</div>
       {scenes.map((scene, index) => (
         <section
           key={scene.id}
