@@ -1,303 +1,222 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-
-const memoryMessages = [
-  "Your memory is safe here.",
-  "Love does not end.",
-  "We carry your light forward.",
-  "You are missed. You are loved.",
-];
+import { useState } from "react";
+import Link from "next/link";
 
 export default function GardenPage() {
-  const [scene, setScene] = useState<"gate" | "tree" | "growing">("gate");
-  const [isOpening, setIsOpening] = useState(false);
-  const [activeMemory, setActiveMemory] = useState("");
-  const [showMemory, setShowMemory] = useState(false);
-
-  const enterGarden = () => {
-    setIsOpening(true);
-    setTimeout(() => {
-      setScene("tree");
-      setIsOpening(false);
-    }, 900);
-  };
+  const [gateOpen, setGateOpen] = useState(false);
 
   return (
-    <main className="relative h-screen overflow-hidden bg-black text-white">
-      <div
-        className={`absolute inset-0 bg-center bg-no-repeat transition-all duration-1000 ${
-          scene === "gate" ? "bg-contain scale-100" : "bg-cover scale-105"
-        }`}
-        style={{
-          backgroundImage:
-            scene === "tree"
-              ? "url('/garden-art/memory-tree.png')"
-              : "url('/garden-art/garden-gate.png')",
-        }}
-      />
+    <main className="min-h-screen overflow-hidden bg-[#07120d] text-white">
+      <section className="relative min-h-screen bg-gradient-to-b from-[#07111f] via-[#12301f] to-[#08130d]">
 
-      <div className="absolute inset-0 bg-black/10" />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/65 to-transparent" />
+        {/* stars */}
+        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_20%,white_1px,transparent_2px),radial-gradient(circle_at_80%_30%,white_1px,transparent_2px),radial-gradient(circle_at_50%_70%,white_1px,transparent_2px)] bg-[length:140px_140px]" />
 
-      {isOpening && (
-        <div className="absolute inset-0 z-50 animate-gardenFade bg-yellow-100/20 backdrop-blur-sm" />
-      )}
-
-      <a
-        href="/"
-        className="absolute left-4 top-4 z-40 rounded-full bg-black/35 px-5 py-3 text-sm font-bold text-white backdrop-blur-md"
-      >
-        ← Home
-      </a>
-
-      <Fireflies />
-
-      {scene === "gate" && (
-        <>
-          <button
-            onClick={enterGarden}
-            className="absolute inset-0 z-20 cursor-pointer"
-            aria-label="Enter Noelle's Garden"
-          />
-
-          <div className="absolute left-1/2 top-[54%] z-10 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-200/10 blur-3xl animate-pulse" />
-
-          <WoodSign className="absolute bottom-24 left-5 z-30 max-w-[270px] rotate-[-3deg]">
-            <p className="text-[10px] font-black uppercase tracking-[0.25em] text-yellow-100">
-              Garden Under Construction
-            </p>
-            <p className="mt-2 text-xs leading-5 text-white/80">
-              This memorial garden is still being planted. Some paths, memories,
-              and lights are still growing.
-            </p>
-          </WoodSign>
-
-          <div className="absolute bottom-8 left-1/2 z-30 -translate-x-1/2 rounded-full bg-black/35 px-6 py-3 text-sm font-bold text-yellow-100 backdrop-blur-md">
-            Tap the gate to enter
-          </div>
-        </>
-      )}
-
-      {scene === "tree" && (
-        <>
-          {/* Invisible tap zones over the tree lanterns */}
-          {[
-            { left: "25%", top: "31%" },
-            { left: "42%", top: "26%" },
-            { left: "57%", top: "30%" },
-            { left: "72%", top: "35%" },
-          ].map((spot, i) => (
-            <button
+        {/* fireflies */}
+        <div className="pointer-events-none absolute inset-0">
+          {Array.from({ length: 28 }).map((_, i) => (
+            <span
               key={i}
-              onClick={() => {
-                setActiveMemory(memoryMessages[i]);
-                setShowMemory(true);
+              className="absolute h-2 w-2 rounded-full bg-yellow-200 shadow-[0_0_18px_6px_rgba(255,240,150,0.7)] animate-pulse"
+              style={{
+                left: `${8 + ((i * 17) % 84)}%`,
+                top: `${18 + ((i * 23) % 70)}%`,
+                animationDelay: `${i * 0.25}s`,
               }}
-              className="absolute z-30 h-16 w-16 rounded-full"
-              style={spot}
-              aria-label={`Read memory lantern ${i + 1}`}
-            >
-              <span className="absolute inset-3 rounded-full bg-yellow-200/20 shadow-[0_0_35px_18px_rgba(253,224,71,.25)] animate-lanternGlow" />
-            </button>
+            />
           ))}
+        </div>
 
-          <WoodSign className="absolute bottom-28 left-1/2 z-30 w-[86%] max-w-md -translate-x-1/2 rotate-[-1deg]">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-yellow-100/85">
-              Memory Tree
-            </p>
-            <h1 className="mt-3 text-3xl font-black md:text-5xl">
-              A quiet place to remember.
-            </h1>
-            <p className="mt-4 text-base leading-7 text-white/85">
-              Tap the lanterns beneath the branches.
-            </p>
-          </WoodSign>
+        {/* entrance */}
+        {!gateOpen && (
+          <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
+            <Link href="/" className="absolute left-6 top-6 text-sm text-white/70">
+              ← Home
+            </Link>
 
-          {showMemory && (
-            <WoodSign className="absolute left-1/2 top-24 z-40 w-[84%] max-w-sm -translate-x-1/2 rotate-[1deg] animate-dropSign">
-              <p className="text-xs font-black uppercase tracking-[0.25em] text-yellow-100">
-                Memory Lantern
+            <div className="mb-8 rounded-3xl border border-amber-700/60 bg-amber-950/40 px-8 py-6 shadow-2xl">
+              <p className="mb-2 text-sm tracking-[0.3em] text-amber-200">
+                ENTER THE MEMORIAL GARDEN
               </p>
-              <p className="mt-3 text-lg leading-7 text-white/90">
-                “{activeMemory}”
+              <h1 className="text-5xl font-bold text-amber-100">
+                Noelle&apos;s Garden
+              </h1>
+              <p className="mt-4 max-w-xl text-white/80">
+                Walk gently. Take what you need. Leave what light you can.
               </p>
-              <button
-                onClick={() => setShowMemory(false)}
-                className="mt-4 rounded-full bg-yellow-200 px-5 py-2 text-sm font-black text-slate-950"
-              >
-                Close
-              </button>
-            </WoodSign>
-          )}
+            </div>
 
-          <div className="absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 gap-3">
             <button
-              onClick={() => setScene("gate")}
-              className="rounded-full bg-black/35 px-6 py-3 font-bold backdrop-blur-md"
+              onClick={() => setGateOpen(true)}
+              className="rounded-full bg-amber-300 px-8 py-4 text-lg font-bold text-amber-950 shadow-[0_0_35px_rgba(252,211,77,0.8)] transition hover:scale-105 hover:bg-amber-200"
             >
-              Back
-            </button>
-            <button
-              onClick={() => setScene("growing")}
-              className="rounded-full bg-yellow-200 px-7 py-3 font-black text-slate-950 shadow-[0_0_35px_rgba(253,224,71,.55)]"
-            >
-              Continue
+              Open the Gate
             </button>
           </div>
-        </>
-      )}
+        )}
 
-      {scene === "growing" && (
-        <>
-          <WoodSign className="absolute left-1/2 top-1/2 z-30 w-[88%] max-w-md -translate-x-1/2 -translate-y-1/2 rotate-[-1deg]">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-yellow-100/85">
-              This Garden Is Still Growing
-            </p>
-            <h1 className="mt-3 text-3xl font-black">
-              More paths are being planted.
-            </h1>
-            <p className="mt-4 text-base leading-7 text-white/85">
-              Reflection Pond, Mushroom Hollow, Firefly Field, and Noelle&apos;s
-              Lantern are coming soon.
-            </p>
-          </WoodSign>
+        {/* garden */}
+        {gateOpen && (
+          <div className="relative z-10 px-5 pb-24 pt-8">
+            <Link href="/" className="text-sm text-white/70">
+              ← Home
+            </Link>
 
-          <div className="absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 gap-3">
-            <button
-              onClick={() => setScene("tree")}
-              className="rounded-full bg-black/35 px-6 py-3 font-bold backdrop-blur-md"
-            >
-              Back
-            </button>
-            <button
-              onClick={() => setScene("gate")}
-              className="rounded-full bg-yellow-200 px-7 py-3 font-black text-slate-950"
-            >
-              Return
-            </button>
+            <section className="mx-auto mt-8 max-w-6xl">
+              <div className="rounded-[2rem] border border-amber-700/40 bg-black/25 p-6 shadow-2xl backdrop-blur">
+                <h1 className="text-center text-4xl font-bold text-amber-100 md:text-6xl">
+                  Noelle&apos;s Garden
+                </h1>
+                <p className="mx-auto mt-4 max-w-2xl text-center text-white/75">
+                  A storybook memorial garden where each path leads to light,
+                  memory, reflection, and help.
+                </p>
+              </div>
+
+              {/* winding path */}
+              <div className="relative mx-auto mt-12 max-w-4xl">
+                <div className="absolute left-1/2 top-0 h-full w-24 -translate-x-1/2 rounded-full bg-gradient-to-b from-amber-200/50 via-stone-300/30 to-amber-100/40 blur-sm" />
+
+                <GardenStop
+                  side="left"
+                  title="Lantern Path"
+                  text="Follow the warm lights. Each lantern is a reminder that someone is still here, still trying, still worth finding."
+                />
+
+                <MushroomPatch />
+
+                <GardenStop
+                  side="right"
+                  title="Memory Mushrooms"
+                  text="Small glowing places for names, notes, memories, and moments that deserve to be kept alive."
+                />
+
+                <TreeSection />
+
+                <GardenStop
+                  side="left"
+                  title="Noelle’s Tree"
+                  text="The heart of the garden. A place to pause, breathe, remember, and feel close."
+                />
+
+                <PondSection />
+
+                <GardenStop
+                  side="right"
+                  title="Reflection Pond"
+                  text="A quiet place for grief, hope, and the thoughts that are too heavy to carry alone."
+                />
+
+                <ResourceSigns />
+              </div>
+            </section>
           </div>
-        </>
-      )}
-
-      <style jsx>{`
-        .firefly {
-          animation: fireflyDrift 8s ease-in-out infinite alternate,
-            fireflyBlink 2.7s ease-in-out infinite;
-        }
-
-        @keyframes fireflyDrift {
-          0% {
-            transform: translate(0, 0) scale(0.8);
-          }
-          100% {
-            transform: translate(22px, -34px) scale(1.15);
-          }
-        }
-
-        @keyframes fireflyBlink {
-          0%,
-          100% {
-            opacity: 0.15;
-          }
-          45% {
-            opacity: 0.95;
-          }
-          65% {
-            opacity: 0.25;
-          }
-          80% {
-            opacity: 0.75;
-          }
-        }
-
-        .animate-lanternGlow {
-          animation: lanternGlow 2.6s ease-in-out infinite;
-        }
-
-        @keyframes lanternGlow {
-          0%,
-          100% {
-            opacity: 0.25;
-            transform: scale(0.9);
-          }
-          50% {
-            opacity: 0.75;
-            transform: scale(1.12);
-          }
-        }
-
-        .animate-dropSign {
-          animation: dropSign 350ms ease-out;
-        }
-
-        @keyframes dropSign {
-          from {
-            transform: translate(-50%, -18px) rotate(1deg);
-            opacity: 0;
-          }
-          to {
-            transform: translate(-50%, 0) rotate(1deg);
-            opacity: 1;
-          }
-        }
-
-        .animate-gardenFade {
-          animation: gardenFade 900ms ease-in-out forwards;
-        }
-
-        @keyframes gardenFade {
-          0% {
-            opacity: 0;
-          }
-          45% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
-        }
-      `}</style>
+        )}
+      </section>
     </main>
   );
 }
 
-function Fireflies() {
-  return (
-    <>
-      {Array.from({ length: 14 }).map((_, i) => (
-        <span
-          key={i}
-          className="firefly pointer-events-none absolute z-30"
-          style={{
-            left: `${10 + ((i * 23) % 78)}%`,
-            top: `${12 + ((i * 37) % 72)}%`,
-            animationDelay: `${i * 0.43}s`,
-          }}
-        >
-          <span className="block h-1 w-2 rounded-full bg-yellow-100 shadow-[0_0_12px_5px_rgba(253,224,71,.28)]" />
-          <span className="absolute left-1 top-[-2px] h-1 w-1 rounded-full bg-white/40" />
-        </span>
-      ))}
-    </>
-  );
-}
-
-function WoodSign({
-  children,
-  className = "",
+function GardenStop({
+  side,
+  title,
+  text,
 }: {
-  children: ReactNode;
-  className?: string;
+  side: "left" | "right";
+  title: string;
+  text: string;
 }) {
   return (
     <div
-      className={`relative rounded-2xl border-2 border-yellow-100/25 bg-[#5a351c]/90 p-5 text-center shadow-[0_12px_35px_rgba(0,0,0,.45)] backdrop-blur-sm ${className}`}
+      className={`relative my-20 flex ${
+        side === "left" ? "justify-start" : "justify-end"
+      }`}
     >
-      <div className="absolute left-1/2 top-[-18px] h-5 w-1 -translate-x-1/2 bg-yellow-100/30" />
-      <div className="absolute -left-2 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-yellow-100/50" />
-      <div className="absolute -right-2 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-yellow-100/50" />
-      {children}
+      <div className="w-full max-w-sm rounded-xl border-4 border-amber-900 bg-[#6b3f1d] p-5 text-amber-50 shadow-xl transition hover:scale-105">
+        <h2 className="text-2xl font-bold">{title}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-amber-100/90">{text}</p>
+      </div>
     </div>
+  );
+}
+
+function MushroomPatch() {
+  return (
+    <div className="relative my-16 flex justify-center gap-5">
+      {["🍄", "🍄", "🍄", "🍄", "🍄"].map((m, i) => (
+        <button
+          key={i}
+          className="text-4xl transition hover:-translate-y-2 hover:scale-125"
+          title="Memory mushroom"
+        >
+          {m}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function TreeSection() {
+  return (
+    <section className="relative my-28 flex flex-col items-center text-center">
+      <div className="absolute h-72 w-72 rounded-full bg-emerald-300/20 blur-3xl" />
+
+      <div className="relative text-[12rem] leading-none drop-shadow-2xl">
+        🌳
+      </div>
+
+      <div className="relative -mt-6 max-w-xl rounded-3xl border border-emerald-200/30 bg-black/35 p-6 backdrop-blur">
+        <h2 className="text-3xl font-bold text-emerald-100">
+          Noelle&apos;s Tree
+        </h2>
+        <p className="mt-3 text-white/80">
+          A protected clearing in the center of the garden. This is where the
+          page should feel still, sacred, and full of love.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function PondSection() {
+  return (
+    <section className="relative my-28 flex flex-col items-center text-center">
+      <div className="h-48 w-full max-w-xl rounded-[50%] border border-sky-200/50 bg-gradient-to-br from-sky-300/40 via-blue-600/30 to-indigo-900/60 shadow-[0_0_60px_rgba(125,211,252,0.45)]" />
+
+      <div className="-mt-10 max-w-md rounded-2xl border border-sky-100/30 bg-black/35 p-5 backdrop-blur">
+        <h2 className="text-2xl font-bold text-sky-100">Reflection Pond</h2>
+        <p className="mt-2 text-sm text-white/75">
+          Sit here for a moment. Let the water hold what feels too heavy.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function ResourceSigns() {
+  return (
+    <section className="my-24 grid gap-5 md:grid-cols-3">
+      <a
+        href="tel:988"
+        className="rounded-xl border-4 border-amber-900 bg-[#75451f] p-5 text-center font-bold text-amber-50 shadow-xl transition hover:scale-105"
+      >
+        Call 988
+      </a>
+
+      <a
+        href="sms:988"
+        className="rounded-xl border-4 border-amber-900 bg-[#75451f] p-5 text-center font-bold text-amber-50 shadow-xl transition hover:scale-105"
+      >
+        Text 988
+      </a>
+
+      <a
+        href="/resources"
+        className="rounded-xl border-4 border-amber-900 bg-[#75451f] p-5 text-center font-bold text-amber-50 shadow-xl transition hover:scale-105"
+      >
+        Find Resources
+      </a>
+    </section>
   );
 }
