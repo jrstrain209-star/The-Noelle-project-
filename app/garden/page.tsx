@@ -2,85 +2,56 @@
 
 import { useState } from "react";
 
-const scenes = [
-  {
-    id: "gate",
-    title: "Noelle's Garden",
-    text: "Walk gently. Take what you need. Leave what you can.",
-    image: "/garden-art/garden-gate.png",
-  },
-  {
-    id: "tree",
-    title: "Memory Tree",
-    text: "A quiet place to remember. Lanterns hang like memories held gently in the night.",
-    image: "/garden-art/memory-tree.png",
-  },
-  {
-    id: "pond",
-    title: "Reflection Pond",
-    text: "It is okay to sit here awhile. Let the water hold what feels too heavy.",
-    image: "/garden-art/reflection-pond.png",
-  },
-  {
-    id: "mushrooms",
-    title: "Mushroom Hollow",
-    text: "Small lights in dark places. Even here, something gentle can grow.",
-    image: "/garden-art/mushroom-hollow.png",
-  },
-  {
-    id: "field",
-    title: "Firefly Field",
-    text: "You are not walking alone. Every light is someone who kept going.",
-    image: "/garden-art/firefly-field.png",
-  },
-  {
-    id: "lantern",
-    title: "Noelle's Lantern",
-    text: "May the love that remains help guide someone else home.",
-    image: "/garden-art/noelles-lantern.png",
-  },
+const memoryMessages = [
+  "Your memory is safe here.",
+  "Love does not end.",
+  "We carry your light forward.",
+  "A quiet place to remember.",
+  "You are missed. You are loved.",
 ];
 
 export default function GardenPage() {
-  const [index, setIndex] = useState(0);
-  const scene = scenes[index];
-
-  const nextScene = () => {
-    setIndex((current) => Math.min(current + 1, scenes.length - 1));
-  };
-
-  const previousScene = () => {
-    setIndex((current) => Math.max(current - 1, 0));
-  };
+  const [scene, setScene] = useState<"gate" | "tree" | "growing">("gate");
+  const [activeMemory, setActiveMemory] = useState(memoryMessages[0]);
+  const [showMemory, setShowMemory] = useState(false);
 
   return (
     <main className="relative h-screen overflow-hidden bg-black text-white">
       <div
         className={`absolute inset-0 bg-center bg-no-repeat transition-all duration-700 ${
-  scene.id === "gate" ? "bg-contain" : "bg-cover"
-}`}
-        style={{ backgroundImage: `url('${scene.image}')` }}
+          scene === "gate" ? "bg-contain" : "bg-cover"
+        }`}
+        style={{
+          backgroundImage:
+            scene === "tree"
+              ? "url('/garden-art/memory-tree.png')"
+              : "url('/garden-art/garden-gate.png')",
+        }}
       />
 
       <div className="absolute inset-0 bg-black/10" />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/75 to-transparent" />
 
       <a
         href="/"
-        className="absolute left-4 top-4 z-30 rounded-full bg-black/35 px-5 py-3 text-sm font-bold text-white backdrop-blur-md"
+        className="absolute left-4 top-4 z-40 rounded-full bg-black/35 px-5 py-3 text-sm font-bold text-white backdrop-blur-md"
       >
         ← Home
       </a>
 
-      {scene.id === "gate" ? (
+      <Fireflies />
+
+      {scene === "gate" && (
         <>
           <button
-            onClick={nextScene}
-            className="absolute inset-0 z-10 cursor-pointer"
-            aria-label="Open the gate"
+            onClick={() => setScene("tree")}
+            className="absolute inset-0 z-20 cursor-pointer"
+            aria-label="Enter Noelle's Garden"
           />
 
-          <WoodSign className="absolute bottom-24 left-5 z-20 max-w-[260px] rotate-[-3deg]">
+          <div className="absolute left-1/2 top-1/2 z-10 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-200/10 blur-3xl animate-pulse" />
+
+          <WoodSign className="absolute bottom-24 left-5 z-30 max-w-[270px] rotate-[-3deg]">
             <p className="text-[10px] font-black uppercase tracking-[0.25em] text-yellow-100">
               Garden Under Construction
             </p>
@@ -90,70 +61,150 @@ export default function GardenPage() {
             </p>
           </WoodSign>
 
-          <div className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 rounded-full bg-black/35 px-6 py-3 text-sm font-bold text-yellow-100 backdrop-blur-md">
+          <div className="absolute bottom-8 left-1/2 z-30 -translate-x-1/2 rounded-full bg-black/35 px-6 py-3 text-sm font-bold text-yellow-100 backdrop-blur-md">
             Tap the gate to enter
-          </div>
-        </>
-      ) : (
-        <>
-          <WoodSign className="absolute bottom-28 left-1/2 z-20 w-[88%] max-w-md -translate-x-1/2 rotate-[-1deg]">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-yellow-100/85">
-              Noelle&apos;s Garden
-            </p>
-
-            <h1 className="mt-3 text-3xl font-black md:text-5xl">
-              {scene.title}
-            </h1>
-
-            <p className="mt-4 text-base leading-7 text-white/85">
-              {scene.text}
-            </p>
-          </WoodSign>
-
-          <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center justify-center gap-3">
-            <button
-              onClick={previousScene}
-              className="rounded-full bg-black/35 px-6 py-3 font-bold text-white backdrop-blur-md"
-            >
-              Back
-            </button>
-
-            {index < scenes.length - 1 ? (
-              <button
-                onClick={nextScene}
-                className="rounded-full bg-yellow-200 px-7 py-3 font-black text-slate-950 shadow-[0_0_35px_rgba(253,224,71,.55)]"
-              >
-                Continue
-              </button>
-            ) : (
-              <button
-                onClick={() => setIndex(0)}
-                className="rounded-full bg-yellow-200 px-7 py-3 font-black text-slate-950 shadow-[0_0_35px_rgba(253,224,71,.55)]"
-              >
-                Return
-              </button>
-            )}
           </div>
         </>
       )}
 
-      <div className="absolute right-4 top-4 z-30 rounded-full bg-black/35 px-4 py-2 text-xs font-bold text-yellow-100 backdrop-blur-md">
-        {index + 1} / {scenes.length}
+      {scene === "tree" && (
+        <>
+          <WoodSign className="absolute bottom-28 left-1/2 z-30 w-[88%] max-w-md -translate-x-1/2 rotate-[-1deg]">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-yellow-100/85">
+              Noelle&apos;s Garden
+            </p>
+            <h1 className="mt-3 text-3xl font-black md:text-5xl">
+              Memory Tree
+            </h1>
+            <p className="mt-4 text-base leading-7 text-white/85">
+              Tap a lantern beneath the branches to reveal a small memory.
+            </p>
+          </WoodSign>
+
+          {memoryMessages.map((message, i) => (
+            <button
+              key={message}
+              onClick={() => {
+                setActiveMemory(message);
+                setShowMemory(true);
+              }}
+              className="absolute z-30 h-8 w-8 rounded-full bg-yellow-200/80 shadow-[0_0_35px_16px_rgba(253,224,71,.45)] transition hover:scale-125"
+              style={{
+                left: `${22 + i * 14}%`,
+                top: `${30 + (i % 2) * 11}%`,
+              }}
+              aria-label={`Reveal memory ${i + 1}`}
+            />
+          ))}
+
+          {showMemory && (
+            <WoodSign className="absolute left-1/2 top-24 z-40 w-[86%] max-w-sm -translate-x-1/2 rotate-[1deg]">
+              <p className="text-xs font-black uppercase tracking-[0.25em] text-yellow-100">
+                Memory Lantern
+              </p>
+              <p className="mt-3 text-lg leading-7 text-white/90">
+                “{activeMemory}”
+              </p>
+              <button
+                onClick={() => setShowMemory(false)}
+                className="mt-4 rounded-full bg-yellow-200 px-5 py-2 text-sm font-black text-slate-950"
+              >
+                Close
+              </button>
+            </WoodSign>
+          )}
+
+          <div className="absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 gap-3">
+            <button
+              onClick={() => setScene("gate")}
+              className="rounded-full bg-black/35 px-6 py-3 font-bold backdrop-blur-md"
+            >
+              Back
+            </button>
+            <button
+              onClick={() => setScene("growing")}
+              className="rounded-full bg-yellow-200 px-7 py-3 font-black text-slate-950 shadow-[0_0_35px_rgba(253,224,71,.55)]"
+            >
+              Continue
+            </button>
+          </div>
+        </>
+      )}
+
+      {scene === "growing" && (
+        <>
+          <WoodSign className="absolute left-1/2 top-1/2 z-30 w-[88%] max-w-md -translate-x-1/2 -translate-y-1/2 rotate-[-1deg]">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-yellow-100/85">
+              This Garden Is Still Growing
+            </p>
+            <h1 className="mt-3 text-3xl font-black">
+              More paths are being planted.
+            </h1>
+            <p className="mt-4 text-base leading-7 text-white/85">
+              Reflection Pond, Mushroom Hollow, Firefly Field, and Noelle&apos;s
+              Lantern are coming soon.
+            </p>
+          </WoodSign>
+
+          <div className="absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 gap-3">
+            <button
+              onClick={() => setScene("tree")}
+              className="rounded-full bg-black/35 px-6 py-3 font-bold backdrop-blur-md"
+            >
+              Back
+            </button>
+            <button
+              onClick={() => setScene("gate")}
+              className="rounded-full bg-yellow-200 px-7 py-3 font-black text-slate-950"
+            >
+              Return to Gate
+            </button>
+          </div>
+        </>
+      )}
+
+      <div className="absolute right-4 top-4 z-40 rounded-full bg-black/35 px-4 py-2 text-xs font-bold text-yellow-100 backdrop-blur-md">
+        {scene === "gate" ? "1" : scene === "tree" ? "2" : "3"} / 3
       </div>
 
-      <div className="absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 gap-2">
-        {scenes.map((item, sceneIndex) => (
-          <button
-            key={item.id}
-            onClick={() => setIndex(sceneIndex)}
-            aria-label={item.title}
-            className={`h-2 rounded-full transition-all ${
-              sceneIndex === index ? "w-8 bg-yellow-200" : "w-2 bg-white/45"
-            }`}
-          />
-        ))}
-      </div>
+      <style jsx>{`
+        .firefly {
+          animation: floatFirefly 7s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatFirefly {
+          0% {
+            transform: translate(0, 0);
+            opacity: 0.25;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            transform: translate(22px, -32px);
+            opacity: 0.65;
+          }
+        }
+      `}</style>
     </main>
+  );
+}
+
+function Fireflies() {
+  return (
+    <>
+      {Array.from({ length: 18 }).map((_, i) => (
+        <span
+          key={i}
+          className="firefly pointer-events-none absolute z-30 h-1.5 w-1.5 rounded-full bg-yellow-200 shadow-[0_0_18px_7px_rgba(253,224,71,.35)]"
+          style={{
+            left: `${8 + ((i * 19) % 84)}%`,
+            top: `${10 + ((i * 31) % 76)}%`,
+            animationDelay: `${i * 0.35}s`,
+          }}
+        />
+      ))}
+    </>
   );
 }
 
@@ -166,7 +217,7 @@ function WoodSign({
 }) {
   return (
     <div
-      className={`rounded-2xl border-2 border-yellow-100/25 bg-[#5a351c]/90 p-5 text-center shadow-[0_12px_35px_rgba(0,0,0,.45)] backdrop-blur-sm ${className}`}
+      className={`relative rounded-2xl border-2 border-yellow-100/25 bg-[#5a351c]/90 p-5 text-center shadow-[0_12px_35px_rgba(0,0,0,.45)] backdrop-blur-sm ${className}`}
     >
       <div className="absolute -left-2 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-yellow-100/50" />
       <div className="absolute -right-2 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-yellow-100/50" />
