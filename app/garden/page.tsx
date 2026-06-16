@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const gateImage = "/garden-gate.png";
-const treeImage = "/noelles-tree.png";
+const gateImage = "public/garden-art/garden-gate.png";
+const treeImage = "public/garden-art/noelles-tree.png";
 const pondImage = "/reflection-pond.png";
 
 export default function GardenPage() {
