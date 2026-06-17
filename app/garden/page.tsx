@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 const gateImage = "/garden-art/garden-gate.png";
-const treeImage = "/garden-art/noelles-tree.png";
+const treeImage = "/garden-art/memory-tree.png";
 const pondImage = "/reflection-pond.png";
 
 export default function GardenPage() {
