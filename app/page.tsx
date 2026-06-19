@@ -19,7 +19,6 @@ const helpResources = [
   },
 ];
 
-
 const futureIdeas = [
   "Anonymous community posts",
   "Memorial wall",
@@ -58,12 +57,28 @@ export default function Home() {
         </div>
       </header>
 
-      <a
-  href="/garden"
-  className="inline-block rounded-full bg-purple-500 px-6 py-3 text-white font-semibold"
->
-  Visit Noelle’s Garden
-</a>
+      <section className="mx-auto max-w-6xl px-5 pt-8">
+        <div className="rounded-3xl border-4 border-[#5a3419] bg-[#70421f]/95 p-6 text-center shadow-2xl">
+          <p className="text-3xl">🌱</p>
+
+          <h2 className="mt-2 text-2xl font-bold text-amber-100">
+            Noelle&apos;s Light is Still Growing
+          </h2>
+
+          <p className="mx-auto mt-3 max-w-3xl leading-7 text-amber-50">
+            We are building this space one step at a time. If you have ideas,
+            suggestions, resources, or comments that could help us grow, we
+            would love to hear from you.
+          </p>
+
+          <a
+            href="/suggest"
+            className="mt-5 inline-block rounded-full bg-amber-300 px-7 py-3 text-sm font-bold text-amber-950 shadow-lg transition hover:scale-105 hover:bg-amber-200"
+          >
+            Help Us Grow
+          </a>
+        </div>
+      </section>
 
       <section className="mx-auto max-w-6xl px-5 py-20 text-center sm:py-28">
         <p className="mb-6 text-xs font-semibold uppercase tracking-[0.35em] text-pink-200/80">
@@ -80,25 +95,20 @@ export default function Home() {
         </p>
 
         <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-          <a
-            href="/submit-story"
-            className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-slate-950"
-          >
+          <a href="/submit-story" className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-slate-950">
             Share Your Story
           </a>
 
-          <a
-            href="#community-stories"
-            className="rounded-full bg-white/10 px-8 py-3 text-sm font-semibold text-white ring-1 ring-white/20"
-          >
+          <a href="#community-stories" className="rounded-full bg-white/10 px-8 py-3 text-sm font-semibold text-white ring-1 ring-white/20">
             Read Community Stories →
           </a>
 
-          <a
-            href="#resources"
-            className="rounded-full bg-white/10 px-8 py-3 text-sm font-semibold text-white ring-1 ring-white/20"
-          >
+          <a href="#resources" className="rounded-full bg-white/10 px-8 py-3 text-sm font-semibold text-white ring-1 ring-white/20">
             Find Help
+          </a>
+
+          <a href="/garden" className="rounded-full bg-purple-500 px-8 py-3 text-sm font-semibold text-white">
+            Visit Noelle&apos;s Garden
           </a>
         </div>
       </section>
@@ -266,16 +276,13 @@ export default function Home() {
       </section>
 
       <footer className="border-t border-white/10 px-5 py-12 text-center text-sm text-white/50">
-  <p>Created in memory of Noelle Ryan Strain.</p>
-  <p className="mt-2">A safe place to be heard.</p>
+        <p>Created in memory of Noelle Ryan Strain.</p>
+        <p className="mt-2">A safe place to be heard.</p>
 
-  <a
-    href="/suggest"
-    className="mt-4 inline-block text-pink-200 underline"
-  >
-    Suggestions & Comments
-  </a>
-</footer>
-      </main>
+        <a href="/suggest" className="mt-4 inline-block text-pink-200 underline">
+          Suggestions & Comments
+        </a>
+      </footer>
+    </main>
   );
 }
