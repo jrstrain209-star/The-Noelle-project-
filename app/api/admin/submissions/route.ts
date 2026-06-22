@@ -11,6 +11,7 @@ const tables = {
   memorial: "memorial_submissions",
   community: "community_posts",
   flower: "garden_flowers",
+  suggestion: "suggestions",
 } as const;
 
 type SubmissionType = keyof typeof tables;
@@ -40,8 +41,18 @@ export async function GET() {
     .eq("moderation_status", "pending")
     .order("created_at", { ascending: false });
 
+  const { data: suggestions, error: suggestionsError } = await supabase
+    .from("suggestions")
+    .select("*")
+    .eq("reviewed", false)
+    .order("created_at", { ascending: false });
+
   const error =
-    storiesError || memorialsError || communityError || gardenFlowersError;
+    storiesError ||
+    memorialsError ||
+    communityError ||
+    gardenFlowersError ||
+    suggestionsError;
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -52,6 +63,7 @@ export async function GET() {
     memorials: memorials || [],
     communityPosts: communityPosts || [],
     gardenFlowers: gardenFlowers || [],
+    suggestions: suggestions || [],
   });
 }
 
@@ -67,6 +79,19 @@ export async function PATCH(request: Request) {
       { error: "Missing or invalid id/type." },
       { status: 400 }
     );
+  }
+
+  if (type === "suggestion") {
+    const { error } = await supabase
+      .from("suggestions")
+      .update({ reviewed: true })
+      .eq("id", id);
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true });
   }
 
   const { error } = await supabase
@@ -95,7 +120,6 @@ export async function DELETE(request: Request) {
     );
   }
 
-  // First, fetch the full row to archive it
   const { data: submission, error: fetchError } = await supabase
     .from(tables[type])
     .select("*")
@@ -106,23 +130,34 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: fetchError.message }, { status: 500 });
   }
 
-  // Copy the full row to moderation_archive with decision='denied'
   const { error: archiveError } = await supabase
     .from("moderation_archive")
- .insert({
-  source_table: tables[type],
-  source_id: id,
-  submission_type: type,
-  decision: "denied",
-  reason: null,
-  payload: submission,
-});
+    .insert({
+      source_table: tables[type],
+      source_id: id,
+      submission_type: type,
+      decision: "denied",
+      reason: null,
+      payload: submission,
+    });
 
   if (archiveError) {
     return NextResponse.json({ error: archiveError.message }, { status: 500 });
   }
 
-  // Update the original row instead of deleting it
+  if (type === "suggestion") {
+    const { error } = await supabase
+      .from("suggestions")
+      .update({ reviewed: true })
+      .eq("id", id);
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true });
+  }
+
   const { error: updateError } = await supabase
     .from(tables[type])
     .update({ approved: false, moderation_status: "denied" })
