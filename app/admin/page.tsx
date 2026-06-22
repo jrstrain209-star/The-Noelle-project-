@@ -36,6 +36,16 @@ type GardenFlower = {
   approved: boolean;
 };
 
+type Suggestion = {
+  id: string;
+  name: string | null;
+  email: string | null;
+  category: string | null;
+  message: string;
+  reviewed: boolean;
+  created_at: string;
+};
+
 const flowerEmoji: Record<string, string> = {
   rose: "🌹",
   sunflower: "🌻",
@@ -51,6 +61,7 @@ export default function AdminPage() {
   const [memorials, setMemorials] = useState<Memorial[]>([]);
   const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>([]);
   const [gardenFlowers, setGardenFlowers] = useState<GardenFlower[]>([]);
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [loading, setLoading] = useState(false);
 
   async function loadSubmissions() {
@@ -63,12 +74,13 @@ export default function AdminPage() {
     setMemorials(data.memorials || []);
     setCommunityPosts(data.communityPosts || []);
     setGardenFlowers(data.gardenFlowers || []);
+    setSuggestions(data.suggestions || []);
     setLoading(false);
   }
 
   async function approveSubmission(
     id: string,
-    type: "story" | "memorial" | "community" | "flower"
+    type: "story" | "memorial" | "community" | "flower" | "suggestion"
   ) {
     await fetch("/api/admin/submissions", {
       method: "PATCH",
@@ -81,9 +93,9 @@ export default function AdminPage() {
 
   async function denySubmission(
     id: string,
-    type: "story" | "memorial" | "community" | "flower"
+    type: "story" | "memorial" | "community" | "flower" | "suggestion"
   ) {
-    const confirmed = confirm("Deny this submission?");
+    const confirmed = confirm("Deny or archive this submission?");
     if (!confirmed) return;
 
     await fetch("/api/admin/submissions", {
@@ -133,7 +145,11 @@ export default function AdminPage() {
   }
 
   const totalPending =
-    stories.length + memorials.length + communityPosts.length + gardenFlowers.length;
+    stories.length +
+    memorials.length +
+    communityPosts.length +
+    gardenFlowers.length +
+    suggestions.length;
 
   return (
     <main className="min-h-screen bg-slate-950 p-6 text-white">
@@ -154,27 +170,12 @@ export default function AdminPage() {
           </button>
         </div>
 
-        {/* Summary Stats */}
-        <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <p className="text-sm text-white/60">Stories Pending</p>
-            <p className="mt-1 text-3xl font-bold">{stories.length}</p>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <p className="text-sm text-white/60">Memorials Pending</p>
-            <p className="mt-1 text-3xl font-bold">{memorials.length}</p>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <p className="text-sm text-white/60">Posts Pending</p>
-            <p className="mt-1 text-3xl font-bold">{communityPosts.length}</p>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <p className="text-sm text-white/60">Flowers Pending</p>
-            <p className="mt-1 text-3xl font-bold">{gardenFlowers.length}</p>
-          </div>
+        <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-5">
+          <StatCard label="Stories Pending" value={stories.length} />
+          <StatCard label="Memorials Pending" value={memorials.length} />
+          <StatCard label="Posts Pending" value={communityPosts.length} />
+          <StatCard label="Flowers Pending" value={gardenFlowers.length} />
+          <StatCard label="Suggestions" value={suggestions.length} />
         </div>
 
         {totalPending === 0 && (
@@ -183,6 +184,58 @@ export default function AdminPage() {
               ✓ All submissions reviewed! Queue is empty.
             </p>
           </div>
+        )}
+
+        {suggestions.length > 0 && (
+          <section className="mb-12">
+            <h2 className="mb-4 text-2xl font-bold">Suggestions & Comments</h2>
+
+            <div className="grid gap-6">
+              {suggestions.map((suggestion) => (
+                <div
+                  key={suggestion.id}
+                  className="rounded-3xl border border-amber-200/20 bg-amber-200/10 p-6"
+                >
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h3 className="text-2xl font-bold">
+                        {suggestion.name || "Anonymous"}
+                      </h3>
+
+                      {suggestion.email && (
+                        <p className="mt-1 text-sm text-pink-200">
+                          {suggestion.email}
+                        </p>
+                      )}
+
+                      <p className="mt-1 text-sm text-white/50">
+                        Category: {suggestion.category || "general"}
+                      </p>
+                    </div>
+
+                    <p className="text-sm text-white/40">
+                      {suggestion.created_at
+                        ? new Date(suggestion.created_at).toLocaleString()
+                        : ""}
+                    </p>
+                  </div>
+
+                  <p className="mt-4 whitespace-pre-wrap text-white/80">
+                    {suggestion.message}
+                  </p>
+
+                  <QueueActions
+                    approveLabel="Mark Reviewed"
+                    denyLabel="Archive"
+                    onApprove={() =>
+                      approveSubmission(suggestion.id, "suggestion")
+                    }
+                    onDeny={() => denySubmission(suggestion.id, "suggestion")}
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
         {gardenFlowers.length > 0 && (
@@ -195,21 +248,15 @@ export default function AdminPage() {
                   key={flower.id}
                   className="rounded-3xl border border-white/10 bg-white/5 p-6"
                 >
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <p className="text-5xl">
-                        {flowerEmoji[flower.flower_type] || "🌼"}
-                      </p>
+                  <p className="text-5xl">
+                    {flowerEmoji[flower.flower_type] || "🌼"}
+                  </p>
 
-                      <h3 className="mt-3 text-2xl font-bold">
-                        {flower.dedication || "For Noelle"}
-                      </h3>
+                  <h3 className="mt-3 text-2xl font-bold">
+                    {flower.dedication || "For Noelle"}
+                  </h3>
 
-                      <p className="mt-1 text-sm text-white/50">
-                        Pending review
-                      </p>
-                    </div>
-                  </div>
+                  <p className="mt-1 text-sm text-white/50">Pending review</p>
 
                   <p className="mt-4 whitespace-pre-wrap text-white/80">
                     {flower.message}
@@ -239,17 +286,11 @@ export default function AdminPage() {
                   key={story.id}
                   className="rounded-3xl border border-white/10 bg-white/5 p-6"
                 >
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <h3 className="text-2xl font-bold">
-                        {story.is_anonymous ? "Anonymous" : story.name || "Anonymous"}
-                      </h3>
+                  <h3 className="text-2xl font-bold">
+                    {story.is_anonymous ? "Anonymous" : story.name || "Anonymous"}
+                  </h3>
 
-                      <p className="mt-1 text-sm text-white/50">
-                        Pending review
-                      </p>
-                    </div>
-                  </div>
+                  <p className="mt-1 text-sm text-white/50">Pending review</p>
 
                   <p className="mt-4 whitespace-pre-wrap text-white/80">
                     {story.story}
@@ -283,24 +324,22 @@ export default function AdminPage() {
                     />
                   )}
 
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <h3 className="text-2xl font-bold">
-                        {submission.name || "Anonymous"}
-                      </h3>
+                  <h3 className="text-2xl font-bold">
+                    {submission.name || "Anonymous"}
+                  </h3>
 
-                      <p className="mt-1 text-white/60">
-                        {submission.relationship || "No relationship listed"}
-                      </p>
-                    </div>
-                  </div>
+                  <p className="mt-1 text-white/60">
+                    {submission.relationship || "No relationship listed"}
+                  </p>
 
                   <p className="mt-4 whitespace-pre-wrap text-white/80">
                     {submission.message}
                   </p>
 
                   <QueueActions
-                    onApprove={() => approveSubmission(submission.id, "memorial")}
+                    onApprove={() =>
+                      approveSubmission(submission.id, "memorial")
+                    }
                     onDeny={() => denySubmission(submission.id, "memorial")}
                   />
                 </div>
@@ -319,15 +358,11 @@ export default function AdminPage() {
                   key={post.id}
                   className="rounded-3xl border border-white/10 bg-white/5 p-6"
                 >
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <h3 className="text-2xl font-bold">
-                        {post.display_name || "Anonymous"}
-                      </h3>
+                  <h3 className="text-2xl font-bold">
+                    {post.display_name || "Anonymous"}
+                  </h3>
 
-                      <p className="mt-1 text-white/60">{post.category}</p>
-                    </div>
-                  </div>
+                  <p className="mt-1 text-white/60">{post.category}</p>
 
                   <p className="mt-4 whitespace-pre-wrap text-white/80">
                     {post.message}
@@ -347,12 +382,25 @@ export default function AdminPage() {
   );
 }
 
+function StatCard({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+      <p className="text-sm text-white/60">{label}</p>
+      <p className="mt-1 text-3xl font-bold">{value}</p>
+    </div>
+  );
+}
+
 function QueueActions({
   onApprove,
   onDeny,
+  approveLabel = "Approve",
+  denyLabel = "Deny",
 }: {
   onApprove: () => void;
   onDeny: () => void;
+  approveLabel?: string;
+  denyLabel?: string;
 }) {
   return (
     <div className="mt-6 flex flex-wrap gap-3">
@@ -360,14 +408,14 @@ function QueueActions({
         onClick={onApprove}
         className="rounded-full bg-green-400 px-6 py-2 font-bold text-slate-950"
       >
-        Approve
+        {approveLabel}
       </button>
 
       <button
         onClick={onDeny}
         className="rounded-full bg-rose-500 px-6 py-2 font-bold text-white"
       >
-        Deny
+        {denyLabel}
       </button>
     </div>
   );
