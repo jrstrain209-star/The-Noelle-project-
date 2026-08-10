@@ -107,8 +107,7 @@ export default function Home() {
             Find Help
           </a>
 
-          <a href="/garden" className="rounded-full bg-purple-500 px-8 py-3 text-sm font-semibold text-white">
-            Visit Noelle&apos;s Garden
+          
           </a>
         </div>
       </section>
